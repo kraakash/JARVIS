@@ -1,0 +1,216 @@
+{
+  "patterns": {
+    "lets_make_you": [
+      {
+        "input": "lets make you stronger",
+        "words": [
+          "lets",
+          "make",
+          "you",
+          "stronger"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:28:15.954631",
+        "frequency": 1
+      }
+    ],
+    "btao": [
+      {
+        "input": "or btao",
+        "words": [
+          "btao"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:29:15.582309",
+        "frequency": 1
+      },
+      {
+        "input": "or btao",
+        "words": [
+          "btao"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:34:45.114524",
+        "frequency": 1
+      },
+      {
+        "input": "or btao",
+        "words": [
+          "btao"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-12T23:34:45.173387",
+        "frequency": 1
+      }
+    ],
+    "btao_kuch": [
+      {
+        "input": "kuch btao",
+        "words": [
+          "kuch",
+          "btao"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:36:15.293800",
+        "frequency": 1
+      },
+      {
+        "input": "kuch btao",
+        "words": [
+          "kuch",
+          "btao"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-12T23:36:15.345871",
+        "frequency": 1
+      }
+    ],
+    "sath_tum": [
+      {
+        "input": "ha sath  me tum jo ho",
+        "words": [
+          "sath",
+          "tum"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:45:39.503456",
+        "frequency": 1
+      },
+      {
+        "input": "ha sath  me tum jo ho",
+        "words": [
+          "sath",
+          "tum"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-12T23:45:39.557087",
+        "frequency": 1
+      }
+    ],
+    "": [
+      {
+        "input": "",
+        "words": [],
+        "context": "general",
+        "timestamp": "2025-11-12T23:46:02.089677",
+        "frequency": 1
+      },
+      {
+        "input": "",
+        "words": [],
+        "context": "casual",
+        "timestamp": "2025-11-12T23:46:02.167225",
+        "frequency": 1
+      }
+    ],
+    "kaise": [
+      {
+        "input": "kaise o",
+        "words": [
+          "kaise"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:46:14.173264",
+        "frequency": 1
+      },
+      {
+        "input": "kaise o",
+        "words": [
+          "kaise"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-12T23:46:14.267253",
+        "frequency": 1
+      }
+    ],
+    "chlo_fir_kuch": [
+      {
+        "input": "chlo fir  kuch bnate hai",
+        "words": [
+          "chlo",
+          "fir",
+          "kuch",
+          "bnate",
+          "hai"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:46:24.590334",
+        "frequency": 1
+      },
+      {
+        "input": "chlo fir  kuch bnate hai",
+        "words": [
+          "chlo",
+          "fir",
+          "kuch",
+          "bnate",
+          "hai"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-12T23:46:24.649337",
+        "frequency": 1
+      }
+    ],
+    "bnaye_kya": [
+      {
+        "input": "kya bnaye",
+        "words": [
+          "kya",
+          "bnaye"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-12T23:46:34.866444",
+        "frequency": 1
+      },
+      {
+        "input": "kya bnaye",
+        "words": [
+          "kya",
+          "bnaye"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-12T23:46:34.971501",
+        "frequency": 1
+      }
+    ]
+  },
+  "word_associations": {
+    "lets": [
+      "make"
+    ],
+    "make": [
+      "you"
+    ],
+    "you": [
+      "stronger"
+    ],
+    "kuch": [
+      "btao",
+      "btao",
+      "bnate",
+      "bnate"
+    ],
+    "sath": [
+      "tum",
+      "tum"
+    ],
+    "chlo": [
+      "fir",
+      "fir"
+    ],
+    "fir": [
+      "kuch",
+      "kuch"
+    ],
+    "bnate": [
+      "hai",
+      "hai"
+    ],
+    "kya": [
+      "bnaye",
+      "bnaye"
+    ]
+  },
+  "user_taught_answers": {},
+  "last_updated": "2025-11-12T23:46:34.971501"
+}

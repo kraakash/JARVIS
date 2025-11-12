@@ -12,6 +12,7 @@ from modules.voice import jarvis_speaker
 from modules.nlp import emotion_engine, language_support, conversation_engine
 from modules.apps import app_controller
 from modules.web import web_controller
+from modules.ai.smart_conversation import smart_conversation
 
 class JarvisBrain:
     def __init__(self):
@@ -20,10 +21,11 @@ class JarvisBrain:
         self.speaker = jarvis_speaker  # Use the speaker instance
         self.load_skills()
         
-        # Test voice on startup
-        print("[DEBUG] Testing initial speech...")
+        # Initialize with JARVIS voice style
+        print("[DEBUG] Setting up JARVIS voice...")
+        self.speaker.change_voice_style('jarvis')
         self.speaker.speak(language_support.get_response('ready'))
-        print("[DEBUG] Initial speech queued")
+        print("[DEBUG] JARVIS voice initialized")
         
     def load_skills(self):
         """Dynamically load all available skills"""
@@ -45,6 +47,11 @@ class JarvisBrain:
             'pause_video': self._handle_pause_video,
             'stop_video': self._handle_stop_video,
             'youtube_results': self._handle_youtube_results,
+            'search_apps': self._handle_search_apps,
+            'change_voice': self._handle_change_voice,
+            'test_voice': self._handle_test_voice,
+            'learning_stats': self._handle_learning_stats,
+            'test_learning': self._handle_test_learning,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -110,11 +117,23 @@ class JarvisBrain:
             response = self.skills['pause_video'](emotion_data)
         elif intent == 'stop_video':
             response = self.skills['stop_video'](emotion_data)
+        elif intent == 'search_apps':
+            response = self.skills['search_apps'](command_text, emotion_data)
+        elif intent == 'change_voice':
+            response = self.skills['change_voice'](command_text, emotion_data)
+        elif intent == 'test_voice':
+            response = self.skills['test_voice'](emotion_data)
+        elif intent == 'learning_stats':
+            response = self.skills['learning_stats'](emotion_data)
+        elif intent == 'test_learning':
+            response = self.skills['test_learning'](emotion_data)
         elif intent == 'general_conversation':
             response = self._handle_general_conversation(command_text, emotion_data)
         else:
-            base_response = language_support.get_response('learning')
-            response = emotion_engine.enhance_response(base_response, emotion_data)
+            # Use smart conversation for unrecognized intents
+            response = smart_conversation.get_smart_response(command_text)
+            if emotion_data:
+                response = emotion_engine.enhance_response(response, emotion_data)
             
         self.speak(response)
         return response
@@ -180,14 +199,15 @@ class JarvisBrain:
         response = f"Testing voice system. I have {len(voices)} voices available."
         self.speak(response)
         
-        # Test with different rate
-        self.speaker.set_rate(150)
-        self.speak("This is my slower speaking speed")
+        # Test with different styles
+        self.speaker.change_voice_style('slow')
+        self.speak("This is my slower, more measured pace.")
         
-        self.speaker.set_rate(250)
-        self.speak("This is my faster speaking speed")
+        self.speaker.change_voice_style('fast')
+        self.speak("This is my faster speaking speed.")
         
-        self.speaker.set_rate(200)  # Reset to normal
+        self.speaker.change_voice_style('jarvis')  # Reset to JARVIS style
+        self.speak("And this is my standard JARVIS voice, Sir.")
         return "Voice test completed"
     
     def _handle_emotional_expression(self, command_text, emotion_data):
@@ -218,7 +238,8 @@ class JarvisBrain:
         trigger_words = ['open', 'start', 'launch', 'run']
         for i, word in enumerate(words):
             if word in trigger_words and i + 1 < len(words):
-                app_name = words[i + 1]
+                # Get the rest of the words as app name (for multi-word apps)
+                app_name = ' '.join(words[i + 1:])
                 break
         
         if not app_name:
@@ -227,9 +248,14 @@ class JarvisBrain:
         success, result_message = app_controller.open_app(app_name)
         
         if success:
-            message = language_support.get_response('opening_app', app=app_name)
+            return result_message  # Use the actual success message from app_controller
         else:
-            message = language_support.get_response('app_not_found', app=app_name)
+            # Try to suggest similar apps
+            suggestions = app_controller.search_apps(app_name)
+            if suggestions:
+                message = f"Could not find '{app_name}', Sir. Did you mean: {', '.join(suggestions[:3])}?"
+            else:
+                message = f"Could not find '{app_name}' on your system, Sir."
         
         if emotion_data:
             return emotion_engine.enhance_response(message, emotion_data)
@@ -267,17 +293,27 @@ class JarvisBrain:
         return message
     
     def _handle_list_apps(self, emotion_data):
-        """Handle listing available or running apps"""
+        """Handle listing available desktop apps"""
         available_apps = app_controller.get_available_apps()
-        running_apps = app_controller.list_running_apps()
         
-        if running_apps:
-            base_response = language_support.get_response('running_apps', 
-                                                        apps=', '.join(running_apps),
-                                                        available=', '.join(available_apps))
+        if available_apps:
+            # Show first 10 apps in a clean format
+            app_list = ', '.join(available_apps[:10])
+            if language_support.current_language == 'hindi':
+                base_response = f"Yeh applications main khol sakta hun, Sir: {app_list}. Koi bhi kholne ke liye 'Open [App Name]' kahiye."
+            else:
+                base_response = f"I can open these applications for you, Sir: {app_list}. Just say 'Open [App Name]' to launch any application."
+            
+            if len(available_apps) > 10:
+                if language_support.current_language == 'hindi':
+                    base_response += f" Aur {len(available_apps) - 10} applications bhi available hain."
+                else:
+                    base_response += f" Plus {len(available_apps) - 10} more applications are available."
         else:
-            base_response = language_support.get_response('no_running_apps',
-                                                        available=', '.join(available_apps))
+            if language_support.current_language == 'hindi':
+                base_response = "Main aapke system ke applications scan kar raha hun, Sir. Thoda intezar kariye."
+            else:
+                base_response = "I'm scanning for applications on your system, Sir. Please try again in a moment."
         
         if emotion_data:
             return emotion_engine.enhance_response(base_response, emotion_data)
@@ -285,6 +321,7 @@ class JarvisBrain:
     
     def _handle_general_conversation(self, command_text, emotion_data):
         """Handle general conversation and questions"""
+        # Try conversation engine first
         response = conversation_engine.get_conversation_response(command_text)
         
         if response:
@@ -296,14 +333,28 @@ class JarvisBrain:
                     response = "I'm delighted! " + response
             elif emotion_data and emotion_data['emotion'] in ['sad', 'negative']:
                 if language_support.current_language == 'hindi':
-                    response = "Main samajh sakta hun. " + response
+                    response = "Mein samajh sakta hoon. " + response
                 else:
                     response = "I understand. " + response
             
             return response
         else:
-            # Fallback for unrecognized conversation
-            return language_support.get_response('learning')
+            # Use smart conversation for intelligent responses
+            smart_response = smart_conversation.get_smart_response(command_text)
+            
+            # Apply emotional enhancement
+            if emotion_data and emotion_data['emotion'] in ['excited', 'positive']:
+                if language_support.current_language == 'hindi':
+                    smart_response = "Bahut achha! " + smart_response
+                else:
+                    smart_response = "Excellent! " + smart_response
+            elif emotion_data and emotion_data['emotion'] in ['sad', 'negative']:
+                if language_support.current_language == 'hindi':
+                    smart_response = "Mein samajh sakta hoon. " + smart_response
+                else:
+                    smart_response = "I understand. " + smart_response
+            
+            return smart_response
     
     def _handle_web_search(self, command_text, emotion_data):
         """Handle web search commands"""
@@ -447,6 +498,130 @@ class JarvisBrain:
         if emotion_data:
             return emotion_engine.enhance_response(message, emotion_data)
         return message
+    
+    def _handle_search_apps(self, command_text, emotion_data):
+        """Handle searching for applications"""
+        words = command_text.lower().split()
+        query = ""
+        
+        # Extract search query after trigger words
+        trigger_words = ['find', 'search', 'show', 'list']
+        for i, word in enumerate(words):
+            if word in trigger_words and 'app' in words:
+                # Get everything after the trigger word except 'app'
+                remaining = words[i+1:]
+                query = ' '.join([w for w in remaining if w not in ['app', 'apps', 'application', 'applications']])
+                break
+        
+        if not query:
+            # Show all available apps
+            apps = app_controller.get_available_apps()
+            if apps:
+                app_list = ', '.join(apps[:20])  # Show first 20
+                message = f"Available applications: {app_list}"
+                if len(apps) > 20:
+                    message += f" and {len(apps) - 20} more."
+            else:
+                message = "No applications found, Sir."
+        else:
+            # Search for specific apps
+            matches = app_controller.search_apps(query)
+            if matches:
+                message = f"Found applications matching '{query}': {', '.join(matches)}"
+            else:
+                message = f"No applications found matching '{query}', Sir."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_change_voice(self, command_text, emotion_data):
+        """Handle voice change commands"""
+        words = command_text.lower().split()
+        
+        # Extract voice number or style
+        voice_num = None
+        style = 'jarvis'
+        
+        for i, word in enumerate(words):
+            if word.isdigit():
+                voice_num = int(word)
+                break
+            elif word in ['fast', 'slow', 'normal', 'jarvis']:
+                style = word
+        
+        from modules.voice.speaker import change_jarvis_voice
+        result = change_jarvis_voice(voice_num, style)
+        
+        if language_support.current_language == 'hindi':
+            base_response = f"Voice badal diya, Sir. {result}"
+        else:
+            base_response = f"Voice changed, Sir. {result}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(base_response, emotion_data)
+        return base_response
+    
+    def _handle_test_voice(self, emotion_data):
+        """Handle voice testing"""
+        from modules.voice.speaker import test_current_voice
+        test_current_voice()
+        
+        if language_support.current_language == 'hindi':
+            base_response = "Voice test complete, Sir."
+        else:
+            base_response = "Voice test completed, Sir."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(base_response, emotion_data)
+        return base_response
+    
+    def _handle_learning_stats(self, emotion_data):
+        """Show learning statistics"""
+        from modules.ai.smart_conversation import smart_conversation
+        stats = smart_conversation.learning_ai.get_learning_stats()
+        
+        response = f"Learning Statistics, Sir:\n"
+        response += f"- Total Patterns Learned: {stats['total_patterns']}\n"
+        response += f"- Word Associations: {stats['word_associations']}\n"
+        response += f"- Memory File: {'Available' if stats['memory_file_exists'] else 'Not Found'}\n"
+        
+        if 'tensorflow_model' in stats:
+            tf_stats = stats['tensorflow_model']
+            response += f"- TensorFlow Model: {tf_stats['status']}\n"
+            if tf_stats['status'] != 'TensorFlow not available':
+                response += f"- Vocabulary Size: {tf_stats.get('vocab_size', 0)}\n"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_test_learning(self, emotion_data):
+        """Test if learning is working"""
+        test_phrases = [
+            "my favorite color is blue",
+            "I like pizza", 
+            "weather is nice today",
+            "mera naam John hai"
+        ]
+        
+        from modules.ai.smart_conversation import smart_conversation
+        
+        response = "Testing learning system, Sir:\n"
+        
+        for phrase in test_phrases:
+            # Test learning
+            smart_conversation.learning_ai.learn_from_input(phrase, "test")
+            response += f"✓ Learned: '{phrase}'\n"
+        
+        # Check if patterns were saved
+        stats = smart_conversation.learning_ai.get_learning_stats()
+        response += f"\nResult: {stats['total_patterns']} patterns now in memory."
+        response += "\nLearning system is working properly, Sir!"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
     
     def speak(self, text):
         """Unified speaking method"""

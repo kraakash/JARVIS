@@ -72,16 +72,25 @@ python main.py
 
 ### Application Control
 
-#### Opening Apps
+#### Opening Apps (Any Installed Application)
 - "Open Chrome"
 - "Start Calculator"
 - "Launch Notepad"
 - "Run Paint"
+- "Open Visual Studio Code"
+- "Start Microsoft Word"
+- "Launch Spotify"
 
 #### Closing Apps
 - "Close Chrome"
 - "Exit Calculator"
 - "Stop Notepad"
+
+#### App Discovery & Search
+- "Find app Chrome"
+- "Search app Visual Studio"
+- "Show apps"
+- "List all apps"
 
 #### Hindi App Commands
 - "Chrome kholo"
@@ -180,7 +189,17 @@ You: "Stop video"
 JARVIS: "Stopped video and returned to search results, Sir."
 ```
 
-### Example 4: Mixed Commands
+### Example 4: App Discovery
+```
+You: "Jarvis"
+JARVIS: "Yes, Sir?"
+You: "Find app Visual Studio"
+JARVIS: "Found applications matching 'Visual Studio': Visual Studio Code, Visual Studio 2022"
+You: "Open Visual Studio Code"
+JARVIS: "Opening Visual Studio Code, Sir."
+```
+
+### Example 5: Mixed Commands
 ```
 You: "Jarvis"
 JARVIS: "Yes, Sir?"
@@ -194,13 +213,27 @@ JARVIS: "You're most welcome, Sir!"
 
 ## Supported Applications
 
-- **Chrome** - Web browser
+**JARVIS automatically discovers ALL installed applications on your PC including:**
+
+### Built-in Windows Apps
 - **Calculator** - Windows calculator
 - **Notepad** - Text editor
 - **Paint** - Image editor
 - **Explorer** - File manager
 - **CMD** - Command prompt
+- **WordPad** - Rich text editor
+
+### Installed Applications
+- **Chrome** - Web browser
 - **Edge** - Microsoft Edge browser
+- **Visual Studio Code** - Code editor
+- **Microsoft Office** - Word, Excel, PowerPoint
+- **Spotify** - Music streaming
+- **Discord** - Communication
+- **Steam** - Gaming platform
+- **And ANY other installed application!**
+
+**Note**: JARVIS scans your system to find all installed applications automatically. Just say "Open [App Name]" for any application on your PC.
 
 ## Troubleshooting
 
