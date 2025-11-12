@@ -11,6 +11,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from modules.voice import jarvis_speaker
 from modules.nlp import emotion_engine, language_support, conversation_engine
 from modules.apps import app_controller
+from modules.web import web_controller
 
 class JarvisBrain:
     def __init__(self):
@@ -34,6 +35,16 @@ class JarvisBrain:
             'open_app': self._handle_open_app,
             'close_app': self._handle_close_app,
             'list_apps': self._handle_list_apps,
+            'web_search': self._handle_web_search,
+            'click_result': self._handle_click_result,
+            'go_back': self._handle_go_back,
+            'show_results': self._handle_show_results,
+            'open_youtube': self._handle_open_youtube,
+            'youtube_search': self._handle_youtube_search,
+            'play_video': self._handle_play_video,
+            'pause_video': self._handle_pause_video,
+            'stop_video': self._handle_stop_video,
+            'youtube_results': self._handle_youtube_results,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -79,6 +90,26 @@ class JarvisBrain:
             response = self.skills['close_app'](command_text, emotion_data)
         elif intent == 'list_apps':
             response = self.skills['list_apps'](emotion_data)
+        elif intent == 'web_search':
+            response = self.skills['web_search'](command_text, emotion_data)
+        elif intent == 'click_result':
+            response = self.skills['click_result'](emotion_data)
+        elif intent == 'go_back':
+            response = self.skills['go_back'](emotion_data)
+        elif intent == 'show_results':
+            response = self.skills['show_results'](emotion_data)
+        elif intent == 'open_youtube':
+            response = self.skills['open_youtube'](emotion_data)
+        elif intent == 'youtube_search':
+            response = self.skills['youtube_search'](command_text, emotion_data)
+        elif intent == 'play_video':
+            response = self.skills['play_video'](command_text, emotion_data)
+        elif intent == 'youtube_results':
+            response = self.skills['youtube_results'](emotion_data)
+        elif intent == 'pause_video':
+            response = self.skills['pause_video'](emotion_data)
+        elif intent == 'stop_video':
+            response = self.skills['stop_video'](emotion_data)
         elif intent == 'general_conversation':
             response = self._handle_general_conversation(command_text, emotion_data)
         else:
@@ -273,6 +304,149 @@ class JarvisBrain:
         else:
             # Fallback for unrecognized conversation
             return language_support.get_response('learning')
+    
+    def _handle_web_search(self, command_text, emotion_data):
+        """Handle web search commands"""
+        # Extract search query
+        words = command_text.lower().split()
+        query = ""
+        
+        # Find search terms after trigger words
+        trigger_words = ['search', 'google', 'find', 'look']
+        for i, word in enumerate(words):
+            if word in trigger_words:
+                if i + 1 < len(words) and words[i + 1] == 'for':
+                    query = ' '.join(words[i + 2:])
+                elif i + 1 < len(words):
+                    query = ' '.join(words[i + 1:])
+                break
+        
+        if not query:
+            return "What would you like me to search for, Sir?"
+        
+        success, message = web_controller.search_google(query)
+        
+        if success:
+            # Also get and speak the results
+            result_success, results = web_controller.get_search_results()
+            if result_success:
+                message += f" {results}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_click_result(self, emotion_data):
+        """Handle clicking first search result"""
+        success, message = web_controller.click_first_result()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_go_back(self, emotion_data):
+        """Handle going back to previous page"""
+        success, message = web_controller.go_back()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_show_results(self, emotion_data):
+        """Handle showing search results"""
+        success, message = web_controller.get_search_results()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_open_youtube(self, emotion_data):
+        """Handle opening YouTube"""
+        success, message = web_controller.open_youtube()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_youtube_search(self, command_text, emotion_data):
+        """Handle YouTube search commands"""
+        words = command_text.lower().split()
+        query = ""
+        
+        # Find search terms after trigger words
+        trigger_words = ['youtube', 'yt', 'video']
+        for i, word in enumerate(words):
+            if word in trigger_words:
+                if i + 1 < len(words) and words[i + 1] in ['search', 'mein']:
+                    # Skip 'for' if it follows 'search'
+                    start_idx = i + 2
+                    if start_idx < len(words) and words[start_idx] == 'for':
+                        start_idx += 1
+                    if start_idx < len(words):
+                        query = ' '.join(words[start_idx:])
+                elif i + 1 < len(words):
+                    query = ' '.join(words[i + 1:])
+                break
+        
+        if not query:
+            return "What video would you like me to search for, Sir?"
+        
+        success, message = web_controller.search_youtube(query)
+        
+        if success:
+            result_success, results = web_controller.get_youtube_results()
+            if result_success:
+                message += f" {results}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_play_video(self, command_text, emotion_data):
+        """Handle playing YouTube videos by position"""
+        words = command_text.lower().split()
+        position = 1
+        
+        position_words = {
+            'first': 1, 'second': 2, 'third': 3, 'fourth': 4, 'fifth': 5,
+            '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
+            'pehla': 1, 'dusra': 2, 'tisra': 3
+        }
+        
+        for word in words:
+            if word in position_words:
+                position = position_words[word]
+                break
+        
+        success, message = web_controller.play_youtube_video(position)
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_youtube_results(self, emotion_data):
+        """Handle showing YouTube search results"""
+        success, message = web_controller.get_youtube_results()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_pause_video(self, emotion_data):
+        """Handle pausing/resuming video"""
+        success, message = web_controller.pause_video()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
+    
+    def _handle_stop_video(self, emotion_data):
+        """Handle stopping video and going back"""
+        success, message = web_controller.stop_video()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(message, emotion_data)
+        return message
     
     def speak(self, text):
         """Unified speaking method"""

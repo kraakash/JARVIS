@@ -128,8 +128,32 @@ class EmotionEngine:
         if any(word in text_lower for word in ['feel', 'feeling', 'mood', 'emotion']):
             return 'emotional_expression'
         
+        # YouTube commands
+        if any(phrase in text_lower for phrase in ['open youtube', 'youtube kholo', 'yt open']):
+            return 'open_youtube'
+        elif any(phrase in text_lower for phrase in ['youtube search', 'yt search', 'youtube mein search']):
+            return 'youtube_search'
+        elif any(phrase in text_lower for phrase in ['play video', 'video chalao', 'play first', 'play second', 'play third']):
+            return 'play_video'
+        elif any(phrase in text_lower for phrase in ['pause video', 'pause', 'video roko', 'stop video']):
+            return 'pause_video'
+        elif any(phrase in text_lower for phrase in ['stop video', 'video band karo', 'go back', 'wapas jao']):
+            return 'stop_video'
+        elif any(phrase in text_lower for phrase in ['youtube results', 'video results', 'show videos']):
+            return 'youtube_results'
+        
+        # Web search commands
+        elif any(phrase in text_lower for phrase in ['search for', 'google', 'find', 'look up']):
+            return 'web_search'
+        elif any(phrase in text_lower for phrase in ['open first result', 'click first', 'first result']):
+            return 'click_result'
+        elif 'go back' in text_lower:
+            return 'go_back'
+        elif any(phrase in text_lower for phrase in ['search results', 'show results', 'what did you find']):
+            return 'show_results'
+        
         # App control commands
-        if any(word in text_lower for word in ['open', 'start', 'launch', 'run']):
+        elif any(word in text_lower for word in ['open', 'start', 'launch', 'run']):
             return 'open_app'
         elif any(word in text_lower for word in ['close', 'exit', 'quit', 'stop']):
             return 'close_app'
