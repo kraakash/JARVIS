@@ -1,0 +1,11 @@
+{
+  "vocab": {},
+  "response_classes": {},
+  "training_data": [],
+  "model_info": {
+    "input_size": 100,
+    "hidden_size": 50,
+    "output_size": 20,
+    "last_updated": "2025-11-12T23:46:34.973524"
+  }
+}

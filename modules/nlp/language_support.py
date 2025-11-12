@@ -16,46 +16,46 @@ class LanguageSupport:
             'explorer': ['explorer', 'folder', 'file']
         }
         
-        # Hindi responses
+        # Hindi responses (simplified phonetic)
         self.hindi_responses = {
             # Greetings
-            'morning_greeting': "Namaste Sir! Aapka din shubh ho.",
-            'afternoon_greeting': "Namaste Sir! Aapka din kaisa ja raha hai?",
-            'evening_greeting': "Namaste Sir! Aaj main aapki kya seva kar sakta hun?",
-            'night_greeting': "Namaste Sir! Raat mein kaam kar rahe hain?",
+            'morning_greeting': "Namasthe Sir! Aapka din shubh ho.",
+            'afternoon_greeting': "Namasthe Sir! Aapka din kaisa ja raha hey?",
+            'evening_greeting': "Namasthe Sir! Aaj mein aapki kya seva kar sakta hoon?",
+            'night_greeting': "Namasthe Sir! Raat mein kaam kar rahe hain?",
             
             # App control
-            'opening_app': "{app} khol raha hun, Sir.",
+            'opening_app': "{app} khole raha hoon, Sir.",
             'closing_app': "{app} band kar diya, Sir.",
             'app_not_found': "Maaf kijiye Sir, {app} nahi mil raha.",
             'app_not_running': "{app} abhi chal nahi raha, Sir.",
-            'which_app_open': "Kaun sa application kholna hai, Sir?",
-            'which_app_close': "Kaun sa application band karna hai, Sir?",
+            'which_app_open': "Koun sa application kholna hey, Sir?",
+            'which_app_close': "Koun sa application band karna hey, Sir?",
             
             # Time
-            'current_time': "Abhi samay hai {time}",
+            'current_time': "Abhi samay hey {time}",
             
             # Emotions
-            'excited_response': "Aapka josh dekh kar main bhi khush hun, Sir!",
-            'sad_response': "Main samajh sakta hun, Sir. Main yahan hun aapki madad ke liye.",
-            'negative_response': "Aapki pareshani samajh mein aa rahi hai, Sir.",
-            'positive_response': "Bahut achha, Sir! Main khushi se madad karunga.",
+            'excited_response': "Aapka josh dekh kar mein bhi khush hoon, Sir!",
+            'sad_response': "Mein samajh sakta hoon, Sir. Mein yahan hoon aapki madad ke liye.",
+            'negative_response': "Aapki pareshani samajh mein aa rahi hey, Sir.",
+            'positive_response': "Bahut achha, Sir! Mein khushi se madad karunga.",
             
             # Calculations
-            'calculation_result': "Jawab hai {result}",
+            'calculation_result': "Jawab hey {result}",
             'calculation_error': "Maaf kijiye, yeh calculate nahi kar paya.",
-            'only_addition': "Abhi main sirf jodna kar sakta hun, Sir.",
+            'only_addition': "Abhi mein sirf jodna kar sakta hoon, Sir.",
             
             # General
-            'learning': "Main abhi seekh raha hun, Sir. Kya main kuch aur kar sakta hun?",
-            'ready': "JARVIS taiyar hai, Sir.",
+            'learning': "Mein abhi seekh raha hoon, Sir. Kya mein kuch aur kar sakta hoon?",
+            'ready': "JARVIS taiyaar hey, Sir.",
             'shutdown': "Alvida Sir. Aapka din mangalmay ho.",
             'yes_sir': "Haan Sir?",
             'didnt_catch': "Samajh nahi aaya, Sir. Phir se koshish kariye.",
             
             # App list
-            'running_apps': "Chal rahe hain: {apps}. Uplabdh apps: {available}",
-            'no_running_apps': "Koi tracked apps nahi chal rahe. Uplabdh apps: {available}",
+            'running_apps': "Chal rahe hain: {apps}. Available apps: {available}",
+            'no_running_apps': "Koi apps nahi chal rahe. Available apps: {available}",
         }
         
         # English responses (existing)

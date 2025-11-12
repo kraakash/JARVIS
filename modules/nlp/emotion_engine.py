@@ -152,12 +152,26 @@ class EmotionEngine:
         elif any(phrase in text_lower for phrase in ['search results', 'show results', 'what did you find']):
             return 'show_results'
         
+        # Voice control commands
+        elif any(phrase in text_lower for phrase in ['change voice', 'voice change', 'different voice', 'voice badlo']):
+            return 'change_voice'
+        elif any(phrase in text_lower for phrase in ['test voice', 'voice test', 'check voice']):
+            return 'test_voice'
+        
+        # Learning test commands
+        elif any(phrase in text_lower for phrase in ['learning stats', 'show stats', 'memory stats', 'kitna seekha']):
+            return 'learning_stats'
+        elif any(phrase in text_lower for phrase in ['test learning', 'check learning', 'learning test', 'seekhna test']):
+            return 'test_learning'
+        
         # App control commands
+        elif any(phrase in text_lower for phrase in ['find app', 'search app', 'show app', 'list app']):
+            return 'search_apps'
         elif any(word in text_lower for word in ['open', 'start', 'launch', 'run']):
             return 'open_app'
         elif any(word in text_lower for word in ['close', 'exit', 'quit', 'stop']):
             return 'close_app'
-        elif any(word in text_lower for word in ['list apps', 'running apps', 'what apps']):
+        elif any(phrase in text_lower for phrase in ['list apps', 'list all apps', 'show all apps', 'running apps', 'what apps', 'all apps']):
             return 'list_apps'
         
         # Greetings
