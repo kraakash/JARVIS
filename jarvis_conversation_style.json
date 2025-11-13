@@ -4,11 +4,22 @@
   "hindi_patterns": [
     "kaise ho"
   ],
-  "english_patterns": [],
+  "english_patterns": [
+    "start monitoring",
+    "current activity",
+    "sujhav do",
+    "what do you think about ai",
+    "suggestions"
+  ],
   "user_style_words": {
     "kaise": 6
   },
   "response_templates": {
-    "kaise ho...": "Main bilkul theek hun, Sir! Aapki seva ke liye taiyar hun."
+    "kaise ho...": "Main bilkul theek hun, Sir! Aapki seva ke liye taiyar hun.",
+    "start monitoring...": "Desktop monitoring shuru kar diya, Sir. Ab main aapki activities track karunga.",
+    "current activity...": "Current Activity, Sir: Code.exe - 0 minutes 21 seconds se use kar rahe hain.",
+    "sujhav do...": "Abhi koi suggestions nahi hain, Sir. Thoda aur activity karne ke baad milenge.",
+    "what do you think ab...": "Good to see you, Sir!",
+    "suggestions...": "No suggestions available yet, Sir. Use your system for a while to get suggestions."
   }
 }

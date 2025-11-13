@@ -138,6 +138,8 @@ class AdaptiveLearning:
         words = user_input_lower.split()
         for word in words:
             if len(word) > 2:  # Skip short words
+                if word not in intent_data['keywords']:
+                    intent_data['keywords'][word] = 0
                 intent_data['keywords'][word] += 1
         
         # Update counts

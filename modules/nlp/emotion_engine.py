@@ -172,6 +172,32 @@ class EmotionEngine:
             return 'style_stats'
         elif any(phrase in text_lower for phrase in ['ml test', 'machine learning test', 'model test', 'ai test']):
             return 'ml_test'
+        elif any(phrase in text_lower for phrase in ['start monitoring', 'monitor start', 'tracking start', 'monitoring shuru']):
+            return 'start_monitoring'
+        elif any(phrase in text_lower for phrase in ['stop monitoring', 'monitor stop', 'tracking stop', 'monitoring band']):
+            return 'stop_monitoring'
+        elif any(phrase in text_lower for phrase in ['activity report', 'activity summary', 'what am i doing', 'usage report']):
+            return 'activity_report'
+        elif any(phrase in text_lower for phrase in ['current activity', 'what app', 'current app', 'kya kar raha', 'main kya kar raha hun', 'what am i doing']):
+            return 'current_activity'
+        elif any(phrase in text_lower for phrase in ['suggestions', 'recommend', 'advice', 'tips', 'sujhav']):
+            return 'get_suggestions'
+        elif any(phrase in text_lower for phrase in ['meri galtiyan', 'my mistakes', 'analyze mistakes', 'galti analysis', 'productivity analysis']):
+            return 'analyze_mistakes'
+        elif any(phrase in text_lower for phrase in ['kya update hai', 'what update', 'kya chal raha', 'whats happening', 'status kya hai']):
+            return 'status_update'
+        elif any(phrase in text_lower for phrase in ['automation suggestions', 'smart suggestions', 'workflow tips', 'optimize workflow']):
+            return 'automation_suggestions'
+        elif any(phrase in text_lower for phrase in ['execute automation', 'run automation', 'apply suggestion', 'automation chalao']):
+            return 'execute_automation'
+        elif any(phrase in text_lower for phrase in ['automation stats', 'automation statistics', 'workflow stats']):
+            return 'automation_stats'
+        elif any(phrase in text_lower for phrase in ['question pucho', 'kya puchna chahte ho', 'ask question', 'context question']):
+            return 'ask_context_question'
+        elif any(phrase in text_lower for phrase in ['improvement suggestions', 'productivity tips', 'work better', 'improve kaise']):
+            return 'get_improvements'
+        elif any(phrase in text_lower for phrase in ['work pattern', 'analysis', 'pattern analysis', 'kaam ka analysis']):
+            return 'analyze_work_pattern'
         elif any(phrase in text_lower for phrase in ['test learning', 'check learning', 'learning test', 'seekhna test']):
             return 'test_learning'
         elif any(phrase in text_lower for phrase in ['clean memory', 'memory clean', 'saaf karo', 'memory saaf']):
@@ -194,6 +220,12 @@ class EmotionEngine:
         # Greetings - only for simple greetings without questions
         if any(word in text_lower for word in ['hello', 'hi', 'hey', 'greetings']) and not has_question_word and not ends_with_question:
             return 'greeting'
+        
+        # Help commands
+        elif any(phrase in text_lower for phrase in ['help me', 'help karo', 'madad karo', 'solve karo', 'fix karo']):
+            return 'get_help'
+        elif any(phrase in text_lower for phrase in ['google search', 'search karo', 'stackoverflow', 'documentation']):
+            return 'execute_help'
         
         # General commands
         if any(word in text_lower for word in ['play']):

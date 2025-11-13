@@ -13,13 +13,27 @@ from modules.nlp import emotion_engine, language_support, conversation_engine
 from modules.apps import app_controller
 from modules.web import web_controller
 from modules.ai.smart_conversation import smart_conversation
+from modules.core.session_manager import session_manager
+from modules.ai.neural_brain import neural_brain
+from modules.ai.advanced_conversation import advanced_conversation
+from modules.ai.brain_enhancer import brain_enhancer
+from modules.ai.data_trainer import data_trainer
+from modules.ai.book_processor import book_processor
 
 class JarvisBrain:
     def __init__(self):
         self.active = True
         self.user_name = "Sir"
         self.speaker = jarvis_speaker  # Use the speaker instance
+        self.monitoring_active = session_manager.is_monitoring_active()
+        session_manager.increment_session()
         self.load_skills()
+        
+        # Auto-resume monitoring if it was active
+        if self.monitoring_active:
+            from modules.monitoring.desktop_monitor import desktop_monitor
+            desktop_monitor.start_monitoring()
+            print("Resumed monitoring from previous session")
         
         # Initialize with JARVIS voice style
         print("[DEBUG] Setting up JARVIS voice...")
@@ -55,6 +69,21 @@ class JarvisBrain:
             'adaptive_stats': self._handle_adaptive_stats,
             'teach_response': self._handle_teach_response,
             'ml_test': self._handle_ml_test,
+            'start_monitoring': self._handle_start_monitoring,
+            'stop_monitoring': self._handle_stop_monitoring,
+            'activity_report': self._handle_activity_report,
+            'current_activity': self._handle_current_activity,
+            'get_suggestions': self._handle_get_suggestions,
+            'automation_suggestions': self._handle_automation_suggestions,
+            'execute_automation': self._handle_execute_automation,
+            'automation_stats': self._handle_automation_stats,
+            'analyze_mistakes': self._handle_analyze_mistakes,
+            'status_update': self._handle_status_update,
+            'ask_context_question': self._handle_ask_context_question,
+            'get_improvements': self._handle_get_improvements,
+            'analyze_work_pattern': self._handle_analyze_work_pattern,
+            'get_help': self._handle_get_help,
+            'execute_help': self._handle_execute_help,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -138,35 +167,129 @@ class JarvisBrain:
             response = self.skills['test_voice'](emotion_data)
         elif intent == 'learning_stats':
             response = self.skills['learning_stats'](emotion_data)
+        elif intent == 'book_knowledge':
+            response = self._handle_book_knowledge(command_text, emotion_data)
+        elif intent == 'training_stats':
+            response = self._handle_training_stats(emotion_data)
         elif intent == 'adaptive_stats':
             response = self.skills['adaptive_stats'](emotion_data)
         elif intent == 'teach_response':
             response = self.skills['teach_response'](command_text, emotion_data)
         elif intent == 'ml_test':
             response = self.skills['ml_test'](emotion_data)
+        elif intent == 'start_monitoring':
+            response = self.skills['start_monitoring'](emotion_data)
+        elif intent == 'stop_monitoring':
+            response = self.skills['stop_monitoring'](emotion_data)
+        elif intent == 'activity_report':
+            response = self.skills['activity_report'](emotion_data)
+        elif intent == 'current_activity':
+            response = self.skills['current_activity'](emotion_data)
+        elif intent == 'get_suggestions':
+            response = self.skills['get_suggestions'](emotion_data)
+        elif intent == 'automation_suggestions':
+            response = self.skills['automation_suggestions'](emotion_data)
+        elif intent == 'execute_automation':
+            response = self.skills['execute_automation'](command_text, emotion_data)
+        elif intent == 'automation_stats':
+            response = self.skills['automation_stats'](emotion_data)
+        elif intent == 'analyze_mistakes':
+            response = self.skills['analyze_mistakes'](command_text, emotion_data)
+        elif intent == 'status_update':
+            response = self.skills['status_update'](emotion_data)
+        elif intent == 'ask_context_question':
+            response = self.skills['ask_context_question'](emotion_data)
+        elif intent == 'get_improvements':
+            response = self.skills['get_improvements'](emotion_data)
+        elif intent == 'analyze_work_pattern':
+            response = self.skills['analyze_work_pattern'](emotion_data)
+        elif intent == 'get_help':
+            response = self.skills['get_help'](command_text, emotion_data)
+        elif intent == 'execute_help':
+            response = self.skills['execute_help'](command_text, emotion_data)
+        elif intent == 'get_suggestions':
+            response = self.skills['get_suggestions'](emotion_data)
         elif intent == 'test_learning':
             response = self.skills['test_learning'](emotion_data)
+        elif 'start continuous learning' in command_text.lower():
+            data_trainer.start_real_time_training()
+            response = "Continuous learning started, Sir! I'll now learn from real-time data automatically."
         elif intent == 'clean_memory':
             response = self.skills['clean_memory'](emotion_data)
+        elif 'build knowledge' in command_text.lower():
+            data_trainer.build_knowledge_graph()
+            response = "Knowledge system built successfully, Sir!"
         elif intent == 'general_conversation':
             response = self._handle_general_conversation(command_text, emotion_data)
         elif intent == 'general':
             # Route general intent to conversation handler
             response = self._handle_general_conversation(command_text, emotion_data)
         else:
-            # Use smart conversation for unrecognized intents
-            response = smart_conversation.get_smart_response(command_text)
-            if emotion_data:
-                response = emotion_engine.enhance_response(response, emotion_data)
+            # Use neural brain for intelligent responses
+            from modules.monitoring.desktop_monitor import desktop_monitor
+            current_activity = None
+            if self.monitoring_active:
+                current = desktop_monitor.get_current_activity()
+                if current:
+                    current_activity = current['app']
             
-        # Learn from this interaction (avoid duplicates)
-        if len(command_text.strip()) > 2 and not any(word in command_text.lower() for word in ['main', 'bhi']):
-            adaptive_learning.learn_intent_pattern(command_text, intent, response)
+            # Try neural brain first
+            neural_response = neural_brain.generate_contextual_response(command_text, current_activity)
+            if neural_response:
+                response = neural_response
+            else:
+                # Use advanced conversation system
+                response = advanced_conversation.generate_contextual_response(command_text)
+                if not response:
+                    # Final fallback to smart conversation
+                    response = smart_conversation.get_smart_response(command_text)
+                    if emotion_data:
+                        response = emotion_engine.enhance_response(response, emotion_data)
+            
+            # Check trained knowledge first
+            trained_response = data_trainer.get_smart_response(command_text)
+            if trained_response:
+                response = trained_response
+            else:
+                # Enhance response with brain enhancer for maximum intelligence
+                context = {'activity': current_activity} if current_activity else None
+                response = brain_enhancer.enhance_response_intelligence(command_text, response, context)
+                response = brain_enhancer.enhance_emotional_intelligence(command_text, response)
+            
+            # Process conversation for continuous learning
+            data_trainer.process_conversation_for_training(command_text, response)
+            
+        # Learn from this interaction (avoid duplicates and problematic words)
+        if len(command_text.strip()) > 2 and not any(word in command_text.lower() for word in ['main', 'bhi', 'meri', 'tum', 'kya', 'suggestions']):
+            try:
+                adaptive_learning.learn_intent_pattern(command_text, intent, response)
+            except Exception as e:
+                print(f"[ML] Learning error: {e}")
+        
+        # Learn from contextual responses if this was a contextual question
+        if hasattr(self, '_last_contextual_question') and self._last_contextual_question:
+            try:
+                from modules.ai.contextual_ai import contextual_ai
+                from modules.monitoring.desktop_monitor import desktop_monitor
+                
+                current = desktop_monitor.get_current_activity()
+                if current:
+                    context = {
+                        'activity_type': 'general',
+                        'title_words': [],
+                        'app': current['app']
+                    }
+                    contextual_ai.learn_from_user_response(self._last_contextual_question, command_text, context)
+                    self._last_contextual_question = None
+            except Exception as e:
+                print(f"[AI] Contextual learning error: {e}")
         
         # Learn conversation style with error handling
         try:
             from modules.ai.conversation_style_learning import conversation_style_learning
-            conversation_style_learning.learn_response_style(command_text, response)
+            # Skip learning for problematic phrases
+            if not any(word in command_text.lower() for word in ['meri', 'tum', 'kya', 'main']):
+                conversation_style_learning.learn_response_style(command_text, response)
             
             # Make response more natural
             natural_response = conversation_style_learning.generate_natural_response(response)
@@ -799,6 +922,377 @@ class JarvisBrain:
         stats = adaptive_learning.get_detailed_stats()
         response += f"  Training Samples: {len(adaptive_learning.training_data)}\n"
         response += f"  Model Status: {'Trained' if adaptive_learning.model_trained else 'Training'}\n"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_start_monitoring(self, emotion_data):
+        """Start desktop monitoring"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        if not self.monitoring_active:
+            success = desktop_monitor.start_monitoring()
+            
+            if success:
+                self.monitoring_active = True
+                session_manager.set_monitoring_mode(True)
+                if language_support.current_language == 'hindi':
+                    response = "Desktop monitoring shuru kar diya, Sir. Ab main aapki activities track karunga."
+                else:
+                    response = "Desktop monitoring started, Sir. I'm now tracking your activities."
+            else:
+                if language_support.current_language == 'hindi':
+                    response = "Monitoring start nahi ho saka, Sir. System libraries missing hain."
+                else:
+                    response = "Could not start monitoring, Sir. System libraries are missing."
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Monitoring pehle se active hai, Sir."
+            else:
+                response = "Monitoring is already active, Sir."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_stop_monitoring(self, emotion_data):
+        """Stop desktop monitoring"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        if self.monitoring_active:
+            desktop_monitor.stop_monitoring()
+            self.monitoring_active = False
+            session_manager.set_monitoring_mode(False)
+            if language_support.current_language == 'hindi':
+                response = "Desktop monitoring band kar diya, Sir."
+            else:
+                response = "Desktop monitoring stopped, Sir."
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Monitoring active nahi hai, Sir."
+            else:
+                response = "Monitoring is not currently active, Sir."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_activity_report(self, emotion_data):
+        """Get activity summary report"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        summary = desktop_monitor.get_activity_summary()
+        
+        if language_support.current_language == 'hindi':
+            response = f"Activity Report, Sir:\n{summary}"
+        else:
+            response = f"Activity Report, Sir:\n{summary}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_current_activity(self, emotion_data):
+        """Get current activity info"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        current = desktop_monitor.get_current_activity()
+        
+        if current:
+            minutes = current['duration'] // 60
+            seconds = current['duration'] % 60
+            
+            # Add contextual question
+            context_question = desktop_monitor.ask_contextual_question()
+            
+            if language_support.current_language == 'hindi':
+                response = f"Aap abhi {current['app']} use kar rahe hain, Sir - {minutes} minutes {seconds} seconds se. {context_question}"
+            else:
+                response = f"You are currently using {current['app']}, Sir - for {minutes} minutes {seconds} seconds. {context_question}"
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Koi activity detect nahi hui, Sir. Monitoring shuru kariye."
+            else:
+                response = "No activity detected, Sir. Please start monitoring first."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_get_suggestions(self, emotion_data):
+        """Get recent suggestions"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        suggestions = desktop_monitor.get_recent_suggestions()
+        
+        if suggestions:
+            if language_support.current_language == 'hindi':
+                response = "Recent Suggestions, Sir:\n"
+            else:
+                response = "Recent Suggestions, Sir:\n"
+            
+            for i, suggestion in enumerate(suggestions[-3:], 1):
+                response += f"{i}. {suggestion['message']}\n"
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Abhi koi suggestions nahi hain, Sir. Thoda aur activity karne ke baad milenge."
+            else:
+                response = "No suggestions available yet, Sir. Use your system for a while to get suggestions."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_automation_suggestions(self, emotion_data):
+        """Get smart automation suggestions"""
+        from modules.monitoring.smart_automation import smart_automation
+        
+        suggestions = smart_automation.get_automation_suggestions()
+        
+        if suggestions:
+            if language_support.current_language == 'hindi':
+                response = "Smart Automation Suggestions, Sir:\n"
+            else:
+                response = "Smart Automation Suggestions, Sir:\n"
+            
+            for i, suggestion in enumerate(suggestions[:3], 1):
+                priority_text = "High" if suggestion['priority'] >= 4 else "Medium" if suggestion['priority'] >= 2 else "Low"
+                response += f"{i}. [{priority_text}] {suggestion['message']}\n"
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Abhi koi automation suggestions nahi hain, Sir. Thoda aur activity karne ke baad milenge."
+            else:
+                response = "No automation suggestions available yet, Sir. Use your system for a while to get suggestions."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_execute_automation(self, command_text, emotion_data):
+        """Execute automation rule"""
+        from modules.monitoring.smart_automation import smart_automation
+        
+        # Extract automation type from command
+        automation_types = {
+            'browser': 'browser_cleanup',
+            'split screen': 'code_browser_workflow', 
+            'focus': 'morning_focus',
+            'organize': 'frequent_switching'
+        }
+        
+        rule_type = None
+        for keyword, rule in automation_types.items():
+            if keyword in command_text.lower():
+                rule_type = rule
+                break
+        
+        if rule_type:
+            success, message = smart_automation.execute_automation(rule_type, user_consent=True)
+            
+            if success:
+                smart_automation.learn_user_preference(rule_type, True)
+                if language_support.current_language == 'hindi':
+                    response = f"Automation execute kar diya, Sir: {message}"
+                else:
+                    response = f"Automation executed, Sir: {message}"
+            else:
+                if language_support.current_language == 'hindi':
+                    response = f"Automation execute nahi ho saka, Sir: {message}"
+                else:
+                    response = f"Could not execute automation, Sir: {message}"
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Kya automation execute karna chahte hain Sir? Browser, split screen, focus, ya organize?"
+            else:
+                response = "What automation would you like to execute, Sir? Browser, split screen, focus, or organize?"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_automation_stats(self, emotion_data):
+        """Get automation statistics"""
+        from modules.monitoring.smart_automation import smart_automation
+        
+        stats = smart_automation.get_automation_stats()
+        
+        response = "Automation Statistics, Sir:\n"
+        response += f"Total Suggestions: {stats['total_suggestions']}\n"
+        response += f"Recent Suggestions: {stats['recent_suggestions']}\n"
+        
+        if stats['categories']:
+            response += "Categories:\n"
+            for category, count in stats['categories'].items():
+                response += f"  {category}: {count}\n"
+        
+        if stats['user_preferences']:
+            response += "User Preferences:\n"
+            for rule_type, prefs in stats['user_preferences'].items():
+                total = prefs['accepted'] + prefs['rejected']
+                if total > 0:
+                    acceptance_rate = (prefs['accepted'] / total) * 100
+                    response += f"  {rule_type}: {acceptance_rate:.0f}% acceptance\n"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_analyze_mistakes(self, command_text, emotion_data):
+        """Analyze user mistakes from monitoring data"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        if not self.monitoring_active:
+            if language_support.current_language == 'hindi':
+                response = "Sir, monitoring active nahi hai. Pehle monitoring start kariye taaki main aapki activities analyze kar sakun."
+            else:
+                response = "Sir, monitoring is not active. Please start monitoring first so I can analyze your activities."
+        else:
+            # Get activity data and analyze patterns
+            summary = desktop_monitor.get_activity_summary()
+            
+            if language_support.current_language == 'hindi':
+                response = f"Activity Analysis, Sir:\n{summary}\n\nMain aapki productivity patterns analyze kar raha hun. Suggestions ke liye 'suggestions' kahiye."
+            else:
+                response = f"Activity Analysis, Sir:\n{summary}\n\nI'm analyzing your productivity patterns. Say 'suggestions' for recommendations."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_status_update(self, emotion_data):
+        """Provide system status and recent activity update"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        if self.monitoring_active:
+            current = desktop_monitor.get_current_activity()
+            
+            if current:
+                minutes = current['duration'] // 60
+                seconds = current['duration'] % 60
+                
+                if language_support.current_language == 'hindi':
+                    response = f"Status Update, Sir:\n"
+                    response += f"Current: {current['app']} - {minutes} minutes {seconds} seconds\n"
+                    response += f"Monitoring: Active\n"
+                    response += f"Session: {session_manager.session_data.get('session_count', 1)}"
+                else:
+                    response = f"Status Update, Sir:\n"
+                    response += f"Current: {current['app']} - {minutes}m {seconds}s\n"
+                    response += f"Monitoring: Active\n"
+                    response += f"Session: {session_manager.session_data.get('session_count', 1)}"
+            else:
+                if language_support.current_language == 'hindi':
+                    response = "Monitoring active hai Sir, lekin current activity detect nahi hui."
+                else:
+                    response = "Monitoring is active Sir, but no current activity detected."
+        else:
+            if language_support.current_language == 'hindi':
+                response = "System ready hai Sir. Monitoring start karne ke liye 'start monitoring' kahiye."
+            else:
+                response = "System is ready Sir. Say 'start monitoring' to begin activity tracking."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_ask_context_question(self, emotion_data):
+        """Ask intelligent questions based on current activity"""
+        from modules.monitoring.desktop_monitor import desktop_monitor
+        
+        if self.monitoring_active:
+            question = desktop_monitor.ask_contextual_question()
+            # Store the question for learning purposes
+            self._last_contextual_question = question
+            response = question
+        else:
+            if language_support.current_language == 'hindi':
+                response = "Monitoring start kariye Sir, taaki main aapki activity ke hisaab se questions puch sakun."
+            else:
+                response = "Please start monitoring Sir, so I can ask questions based on your activity."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_get_improvements(self, emotion_data):
+        """Get personalized improvement suggestions"""
+        try:
+            from modules.ai.contextual_ai import contextual_ai
+            suggestions = contextual_ai.get_improvement_suggestions()
+            response = suggestions
+        except Exception as e:
+            print(f"[AI] Improvement suggestions error: {e}")
+            response = "Improvement suggestions generate karne mein error aa gaya, Sir."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_analyze_work_pattern(self, emotion_data):
+        """Analyze user's work patterns"""
+        try:
+            from modules.ai.contextual_ai import contextual_ai
+            analysis = contextual_ai.analyze_work_patterns()
+            response = analysis
+        except Exception as e:
+            print(f"[AI] Work pattern analysis error: {e}")
+            response = "Work pattern analysis mein error aa gaya, Sir."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_get_help(self, command_text, emotion_data):
+        """Provide actual actionable help"""
+        response = "Real Help Available:\n1. Google search karu problem ke liye?\n2. StackOverflow solution dhundu?\n3. Documentation kholu?\n\nBolo 'google search python error' for immediate help!"
+        return response
+    
+    def _handle_execute_help(self, command_text, emotion_data):
+        """Execute help actions"""
+        try:
+            from modules.ai.help_engine import help_engine
+            if 'google search' in command_text.lower():
+                query = command_text.lower().replace('google search', '').strip()
+                help_engine.execute_help_action('google_search', query)
+                response = f"Google search opened for: {query}"
+            elif 'stackoverflow' in command_text.lower():
+                query = command_text.lower().replace('stackoverflow', '').strip()
+                help_engine.execute_help_action('stackoverflow_search', query)
+                response = f"StackOverflow opened for: {query}"
+            else:
+                response = "Kya search karna chahte hain? 'google search [topic]' boliye."
+        except:
+            response = "Search kar raha hun Sir."
+        return response
+    
+    def _handle_book_knowledge(self, command_text, emotion_data):
+        """Handle book knowledge queries"""
+        query = command_text.replace("book knowledge", "").strip()
+        if query:
+            results = book_processor.get_book_knowledge(query)
+            if results:
+                response = f"Sir, Book Knowledge: {results[0]['book']} - {results[0]['content'][:200]}..."
+            else:
+                response = "Sir, no relevant book knowledge found for this query."
+        else:
+            response = "Sir, please specify what book knowledge you want to search for."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_training_stats(self, emotion_data):
+        """Show comprehensive training statistics"""
+        neural_stats = neural_brain.get_training_stats()
+        data_stats = data_trainer.get_training_stats()
+        
+        response = f"🧠 Complete Training Statistics, Sir:\n"
+        response += f"Neural Brain: {neural_stats['total_patterns']} patterns, {neural_stats['total_responses']} responses\n"
+        response += f"Data Training: {data_stats['total_books']} books, {data_stats['total_news']} news\n"
+        response += f"Knowledge Base: {data_stats['total_entities']} entities\n"
+        response += f"Conversations: {data_stats['total_conversations']} learned\n"
+        response += f"Last Updated: {data_stats['last_updated']}"
         
         if emotion_data:
             return emotion_engine.enhance_response(response, emotion_data)

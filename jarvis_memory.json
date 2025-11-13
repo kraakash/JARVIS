@@ -1121,6 +1121,84 @@
         "timestamp": "2025-11-13T22:14:00.856245",
         "frequency": 1
       }
+    ],
+    "suggest": [
+      {
+        "input": "suggest me",
+        "words": [
+          "suggest"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T23:21:24.334646",
+        "frequency": 1
+      }
+    ],
+    "jarvis": [
+      {
+        "input": "jarvis",
+        "words": [
+          "jarvis"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T23:27:19.136159",
+        "frequency": 1
+      }
+    ],
+    "bata_galtiyan_meri": [
+      {
+        "input": "Meri galtiyan bata sakte ho",
+        "words": [
+          "meri",
+          "galtiyan",
+          "bata",
+          "sakte"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T23:30:26.931213",
+        "frequency": 1
+      }
+    ],
+    "kya_meri_tum": [
+      {
+        "input": "kya tum meri galtiyan bta skte ho desktop monitoring ke time analyze krke",
+        "words": [
+          "kya",
+          "tum",
+          "meri",
+          "galtiyan",
+          "bta"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T23:31:03.779740",
+        "frequency": 1
+      }
+    ],
+    "hai_kya_update": [
+      {
+        "input": "kya update hai",
+        "words": [
+          "kya",
+          "update",
+          "hai"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T23:34:18.169164",
+        "frequency": 1
+      }
+    ],
+    "think_what_you": [
+      {
+        "input": "what do you think about AI",
+        "words": [
+          "what",
+          "you",
+          "think",
+          "about"
+        ],
+        "context": "greeting",
+        "timestamp": "2025-11-14T00:04:03.459618",
+        "frequency": 1
+      }
     ]
   },
   "word_associations": {
@@ -1131,11 +1209,12 @@
       "you"
     ],
     "you": [
-      "stronger",
       "remain",
+      "stronger",
       "amazing",
       "learning",
-      "rule"
+      "rule",
+      "think"
     ],
     "kuch": [
       "bnate",
@@ -1155,17 +1234,19 @@
     ],
     "kya": [
       "kya",
-      "bnaye",
-      "tum",
-      "skte",
-      "rahe",
       "haal",
-      "kar"
+      "rahe",
+      "bnaye",
+      "kar",
+      "tum",
+      "update",
+      "skte"
     ],
     "tum": [
       "kya",
-      "kaun",
       "kon",
+      "meri",
+      "kaun",
       "koun",
       "merre"
     ],
@@ -1174,8 +1255,8 @@
       "chalo"
     ],
     "youu": [
-      "best",
-      "amazing"
+      "amazing",
+      "best"
     ],
     "love": [
       "you"
@@ -1236,8 +1317,8 @@
       "hai"
     ],
     "kar": [
-      "rahe",
       "rhe",
+      "rahe",
       "sakte"
     ],
     "amazing": [
@@ -1268,10 +1349,27 @@
       "what"
     ],
     "what": [
-      "about"
+      "about",
+      "you"
     ],
     "about": [
       "you"
+    ],
+    "meri": [
+      "galtiyan"
+    ],
+    "galtiyan": [
+      "bata",
+      "bta"
+    ],
+    "bata": [
+      "sakte"
+    ],
+    "update": [
+      "hai"
+    ],
+    "think": [
+      "about"
     ]
   },
   "user_taught_answers": {
@@ -5280,5 +5378,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-13T23:00:54.541781"
+  "last_updated": "2025-11-14T00:04:03.459618"
 }

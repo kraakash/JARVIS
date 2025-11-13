@@ -13,19 +13,29 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from core.brain import JarvisBrain
 from modules.voice import jarvis_listener
 from modules.nlp import language_support
+from modules.core.session_manager import session_manager
 
 def main():
     print("Initializing JARVIS...")
     
     # Initialize the core brain
     jarvis = JarvisBrain()
+    
+    # Show session info
+    if session_manager.is_monitoring_active():
+        print("[SESSION] Resuming from monitoring mode")
 
     # Main loop with voice input (fallback to text if needed)
     try:
         print("\n[INFO] Starting JARVIS...")
-        jarvis.speak("Voice input ready. Say 'Jarvis' followed by your command.")
+        if session_manager.is_monitoring_active():
+            jarvis.speak("JARVIS ready, Sir. Monitoring resumed from previous session.")
+        else:
+            jarvis.speak("Voice input ready. Say 'Jarvis' followed by your command.")
         print("[INFO] Say 'Jarvis' to activate voice mode, or press Ctrl+C for text mode")
         print("[INFO] Say 'Hindi mein bolo' for Hindi responses")
+        if session_manager.is_monitoring_active():
+            print("[INFO] Desktop monitoring is active from previous session")
         
         conversation_mode = False
         
@@ -43,6 +53,7 @@ def main():
                     
                     if command:
                         if command.lower() in ['exit', 'quit', 'goodbye', 'shutdown', 'alvida', 'band karo']:
+                            session_manager.set_shutdown_time()
                             jarvis.speak(language_support.get_response('shutdown'))
                             break
                         elif command.lower() in ['stop', 'that\'s all', 'bas', 'enough', 'khatam']:
@@ -81,6 +92,7 @@ def main():
                             print("[INFO] Switching back to voice mode...")
                             break
                         else:
+                            session_manager.set_shutdown_time()
                             jarvis.speak(language_support.get_response('shutdown'))
                             return
                     elif user_input.lower() in ['stop', 'that\'s all', 'bas', 'enough', 'khatam']:
@@ -112,6 +124,7 @@ def main():
                     user_input = input("You: ")
                     
                 if user_input.lower() in ['exit', 'quit', 'goodbye', 'alvida', 'band karo']:
+                    session_manager.set_shutdown_time()
                     jarvis.speak(language_support.get_response('shutdown'))
                     break
                 elif user_input.lower() in ['stop', 'that\'s all', 'bas', 'enough', 'khatam']:
@@ -130,10 +143,11 @@ def main():
                     text_conversation_mode = False
         except KeyboardInterrupt:
             print("\n\nJARVIS: Emergency shutdown initiated.")
+            session_manager.set_shutdown_time()
             jarvis.speak("Emergency shutdown initiated.")
     except Exception as e:
-        print(f"JARVIS: System error - {e}")  
         print(f"JARVIS: System error - {e}")
+        session_manager.set_shutdown_time()
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,8 @@
     "general": {
       "patterns": [
         "kaise ho",
-        "tum kya kya kar sakte ho"
+        "tum kya kya kar sakte ho",
+        "suggest me"
       ],
       "keywords": {
         "kaise": 5,
@@ -46,19 +47,68 @@
       },
       "success_count": 1,
       "total_count": 1
+    },
+    "start_monitoring": {
+      "patterns": [
+        "start monitoring"
+      ],
+      "keywords": {
+        "start": 1,
+        "monitoring": 1
+      },
+      "success_count": 1,
+      "total_count": 1
+    },
+    "current_activity": {
+      "patterns": [
+        "current activity"
+      ],
+      "keywords": {
+        "current": 1,
+        "activity": 1
+      },
+      "success_count": 1,
+      "total_count": 1
+    },
+    "get_suggestions": {
+      "patterns": [
+        "sujhav do"
+      ],
+      "keywords": {
+        "sujhav": 1
+      },
+      "success_count": 1,
+      "total_count": 1
+    },
+    "question": {
+      "patterns": [
+        "what do you think about ai"
+      ],
+      "keywords": {
+        "what": 1,
+        "you": 1,
+        "think": 1,
+        "about": 1
+      },
+      "success_count": 1,
+      "total_count": 1
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 9,
-    "correct_predictions": 9,
-    "ml_predictions": 0,
+    "total_interactions": 13,
+    "correct_predictions": 13,
+    "ml_predictions": 4,
     "learning_rate": 100.0,
     "ml_accuracy": 0.0,
     "intent_accuracy": {
       "general": 100.0,
       "greeting": 100.0,
-      "open_app": 100.0
+      "open_app": 100.0,
+      "start_monitoring": 100.0,
+      "current_activity": 100.0,
+      "get_suggestions": 100.0,
+      "question": 100.0
     },
     "last_updated": null
   },
@@ -71,7 +121,11 @@
     "kaise ho",
     "kaise ho",
     "kaise ho",
-    "kam to bahut sara hai shuru kahan se karun"
+    "kam to bahut sara hai shuru kahan se karun",
+    "start monitoring",
+    "current activity",
+    "sujhav do",
+    "what do you think about ai"
   ],
   "training_labels": [
     "general",
@@ -82,7 +136,11 @@
     "general",
     "general",
     "general",
-    "open_app"
+    "open_app",
+    "start_monitoring",
+    "current_activity",
+    "get_suggestions",
+    "question"
   ],
-  "last_updated": "2025-11-13T22:51:29.856111"
+  "last_updated": "2025-11-14T00:04:03.468198"
 }

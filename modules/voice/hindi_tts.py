@@ -46,42 +46,31 @@ class HindiTTS:
             return False
     
     def _speak_with_edge(self, text):
-        """Use Microsoft Edge TTS for Hindi"""
+        """Use Microsoft Edge TTS for Hindi with in-memory audio"""
         try:
-            import time
-            import uuid
-            
-            # Generate unique filename
-            audio_file = f"temp_hindi_{uuid.uuid4().hex[:8]}.mp3"
-            
-            # Generate speech
+            # Generate speech in memory
             async def generate_speech():
+                audio_data = b""
                 communicate = edge_tts.Communicate(text, self.hindi_voice, rate='-20%')
-                with open(audio_file, "wb") as f:
-                    async for chunk in communicate.stream():
-                        if chunk["type"] == "audio":
-                            f.write(chunk["data"])
+                async for chunk in communicate.stream():
+                    if chunk["type"] == "audio":
+                        audio_data += chunk["data"]
+                return audio_data
             
             # Run async function
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-            loop.run_until_complete(generate_speech())
+            audio_data = loop.run_until_complete(generate_speech())
             loop.close()
             
-            # Play audio
-            pygame.mixer.music.load(audio_file)
+            # Play audio from memory
+            audio_buffer = io.BytesIO(audio_data)
+            pygame.mixer.music.load(audio_buffer)
             pygame.mixer.music.play()
             
             # Wait for playback to finish
             while pygame.mixer.music.get_busy():
                 pygame.time.wait(100)
-            
-            # Clean up with retry
-            try:
-                time.sleep(0.1)
-                os.remove(audio_file)
-            except:
-                pass
             
             return True
             
@@ -90,34 +79,23 @@ class HindiTTS:
             return self._speak_with_gtts(text)  # Fallback
     
     def _speak_with_gtts(self, text):
-        """Use Google TTS for Hindi"""
+        """Use Google TTS for Hindi with in-memory audio"""
         try:
-            import time
-            import uuid
-            
             # Create gTTS object
             tts = gTTS(text=text, lang='hi', slow=True)
             
-            # Generate unique filename
-            audio_file = f"temp_gtts_{uuid.uuid4().hex[:8]}.mp3"
+            # Save to memory buffer instead of file
+            audio_buffer = io.BytesIO()
+            tts.write_to_fp(audio_buffer)
+            audio_buffer.seek(0)
             
-            # Save to file
-            tts.save(audio_file)
-            
-            # Play audio
-            pygame.mixer.music.load(audio_file)
+            # Play audio from memory
+            pygame.mixer.music.load(audio_buffer)
             pygame.mixer.music.play()
             
             # Wait for playback to finish
             while pygame.mixer.music.get_busy():
                 pygame.time.wait(100)
-            
-            # Clean up with retry
-            try:
-                time.sleep(0.1)
-                os.remove(audio_file)
-            except:
-                pass
             
             return True
                 
