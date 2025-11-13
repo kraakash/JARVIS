@@ -127,7 +127,12 @@ class JarvisBrain:
             response = self.skills['learning_stats'](emotion_data)
         elif intent == 'test_learning':
             response = self.skills['test_learning'](emotion_data)
+        elif intent == 'clean_memory':
+            response = self.skills['clean_memory'](emotion_data)
         elif intent == 'general_conversation':
+            response = self._handle_general_conversation(command_text, emotion_data)
+        elif intent == 'general':
+            # Route general intent to conversation handler
             response = self._handle_general_conversation(command_text, emotion_data)
         else:
             # Use smart conversation for unrecognized intents
@@ -225,6 +230,14 @@ class JarvisBrain:
     
     def _handle_question(self, command_text, emotion_data):
         """Handle general questions with emotional context"""
+        # Try learning AI first for knowledge-based questions
+        from modules.ai.learning_ai import learning_ai
+        learned_response = learning_ai.generate_response(command_text)
+        
+        if learned_response and "mujhe nahi aata" not in learned_response and "don't know" not in learned_response:
+            return learned_response
+        
+        # Fallback to default response
         base_response = "That's an interesting question, Sir. I'm still learning to answer complex queries, but I'm here to help however I can."
         return emotion_engine.enhance_response(base_response, emotion_data)
     
@@ -321,7 +334,14 @@ class JarvisBrain:
     
     def _handle_general_conversation(self, command_text, emotion_data):
         """Handle general conversation and questions"""
-        # Try conversation engine first
+        # Try learning AI FIRST for all general conversation
+        from modules.ai.learning_ai import learning_ai
+        learned_response = learning_ai.generate_response(command_text)
+        
+        if learned_response:
+            return learned_response
+        
+        # Fallback to conversation engine
         response = conversation_engine.get_conversation_response(command_text)
         
         if response:
@@ -622,6 +642,20 @@ class JarvisBrain:
         if emotion_data:
             return emotion_engine.enhance_response(response, emotion_data)
         return response
+    
+    def _handle_clean_memory(self, emotion_data):
+        """Clean memory duplicates"""
+        from modules.ai.learning_ai import learning_ai
+        result = learning_ai.clean_memory()
+        
+        if language_support.current_language == 'hindi':
+            base_response = f"Memory saaf kar diya, Sir. {result}"
+        else:
+            base_response = f"Memory cleaned, Sir. {result}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(base_response, emotion_data)
+        return base_response
     
     def speak(self, text):
         """Unified speaking method"""

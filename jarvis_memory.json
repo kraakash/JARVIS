@@ -92,15 +92,15 @@
         "input": "",
         "words": [],
         "context": "general",
-        "timestamp": "2025-11-13T10:14:23.966045",
-        "frequency": 3
+        "timestamp": "2025-11-13T10:57:47.406623",
+        "frequency": 5
       },
       {
         "input": "",
         "words": [],
         "context": "casual",
-        "timestamp": "2025-11-12T23:46:02.167225",
-        "frequency": 1
+        "timestamp": "2025-11-13T11:09:18.243534",
+        "frequency": 2
       },
       {
         "input": "ha",
@@ -846,8 +846,8 @@
           "rhe"
         ],
         "context": "general",
-        "timestamp": "2025-11-13T10:21:41.118800",
-        "frequency": 1
+        "timestamp": "2025-11-13T10:31:00.252540",
+        "frequency": 3
       },
       {
         "input": "kya kar rhe ho",
@@ -857,7 +857,143 @@
           "rhe"
         ],
         "context": "hindi",
-        "timestamp": "2025-11-13T10:21:41.345896",
+        "timestamp": "2025-11-13T10:31:00.343331",
+        "frequency": 3
+      }
+    ],
+    "amazinggg_brooo": [
+      {
+        "input": "amazinggg brooo",
+        "words": [
+          "amazinggg",
+          "brooo"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-13T10:32:49.034229",
+        "frequency": 1
+      },
+      {
+        "input": "amazinggg brooo",
+        "words": [
+          "amazinggg",
+          "brooo"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T10:32:49.192958",
+        "frequency": 1
+      }
+    ],
+    "amazingg_brooo": [
+      {
+        "input": "amazingg brooo",
+        "words": [
+          "amazingg",
+          "brooo"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-13T10:37:07.566374",
+        "frequency": 1
+      },
+      {
+        "input": "amazingg brooo",
+        "words": [
+          "amazingg",
+          "brooo"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T10:37:07.731065",
+        "frequency": 1
+      }
+    ],
+    "amazing_bro": [
+      {
+        "input": "amazing bro",
+        "words": [
+          "amazing",
+          "bro"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-13T10:37:32.124338",
+        "frequency": 2
+      },
+      {
+        "input": "amazing bro",
+        "words": [
+          "amazing",
+          "bro"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T10:37:32.275806",
+        "frequency": 2
+      }
+    ],
+    "kaun_tum": [
+      {
+        "input": "tum kaun ho",
+        "words": [
+          "tum",
+          "kaun"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-13T10:52:21.122841",
+        "frequency": 1
+      },
+      {
+        "input": "tum kaun ho",
+        "words": [
+          "tum",
+          "kaun"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T10:52:21.316435",
+        "frequency": 1
+      }
+    ],
+    "acha_huu_mai": [
+      {
+        "input": "mai acha huu",
+        "words": [
+          "mai",
+          "acha",
+          "huu"
+        ],
+        "context": "general",
+        "timestamp": "2025-11-13T11:01:16.886228",
+        "frequency": 1
+      },
+      {
+        "input": "mai acha huu",
+        "words": [
+          "mai",
+          "acha",
+          "huu"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T11:01:17.003492",
+        "frequency": 1
+      }
+    ],
+    "hello_jarvis": [
+      {
+        "input": "helllo jarvis",
+        "words": [
+          "hello",
+          "jarvis"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T11:09:27.482988",
+        "frequency": 1
+      }
+    ],
+    "kya_rahe": [
+      {
+        "input": "kya ka rahe ho",
+        "words": [
+          "kya",
+          "rahe"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T11:09:32.734783",
         "frequency": 1
       }
     ]
@@ -870,229 +1006,122 @@
       "you"
     ],
     "you": [
-      "stronger",
-      "learning",
-      "learning",
-      "learning",
-      "learning",
-      "learning",
-      "learning",
-      "learning",
-      "learning",
       "remain",
-      "remain",
-      "amazingg",
-      "amazingg",
-      "stronger",
+      "amazing",
+      "learning",
       "rule",
-      "stronger",
-      "rule"
+      "stronger"
     ],
     "kuch": [
       "btao",
-      "btao",
-      "bnate",
       "bnate"
     ],
     "sath": [
-      "tum",
       "tum"
     ],
     "chlo": [
-      "fir",
       "fir"
     ],
     "fir": [
-      "kuch",
       "kuch"
     ],
     "bnate": [
-      "hai",
       "hai"
     ],
     "kya": [
-      "bnaye",
-      "bnaye",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "kya",
-      "skte",
-      "tum",
-      "tum",
-      "haal",
-      "haal",
       "kar",
-      "kar"
+      "bnaye",
+      "tum",
+      "skte",
+      "kya",
+      "haal",
+      "rahe"
     ],
     "tum": [
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
-      "kya",
       "merre",
-      "merre"
+      "kaun",
+      "kya"
     ],
     "uhmm": [
       "you",
-      "you",
-      "you",
-      "you",
-      "you",
-      "you",
-      "you",
-      "you",
-      "chalo",
       "chalo"
     ],
-    "youuu": [
-      "amazingggg",
-      "amazingggg",
-      "amazingggg",
-      "amazingggg",
-      "amazingggg",
-      "amazingggg",
-      "amazingggg",
-      "amazingggg"
+    "youu": [
+      "amazing",
+      "best"
     ],
     "love": [
-      "you",
-      "you",
-      "you",
-      "you",
-      "you",
-      "you",
-      "you",
       "you"
     ],
     "remain": [
-      "forever",
       "forever"
     ],
-    "youu": [
-      "best",
-      "best"
-    ],
     "ahha": [
-      "superr",
       "superr"
     ],
     "superr": [
-      "cool",
       "cool"
     ],
     "stronger": [
-      "soon",
       "soon"
     ],
     "soon": [
-      "you",
       "you"
     ],
     "glad": [
-      "guess",
       "guess"
     ],
     "guess": [
-      "its",
       "its"
     ],
     "its": [
-      "enough",
       "enough"
     ],
     "enough": [
-      "todayy",
       "todayy"
-    ],
-    "byeeeeeee": [
-      "jarivssssss",
-      "jarivssssss"
-    ],
-    "jarivssssss": [
-      "shotdown",
-      "shotdown"
     ],
     "byee": [
       "jarvis",
-      "jarvis"
+      "jarivss"
+    ],
+    "jarivss": [
+      "shotdown"
     ],
     "chalo": [
-      "tumhe",
       "tumhe"
     ],
     "tumhe": [
-      "improve",
       "improve"
     ],
     "improve": [
-      "krte",
       "krte"
     ],
     "merre": [
-      "frnd",
       "frnd"
     ],
     "frnd": [
-      "banoge",
       "banoge"
     ],
     "kyaa": [
-      "haal",
       "haal"
     ],
     "haal": [
-      "hai",
-      "hai",
-      "hai",
       "hai"
     ],
     "kar": [
-      "rhe",
       "rhe"
+    ],
+    "amazing": [
+      "bro"
+    ],
+    "mai": [
+      "acha"
+    ],
+    "acha": [
+      "huu"
+    ],
+    "hello": [
+      "jarvis"
     ]
   },
   "user_taught_answers": {
@@ -5101,5 +5130,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-13T10:21:41.345896"
+  "last_updated": "2025-11-13T11:09:32.734783"
 }

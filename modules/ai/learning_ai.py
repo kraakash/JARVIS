@@ -28,6 +28,34 @@ class LearningAI:
         # Load training data
         self.load_training_data()
         
+        # JARVIS identity responses
+        self.identity_responses = {
+            'who_are_you': {
+                'english': [
+                    "I am JARVIS, Sir - Just A Rather Very Intelligent System. Your personal AI assistant.",
+                    "JARVIS at your service, Sir. I'm your AI assistant created to help you.",
+                    "I'm JARVIS, Sir - your artificial intelligence assistant."
+                ],
+                'hindi': [
+                    "Main JARVIS hun, Sir - aapka personal AI assistant. Aapki seva ke liye banaya gaya hun.",
+                    "JARVIS hun main, Sir. Aapka artificial intelligence assistant.",
+                    "Main aapka AI assistant JARVIS hun, Sir. Aapki madad ke liye yahan hun."
+                ]
+            },
+            'what_is_your_name': {
+                'english': [
+                    "My name is JARVIS, Sir.",
+                    "I'm called JARVIS - Just A Rather Very Intelligent System.",
+                    "JARVIS is my name, Sir."
+                ],
+                'hindi': [
+                    "Mera naam JARVIS hai, Sir.",
+                    "Main JARVIS hun, Sir.",
+                    "JARVIS kehte hain mujhe, Sir."
+                ]
+            }
+        }
+        
         # Base JARVIS responses
         self.base_responses = {
             'greeting': [
@@ -75,10 +103,12 @@ class LearningAI:
         """Learn patterns from user input"""
         words = self.extract_keywords(user_input)
         
-        # Store word associations
+        # Store word associations (prevent duplicates)
         for i, word in enumerate(words):
             if i < len(words) - 1:
-                self.word_associations[word].append(words[i + 1])
+                next_word = words[i + 1]
+                if next_word not in self.word_associations[word]:
+                    self.word_associations[word].append(next_word)
         
         # Learn patterns
         pattern_key = self.create_pattern_key(words)
@@ -110,9 +140,10 @@ class LearningAI:
         if len(self.patterns) % 10 == 0:  # Every 10 new patterns
             neural_network.simple_train()
             
-            # Add to TensorFlow training data
+            # Add to TensorFlow training data and save model
             if tensorflow_jarvis.available:
                 tensorflow_jarvis.add_training_data(user_input, context)
+                tensorflow_jarvis.save_model()  # Only save when training
         
         # Save learning
         self.save_memory()
@@ -126,7 +157,19 @@ class LearningAI:
         if self.waiting_for_answer:
             return self.save_user_answer(user_input)
         
-        # Check for custom responses FIRST
+        # Check for basic JARVIS identity questions FIRST
+        identity_response = self.check_identity_questions(user_input)
+        if identity_response:
+            print(f"[DEBUG] Response source: IDENTITY_RESPONSE")
+            return identity_response
+        
+        # Check for basic conversation responses SECOND
+        conversation_response = self.check_basic_conversation(user_input)
+        if conversation_response:
+            print(f"[DEBUG] Response source: BASIC_CONVERSATION")
+            return conversation_response
+        
+        # Check for custom responses THIRD
         custom_response = memory_editor.get_custom_response(pattern_key)
         if custom_response:
             print(f"[DEBUG] Response source: CUSTOM_RESPONSE (pattern: {pattern_key})")
@@ -136,19 +179,31 @@ class LearningAI:
             self.learn_from_input(user_input, "custom_response")
             return custom_response
         
-        # Check for user-taught answers second
+        # Check for user-taught answers FOURTH
         taught_answer = self.check_user_taught_answers(user_input)
         if taught_answer:
             print(f"[DEBUG] Response source: USER_TAUGHT")
             return taught_answer
         
-        # Try TensorFlow model third (Phase 2), fallback to simple neural network
+        # Try TensorFlow model (with language awareness)
         if tensorflow_jarvis.available:
             predicted_type = tensorflow_jarvis.predict_response_category(user_input)
             tf_response = tensorflow_jarvis.generate_response(user_input)
             if tf_response:
+                # Modify TensorFlow response based on language
+                if self.is_hindi(user_input) and not self.is_hindi(tf_response):
+                    # Convert English response to Hindi equivalent
+                    hindi_equivalents = {
+                        "Quite right, Sir.": "Bilkul sahi, Sir.",
+                        "Indeed, Sir.": "Haan Sir, bilkul.",
+                        "I understand, Sir.": "Samajh gaya, Sir.",
+                        "Very well, Sir.": "Bahut achha, Sir.",
+                        "Excellent, Sir.": "Bahut badhiya, Sir."
+                    }
+                    tf_response = hindi_equivalents.get(tf_response, "Samajh gaya, Sir.")
+                
                 print(f"[DEBUG] Response source: TENSORFLOW_MODEL (category: {predicted_type})")
-                # Automatically learn from this interaction
+                # Only add training data, don't auto-save
                 tensorflow_jarvis.add_training_data(user_input, predicted_type)
                 self.learn_from_input(user_input, predicted_type)
                 return tf_response
@@ -187,6 +242,11 @@ class LearningAI:
     
     def check_user_taught_answers(self, user_input):
         """Check if user previously taught an answer for this question"""
+        # Skip empty or very short inputs
+        if not user_input or len(user_input.strip()) < 3:
+            print(f"[DEBUG] Input too short, skipping user-taught answers")
+            return None
+            
         user_input_clean = user_input.lower().replace('?', '').strip()
         
         print(f"[DEBUG] Checking user-taught answers for: '{user_input.lower()}'")
@@ -200,14 +260,23 @@ class LearningAI:
             print(f"[DEBUG] Found clean match in user-taught answers")
             return self.user_taught_answers[user_input_clean]
         
-        # Then try fuzzy matching
+        # Skip fuzzy matching for conversational phrases
+        conversational_phrases = ['kaise ho', 'kya kar rhe ho', 'aur btao', 'how are you', 'what are you doing']
+        if any(phrase in user_input.lower() for phrase in conversational_phrases):
+            print(f"[DEBUG] Conversational phrase detected, skipping user-taught answers")
+            return None
+        
+        # Then try fuzzy matching only for actual questions
         user_words = set(self.extract_keywords(user_input))
+        if len(user_words) < 2:  # Need at least 2 meaningful words
+            return None
         
         for question, answer in self.user_taught_answers.items():
             question_words = set(self.extract_keywords(question))
             
-            # Check for word overlap (at least 60% match)
-            if len(user_words & question_words) >= len(user_words) * 0.6:
+            # Check for word overlap (at least 70% match and minimum 2 words)
+            overlap = len(user_words & question_words)
+            if overlap >= 2 and overlap >= len(user_words) * 0.7:
                 print(f"[DEBUG] Found fuzzy match in user-taught answers")
                 return answer
         
@@ -280,13 +349,13 @@ class LearningAI:
             base_responses = self.base_responses['improvement']
         elif any(word in user_input.lower() for word in ['kya kya', 'what can', 'capabilities', 'skte ho']):
             base_responses = self.base_responses['capabilities']
-        # Detect language
-        elif self.is_hindi(user_input):
-            base_responses = self.base_responses['hindi']
-        elif '?' in user_input or any(q in user_input.lower() for q in ['what', 'how', 'why', 'when', 'where']):
-            base_responses = self.base_responses['question']
         elif any(g in user_input.lower() for g in ['hi', 'hello', 'hey', 'namaste']):
             base_responses = self.base_responses['greeting']
+        elif '?' in user_input or any(q in user_input.lower() for q in ['what', 'how', 'why', 'when', 'where']):
+            base_responses = self.base_responses['question']
+        # Detect language for general responses
+        elif self.is_hindi(user_input):
+            base_responses = self.base_responses['hindi']
         else:
             base_responses = self.base_responses['unknown']
         
@@ -305,13 +374,31 @@ class LearningAI:
         
         return response
     
+    def normalize_word(self, word):
+        """Normalize words to group similar variations"""
+        # Remove repeated characters (amazing, amazingg, amazinggg -> amazing)
+        normalized = re.sub(r'(.)\1{2,}', r'\1\1', word)  # Keep max 2 repeated chars
+        
+        # Common word mappings
+        word_mappings = {
+            'bro': 'bro', 'broo': 'bro', 'brooo': 'bro', 'broooo': 'bro',
+            'amazing': 'amazing', 'amazingg': 'amazing', 'amazinggg': 'amazing',
+            'cool': 'cool', 'coool': 'cool', 'cooool': 'cool',
+            'nice': 'nice', 'nicee': 'nice', 'niceee': 'nice',
+            'good': 'good', 'goodd': 'good', 'goood': 'good',
+            'great': 'great', 'greatt': 'great', 'greattt': 'great',
+            'awesome': 'awesome', 'awesomee': 'awesome', 'awesomeee': 'awesome'
+        }
+        
+        return word_mappings.get(normalized, normalized)
+    
     def extract_keywords(self, text):
         """Extract meaningful keywords from text"""
         # Remove common words
         stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'must'}
         
         words = re.findall(r'\b\w+\b', text.lower())
-        keywords = [word for word in words if word not in stop_words and len(word) > 2]
+        keywords = [self.normalize_word(word) for word in words if word not in stop_words and len(word) > 2]
         
         return keywords[:5]  # Limit to 5 keywords
     
@@ -321,8 +408,90 @@ class LearningAI:
     
     def is_hindi(self, text):
         """Detect if text contains Hindi"""
-        hindi_words = ['kya', 'hai', 'mein', 'aap', 'kar', 'ho', 'hoon', 'raat', 'rat', 'kaise', 'kaun', 'kab', 'kahan']
+        hindi_words = ['kya', 'hai', 'mein', 'aap', 'kar', 'ho', 'hoon', 'raat', 'rat', 'kaise', 'kaun', 'kab', 'kahan', 'btao', 'rhe', 'chal', 'raha']
         return any(word in text.lower() for word in hindi_words)
+    
+    def check_identity_questions(self, user_input):
+        """Check for basic JARVIS identity questions"""
+        text_lower = user_input.lower().strip()
+        
+        # Who are you patterns
+        who_patterns = ['who are you', 'tum kaun ho', 'kaun ho tum', 'aap kaun hain', 'who r u']
+        for pattern in who_patterns:
+            if pattern in text_lower:
+                if self.is_hindi(user_input):
+                    return random.choice(self.identity_responses['who_are_you']['hindi'])
+                else:
+                    return random.choice(self.identity_responses['who_are_you']['english'])
+        
+        # Name patterns
+        name_patterns = ['what is your name', 'tumhara naam kya hai', 'naam kya hai', 'whats your name', 'your name']
+        for pattern in name_patterns:
+            if pattern in text_lower:
+                if self.is_hindi(user_input):
+                    return random.choice(self.identity_responses['what_is_your_name']['hindi'])
+                else:
+                    return random.choice(self.identity_responses['what_is_your_name']['english'])
+        
+        return None
+    
+    def check_basic_conversation(self, user_input):
+        """Check for basic conversational responses"""
+        text_lower = user_input.lower().strip()
+        
+        # How are you patterns
+        if any(pattern in text_lower for pattern in ['kaise ho', 'how are you', 'kaise hain']):
+            hindi_responses = [
+                "Main bilkul theek hun, Sir! Aapki seva ke liye ready hun.",
+                "Bahut achha hun, Sir. Aap kaise hain?",
+                "Main theek hun, Sir. Aapka din kaisa ja raha hai?"
+            ]
+            english_responses = [
+                "I'm functioning perfectly, Sir! Ready to assist you.",
+                "Excellent condition, Sir. How may I help you today?",
+                "All systems operational, Sir. How are you?"
+            ]
+            
+            if self.is_hindi(user_input):
+                return random.choice(hindi_responses)
+            else:
+                return random.choice(english_responses)
+        
+        # What are you doing patterns
+        if any(pattern in text_lower for pattern in ['kya kar rhe ho', 'what are you doing', 'aur btao', 'kya chal raha']):
+            hindi_responses = [
+                "Main aapka intezaar kar raha tha, Sir. Koi kaam hai?",
+                "Bas aapke commands ka wait kar raha hun, Sir.",
+                "Main ready hun aapki madad ke liye, Sir. Kya chahiye?"
+            ]
+            english_responses = [
+                "Waiting for your commands, Sir. How may I assist?",
+                "Standing by for your instructions, Sir.",
+                "Ready to help you with anything, Sir."
+            ]
+            
+            if self.is_hindi(user_input):
+                return random.choice(hindi_responses)
+            else:
+                return random.choice(english_responses)
+        
+        # General positive responses in Hindi
+        if any(pattern in text_lower for pattern in ['mai acha hun', 'main acha hun', 'mai theek hun', 'main theek hun', 'achha hun']):
+            return random.choice([
+                "Bahut khushi ki baat hai, Sir! Main bhi khush hun.",
+                "Excellent, Sir! Aaj kya karna hai?",
+                "Wonderful, Sir! Koi kaam batayiye."
+            ])
+        
+        # General positive responses in English
+        if any(pattern in text_lower for pattern in ['i am good', 'i am fine', 'im good', 'im fine', 'doing well']):
+            return random.choice([
+                "Excellent to hear, Sir! What shall we accomplish today?",
+                "Wonderful, Sir! How may I assist you?",
+                "Great to know, Sir! Ready for your commands."
+            ])
+        
+        return None
     
     def save_memory(self):
         """Save learned patterns and neural network"""
@@ -340,9 +509,8 @@ class LearningAI:
             # Save neural network model
             neural_network.save_model()
             
-            # Save TensorFlow model
-            if tensorflow_jarvis.available:
-                tensorflow_jarvis.save_model()
+            # Only save TensorFlow model periodically, not every time
+            # tensorflow_jarvis.save_model() - removed auto-save
             
         except Exception as e:
             print(f"[ERROR] Could not save memory: {e}")
@@ -376,28 +544,36 @@ class LearningAI:
                         for example in examples:
                             tensorflow_jarvis.add_training_data(example['input'], example['category'])
             
-            # Load AmbigNQ dataset for general knowledge
+            # Load AmbigNQ dataset for general knowledge (only for specific questions)
             ambignq_path = "general-qa/ambignq/dev.json"
             if os.path.exists(ambignq_path):
                 with open(ambignq_path, 'r', encoding='utf-8') as f:
                     ambignq_data = json.load(f)
                 
-                # Load ALL Q&A pairs for comprehensive knowledge
+                # Load only factual Q&A pairs, skip conversational ones
                 count = 0
                 for item in ambignq_data:
                     question = item.get('question', '')
                     answers = item.get('nq_answer', [])
                     if question and answers:
-                        answer = answers[0] if isinstance(answers, list) else str(answers)
-                        # Store as user-taught answer with exact question matching
-                        self.user_taught_answers[question.lower()] = f"Sir, {answer}."
-                        
-                        # Also add variations for better matching
-                        question_clean = question.lower().replace('?', '').strip()
-                        self.user_taught_answers[question_clean] = f"Sir, {answer}."
-                        count += 1
+                        # Skip conversational questions
+                        skip_patterns = ['how are', 'what are you doing', 'who are you', 'kaise ho', 'kaun ho']
+                        if any(pattern in question.lower() for pattern in skip_patterns):
+                            continue
+                            
+                        # Only add factual questions (with what, when, where, which, etc.)
+                        factual_patterns = ['what is', 'when was', 'where is', 'which', 'who was', 'how many']
+                        if any(pattern in question.lower() for pattern in factual_patterns):
+                            answer = answers[0] if isinstance(answers, list) else str(answers)
+                            # Store as user-taught answer with exact question matching
+                            self.user_taught_answers[question.lower()] = f"Sir, {answer}."
+                            
+                            # Also add variations for better matching
+                            question_clean = question.lower().replace('?', '').strip()
+                            self.user_taught_answers[question_clean] = f"Sir, {answer}."
+                            count += 1
                 
-                print(f"[OK] Loaded {count} general knowledge Q&A pairs from AmbigNQ")
+                print(f"[OK] Loaded {count} factual knowledge Q&A pairs from AmbigNQ")
             
             print(f"[OK] Training data loaded successfully")
         except Exception as e:
@@ -414,6 +590,30 @@ class LearningAI:
             'simple_ml_model': ml_stats,
             'tensorflow_model': tf_stats
         }
+    
+    def clean_memory(self):
+        """Clean duplicate word associations and optimize memory"""
+        # Normalize and merge similar word associations
+        normalized_associations = defaultdict(list)
+        
+        for word, associations in self.word_associations.items():
+            normalized_word = self.normalize_word(word)
+            normalized_associations[normalized_word].extend(associations)
+        
+        # Remove duplicates and update
+        for word, associations in normalized_associations.items():
+            normalized_associations[word] = list(set([self.normalize_word(assoc) for assoc in associations]))
+        
+        old_count = len(self.word_associations)
+        self.word_associations = normalized_associations
+        new_count = len(self.word_associations)
+        
+        # Save cleaned memory
+        self.save_memory()
+        return f"Memory cleaned! Merged {old_count} entries into {new_count} normalized associations."
 
 # Singleton instance
 learning_ai = LearningAI()
+
+# Clean memory on startup
+learning_ai.clean_memory()

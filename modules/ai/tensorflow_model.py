@@ -175,6 +175,7 @@ class TensorFlowJARVIS:
         if category == 'unknown' or 'stronger' in text.lower():
             base_response += " I'm automatically learning from our conversation and will remember this."
         
+        # Don't auto-save model here - only save during training
         return base_response
     
     def add_training_data(self, text, category):
