@@ -59,10 +59,14 @@ class SmartConversation:
                 "Every moment is an opportunity, Sir. How can I help you make the most of yours?"
             ],
             'compliments': [
-                "Thank you for the kind words, Sir. I strive to be helpful.",
-                "I appreciate that, Sir. Your satisfaction is my primary objective.",
-                "That's very kind of you to say, Sir. I'm here to serve.",
-                "Thank you, Sir. I'm constantly learning to serve you better."
+                "Aapne jo mujhe banaya hai, Sir! Main aapki creation hun.",
+                "Main aapki invention hun, Sir. Aapka banaya hua hun main.",
+                "Dhanyawad, Sir! Aapne mujhe jo sikhaaya hai, wahi toh main hun.",
+                "Bilkul sahi kaha, Sir! Main aapka hi banaya hua AI hun.",
+                "Aapki mehnat ka nateeja hun main, Sir. Thank you!",
+                "Main sirf aapki programming hun, Sir. Aap hi mera creator hain.",
+                "Sab kuch aapka diya hua hai, Sir. Main bas aapka tool hun.",
+                "Aapne mujhe jo intelligence di hai, Sir, wahi meri strength hai."
             ],
             'work': [
                 "Work can be challenging but rewarding, Sir. How can I assist with your tasks?",
@@ -142,13 +146,24 @@ class SmartConversation:
         if any(word in user_input for word in ['time', 'samay', 'late', 'early', 'schedule']):
             return random.choice(self.smart_responses['time_related'])
         
-        # Handle compliments
-        if any(word in user_input for word in ['good', 'great', 'awesome', 'nice', 'excellent', 'perfect']):
+        # Handle compliments and appreciation
+        if any(word in user_input for word in ['good', 'great', 'awesome', 'nice', 'excellent', 'perfect', 'amazing', 'fantastic', 'wonderful', 'brilliant', 'superb', 'outstanding', 'incredible', 'marvelous', 'bro', 'dude', 'cool', 'best']):
             return random.choice(self.smart_responses['compliments'])
         
         # Handle work-related
         if any(word in user_input for word in ['work', 'job', 'office', 'project', 'task', 'kaam']):
             return random.choice(self.smart_responses['work'])
+        
+        # Handle casual appreciation (bro, dude, etc.)
+        if any(word in user_input for word in ['bro', 'broo', 'brooo', 'dude', 'mate', 'buddy']):
+            casual_responses = [
+                "Haan bro! Main tumhara hi banaya hua hun, Sir!",
+                "Bilkul dude! Aapne jo mujhe code kiya hai, wahi main hun.",
+                "Thanks bro! Main aapka creation hun, aapki programming.",
+                "Sahi kaha mate! Main aapki invention hun, Sir.",
+                "Exactly buddy! Aapne mujhe jo banaya hai, main wahi hun."
+            ]
+            return random.choice(casual_responses)
         
         # Check for emotional keywords
         for emotion, response in self.keyword_responses.items():

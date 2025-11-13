@@ -96,33 +96,35 @@ class EmotionEngine:
     def extract_intent(self, text):
         """Extract user intent from natural language"""
         text_lower = text.lower()
-        print(f"[DEBUG] Extracting intent from: '{text_lower}'")
         
-        # General conversation - check FIRST before other patterns
-        conversation_keywords = [
-            'how are you', 'kaise ho', 'what is your name', 'tumhara naam',
-            'thank you', 'dhanyawad', 'what can you do', 'tum kya kar sakte ho',
-            'good job', 'achha', 'weather', 'mausam', 'joke', 'mazak',
-            'who are you', 'tum kaun ho', 'tum koun ho', 'kaun ho tum',
-            'whats your name', 'naam batao', 'aap kaun hain', 'your name'
-        ]
-        for keyword in conversation_keywords:
-            if keyword in text_lower:
-                print(f"[DEBUG] Found conversation keyword: '{keyword}'")
-                return 'general_conversation'
-        
-        # Question patterns (after conversation check)
+        # Question patterns - check FIRST (highest priority)
         question_words = ['what', 'when', 'where', 'who', 'why', 'how']
-        if any(word in text_lower for word in question_words):
+        has_question_word = any(word in text_lower for word in question_words)
+        ends_with_question = text.strip().endswith('?')
+        
+        if has_question_word or ends_with_question:
+            # Check for specific question types
             if any(word in text_lower for word in ['time', 'clock']):
                 return 'time_query'
             elif any(word in text_lower for word in ['weather', 'temperature']):
                 return 'weather_query'
             elif any(word in text_lower for word in ['calculate', 'math', 'plus', 'minus', 'multiply', 'divide']):
                 return 'calculation'
+            # Check if it's a general conversation question
+            elif any(keyword in text_lower for keyword in ['how are you', 'kaise ho', 'what is your name', 'tumhara naam', 'who are you', 'tum kaun ho', 'whats your name', 'naam batao']):
+                return 'general_conversation'
             else:
-                print(f"[DEBUG] Generic question detected")
                 return 'question'
+        
+        # General conversation - check after questions
+        conversation_keywords = [
+            'thank you', 'dhanyawad', 'what can you do', 'tum kya kar sakte ho',
+            'good job', 'achha', 'weather', 'mausam', 'joke', 'mazak',
+            'aap kaun hain', 'your name'
+        ]
+        for keyword in conversation_keywords:
+            if keyword in text_lower:
+                return 'general_conversation'
         
         # Emotional expressions
         if any(word in text_lower for word in ['feel', 'feeling', 'mood', 'emotion']):
@@ -161,8 +163,12 @@ class EmotionEngine:
         # Learning test commands
         elif any(phrase in text_lower for phrase in ['learning stats', 'show stats', 'memory stats', 'kitna seekha']):
             return 'learning_stats'
+        elif any(phrase in text_lower for phrase in ['adaptive stats', 'ai stats', 'learning rate', 'intent accuracy']):
+            return 'adaptive_stats'
         elif any(phrase in text_lower for phrase in ['test learning', 'check learning', 'learning test', 'seekhna test']):
             return 'test_learning'
+        elif any(phrase in text_lower for phrase in ['clean memory', 'memory clean', 'saaf karo', 'memory saaf']):
+            return 'clean_memory'
         
         # App control commands
         elif any(phrase in text_lower for phrase in ['find app', 'search app', 'show app', 'list app']):
@@ -174,15 +180,14 @@ class EmotionEngine:
         elif any(phrase in text_lower for phrase in ['list apps', 'list all apps', 'show all apps', 'running apps', 'what apps', 'all apps']):
             return 'list_apps'
         
-        # Greetings
-        if any(word in text_lower for word in ['hello', 'hi', 'hey', 'greetings']):
+        # Greetings - only for simple greetings without questions
+        if any(word in text_lower for word in ['hello', 'hi', 'hey', 'greetings']) and not has_question_word and not ends_with_question:
             return 'greeting'
         
         # General commands
         if any(word in text_lower for word in ['play']):
             return 'command'
         
-        print(f"[DEBUG] No specific intent found, returning 'general'")
         return 'general'
     
     def process_natural_language(self, text):

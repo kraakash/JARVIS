@@ -289,6 +289,121 @@ JARVIS/
 │       └── web_controller.py
 ```
 
+## Recent Updates
+
+### 🧠 Advanced Conversation System (LATEST!)
+- **Human-like Conversations**: Contextual memory and intelligent follow-up questions
+- **Real-time Learning**: Learns from every conversation and builds user profiles
+- **Emotional Intelligence**: Adapts responses based on user emotional patterns
+- **Problem Solving**: Provides intelligent suggestions and analytical responses
+- **Conversation Context**: Maintains conversation flow and remembers topics
+- **Neural Network Training**: Advanced TensorFlow model for conversation patterns
+
+### Learning & AI System
+- **Machine Learning Integration**: Added TensorFlow LSTM model with neural network foundation
+- **Custom Response System**: Create personalized responses in `custom_responses.json`
+- **Memory Management**: Intelligent pattern learning with duplicate prevention
+- **Smart Conversations**: Context-aware responses with interesting facts
+- **Learning Stats**: Track AI learning progress with `learning stats` command
+- **Conversation Training**: Automated training data generation and model improvement
+
+### Custom Response Editor
+- **JSON-based Editing**: Edit responses in `custom_responses.json` file
+- **Pattern Mapping**: Custom responses override default AI responses
+- **Priority System**: Contextual → Custom → User-taught → TensorFlow → Neural Network
+- **Training Integration**: Custom responses automatically train TensorFlow model
+
+### Enhanced Voice & Language
+- **Improved Hindi Pronunciation**: Better phonetic processing for Hindi responses
+- **JARVIS Voice Selection**: Automatic selection of best available voice
+- **Threading Fixes**: Resolved TTS threading issues for smoother speech
+- **Bilingual Learning**: AI learns patterns in both Hindi and English
+- **Contextual Language**: Responds in appropriate language based on conversation context
+
+### Application Discovery
+- **Dynamic App Scanning**: Automatically discovers ALL installed applications
+- **Registry Integration**: Scans Windows registry for comprehensive app list
+- **Smart App Matching**: Fuzzy matching for application names
+- **Enhanced Commands**: `list apps`, `find app [name]`, `show apps`
+
+### Web & YouTube Enhancements
+- **Video Control**: Pause, resume, and stop YouTube videos
+- **Fallback Modes**: Graceful handling when Chrome automation fails
+- **Result Navigation**: Click results, go back, show results
+- **Search Optimization**: Better query extraction and result presentation
+
+### Memory & Learning Files
+- **jarvis_memory.json**: Stores learned patterns and word associations
+- **custom_responses.json**: User-defined custom responses
+- **conversation_context.json**: Conversation history and user profiles
+- **jarvis_conversation_training.json**: Training dataset for conversation patterns
+- **user_conversations.json**: Real user interactions for continuous learning
+- **TensorFlow Models**: Advanced ML models for conversation improvement
+- **Duplicate Prevention**: Smart learning prevents memory file bloat
+
+## 🧠 Advanced Conversation System (NEW!)
+
+JARVIS now features human-like conversation capabilities with:
+
+### 🎯 Intelligent Features
+- **Contextual Memory**: Remembers conversation flow and responds appropriately
+- **Follow-up Questions**: Asks intelligent follow-up questions like humans
+- **User Profiling**: Learns your interests, preferences, and emotional patterns
+- **Problem Solving**: Provides intelligent suggestions and solutions
+- **Emotional Awareness**: Adapts responses based on your emotional state
+- **Real-time Learning**: Gets smarter with every conversation
+
+### 📊 Model Statistics
+- **Training Samples**: Comprehensive conversation patterns
+- **Contextual Responses**: Situational response patterns
+- **Follow-up Chains**: Multi-turn conversation sequences
+- **Intelligent Responses**: Problem-solving and analytical variations
+- **Neural Network**: TensorFlow-powered conversation model
+- **User Conversations**: Continuously learning from real interactions
+
+### 💬 Conversation Examples
+
+#### Contextual Follow-up
+```
+You: "kaise ho"
+JARVIS: "Main theek hun, Sir. Aap kaise hain?"
+You: "aacha nhi ja rha hai"
+JARVIS: "Oh, kya hua Sir? Koi problem hai?" (contextual response!)
+```
+
+#### Problem Solving
+```
+You: "work stress hai"
+JARVIS: "Work stress common hai, Sir. Break lena chahiye. Kya main kuch suggest kar sakta hun?"
+```
+
+#### Interest Learning
+```
+You: "I like music"
+JARVIS: "That's interesting, Sir! Tell me more about it."
+(JARVIS remembers this for future conversations)
+```
+
+### 🚀 How It Works
+1. **Context Tracking**: Maintains conversation history and topics
+2. **Pattern Recognition**: Identifies conversation patterns and user preferences
+3. **Intelligent Responses**: Generates contextually appropriate responses
+4. **Continuous Learning**: Improves with each interaction
+5. **Personalization**: Adapts to individual user patterns
+
+### 🔧 Training System
+Run the training script to enhance conversation capabilities:
+```bash
+python train_conversation_model.py
+```
+
+The system automatically:
+- Generates conversation training data
+- Trains neural networks
+- Creates user profiles
+- Learns from real conversations
+- Updates response patterns
+
 ## Contributing
 
 1. Fork the repository
@@ -304,5 +419,8 @@ This project is licensed under the MIT License.
 ## Acknowledgments
 
 - Inspired by Marvel's JARVIS
-- Built with Python, Selenium, and various NLP libraries
+- Built with Python, Selenium, TensorFlow, and various NLP libraries
 - Voice processing using SpeechRecognition and pyttsx3
+- Machine learning with TensorFlow and custom neural networks
+- Advanced conversation system with contextual memory and learning
+- Human-like interaction patterns and emotional intelligence

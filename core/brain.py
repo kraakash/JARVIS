@@ -52,6 +52,7 @@ class JarvisBrain:
             'test_voice': self._handle_test_voice,
             'learning_stats': self._handle_learning_stats,
             'test_learning': self._handle_test_learning,
+            'adaptive_stats': self._handle_adaptive_stats,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -62,6 +63,16 @@ class JarvisBrain:
         intent = emotion_data['intent']
         
         print(f"[NLP] Detected emotion: {emotion_data['emotion']}, Intent: {intent}")
+        
+        # Adaptive learning - learn from this interaction
+        from modules.ai.adaptive_learning import adaptive_learning
+        
+        # Check if AI can predict intent better
+        predicted_intent, confidence = adaptive_learning.predict_intent(command_text)
+        if predicted_intent and confidence > 70 and predicted_intent != intent:
+            print(f"[AI] Predicted intent: {predicted_intent} (confidence: {confidence:.0f})")
+            # Use AI prediction if confidence is high
+            intent = predicted_intent
         
         # Auto-detect Hindi input and switch language (only for non-conversation intents)
         if intent != 'general_conversation' and language_support.detect_hindi_input(command_text):
@@ -125,9 +136,16 @@ class JarvisBrain:
             response = self.skills['test_voice'](emotion_data)
         elif intent == 'learning_stats':
             response = self.skills['learning_stats'](emotion_data)
+        elif intent == 'adaptive_stats':
+            response = self.skills['adaptive_stats'](emotion_data)
         elif intent == 'test_learning':
             response = self.skills['test_learning'](emotion_data)
+        elif intent == 'clean_memory':
+            response = self.skills['clean_memory'](emotion_data)
         elif intent == 'general_conversation':
+            response = self._handle_general_conversation(command_text, emotion_data)
+        elif intent == 'general':
+            # Route general intent to conversation handler
             response = self._handle_general_conversation(command_text, emotion_data)
         else:
             # Use smart conversation for unrecognized intents
@@ -135,6 +153,9 @@ class JarvisBrain:
             if emotion_data:
                 response = emotion_engine.enhance_response(response, emotion_data)
             
+        # Learn from this interaction
+        adaptive_learning.learn_intent_pattern(command_text, intent, response)
+        
         self.speak(response)
         return response
     
@@ -225,6 +246,14 @@ class JarvisBrain:
     
     def _handle_question(self, command_text, emotion_data):
         """Handle general questions with emotional context"""
+        # Try learning AI first for knowledge-based questions
+        from modules.ai.learning_ai import learning_ai
+        learned_response = learning_ai.generate_response(command_text)
+        
+        if learned_response and "mujhe nahi aata" not in learned_response and "don't know" not in learned_response:
+            return learned_response
+        
+        # Fallback to default response
         base_response = "That's an interesting question, Sir. I'm still learning to answer complex queries, but I'm here to help however I can."
         return emotion_engine.enhance_response(base_response, emotion_data)
     
@@ -321,10 +350,11 @@ class JarvisBrain:
     
     def _handle_general_conversation(self, command_text, emotion_data):
         """Handle general conversation and questions"""
-        # Try conversation engine first
+        # Check conversation engine FIRST for identity and basic questions
         response = conversation_engine.get_conversation_response(command_text)
         
         if response:
+            print("[DEBUG] Response source: IDENTITY_RESPONSE")
             # Apply emotional enhancement if needed
             if emotion_data and emotion_data['emotion'] in ['excited', 'positive']:
                 if language_support.current_language == 'hindi':
@@ -338,23 +368,32 @@ class JarvisBrain:
                     response = "I understand. " + response
             
             return response
-        else:
-            # Use smart conversation for intelligent responses
-            smart_response = smart_conversation.get_smart_response(command_text)
-            
-            # Apply emotional enhancement
-            if emotion_data and emotion_data['emotion'] in ['excited', 'positive']:
-                if language_support.current_language == 'hindi':
-                    smart_response = "Bahut achha! " + smart_response
-                else:
-                    smart_response = "Excellent! " + smart_response
-            elif emotion_data and emotion_data['emotion'] in ['sad', 'negative']:
-                if language_support.current_language == 'hindi':
-                    smart_response = "Mein samajh sakta hoon. " + smart_response
-                else:
-                    smart_response = "I understand. " + smart_response
-            
-            return smart_response
+        
+        # Try learning AI for other general conversation
+        from modules.ai.learning_ai import learning_ai
+        emotion = emotion_data.get('emotion', 'neutral') if emotion_data else 'neutral'
+        intent = emotion_data.get('intent', 'general') if emotion_data else 'general'
+        learned_response = learning_ai.generate_response(command_text, emotion, intent)
+        
+        if learned_response:
+            return learned_response
+        
+        # Use smart conversation for intelligent responses
+        smart_response = smart_conversation.get_smart_response(command_text)
+        
+        # Apply emotional enhancement
+        if emotion_data and emotion_data['emotion'] in ['excited', 'positive']:
+            if language_support.current_language == 'hindi':
+                smart_response = "Bahut achha! " + smart_response
+            else:
+                smart_response = "Excellent! " + smart_response
+        elif emotion_data and emotion_data['emotion'] in ['sad', 'negative']:
+            if language_support.current_language == 'hindi':
+                smart_response = "Mein samajh sakta hoon. " + smart_response
+            else:
+                smart_response = "I understand. " + smart_response
+        
+        return smart_response
     
     def _handle_web_search(self, command_text, emotion_data):
         """Handle web search commands"""
@@ -618,6 +657,47 @@ class JarvisBrain:
         stats = smart_conversation.learning_ai.get_learning_stats()
         response += f"\nResult: {stats['total_patterns']} patterns now in memory."
         response += "\nLearning system is working properly, Sir!"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_clean_memory(self, emotion_data):
+        """Clean memory duplicates"""
+        from modules.ai.learning_ai import learning_ai
+        result = learning_ai.clean_memory()
+        
+        if language_support.current_language == 'hindi':
+            base_response = f"Memory saaf kar diya, Sir. {result}"
+        else:
+            base_response = f"Memory cleaned, Sir. {result}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(base_response, emotion_data)
+        return base_response
+    
+    def _handle_adaptive_stats(self, emotion_data):
+        """Show adaptive learning statistics"""
+        from modules.ai.adaptive_learning import adaptive_learning
+        stats = adaptive_learning.get_detailed_stats()
+        
+        response = f"🧠 Adaptive Learning Stats, Sir:\n"
+        response += f"📊 Learning Rate: {stats['overall_learning_rate']:.1f}%\n"
+        response += f"💬 Total Interactions: {stats['total_interactions']}\n"
+        response += f"🎯 Learned Intents: {stats['learned_intents']}\n\n"
+        
+        # Show top intents
+        sorted_intents = sorted(
+            stats['intent_details'].items(),
+            key=lambda x: x[1]['accuracy'],
+            reverse=True
+        )[:5]
+        
+        response += "Top Intent Accuracies:\n"
+        for intent, data in sorted_intents:
+            response += f"  {intent}: {data['accuracy']:.0f}% ({data['total_uses']} uses)\n"
+        
+        adaptive_learning.display_learning_progress()
         
         if emotion_data:
             return emotion_engine.enhance_response(response, emotion_data)
