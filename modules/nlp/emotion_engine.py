@@ -163,6 +163,8 @@ class EmotionEngine:
         # Learning test commands
         elif any(phrase in text_lower for phrase in ['learning stats', 'show stats', 'memory stats', 'kitna seekha']):
             return 'learning_stats'
+        elif any(phrase in text_lower for phrase in ['adaptive stats', 'ai stats', 'learning rate', 'intent accuracy']):
+            return 'adaptive_stats'
         elif any(phrase in text_lower for phrase in ['test learning', 'check learning', 'learning test', 'seekhna test']):
             return 'test_learning'
         elif any(phrase in text_lower for phrase in ['clean memory', 'memory clean', 'saaf karo', 'memory saaf']):

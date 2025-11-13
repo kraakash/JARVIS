@@ -1,6 +1,6 @@
 """
 JARVIS Voice Speaker Module
-Text-to-Speech with multiple engine support
+Text-to-Speech with multiple engine support and Hindi TTS
 """
 
 import pyttsx3
@@ -8,13 +8,19 @@ import threading
 import queue
 import time
 from typing import Optional
+try:
+    from .hindi_tts import hindi_tts
+    HINDI_TTS_AVAILABLE = True
+except ImportError:
+    HINDI_TTS_AVAILABLE = False
+    print("[WARNING] Hindi TTS not available. Install dependencies with: pip install gtts pygame edge-tts")
 
 class JarvisSpeaker:
     def __init__(self):
         self.engine = None
         self.voices = []
         self.current_voice = 0
-        self.rate = 180  # Slower, more steady like JARVIS
+        self.rate = 150  # Slower pace for clear Hindi pronunciation
         self.volume = 1.0  # Full volume
         self.is_speaking = False
         
@@ -42,8 +48,18 @@ class JarvisSpeaker:
             print(f"[OK] Available voices: {len(self.voices)}")
             
             # Test initial speech
-            print("[DEBUG] Testing voice...")
-            self.speak("JARVIS voice system initialized, Sir.")
+            print("[DEBUG] Testing voice systems...")
+            print("[DEBUG] Testing English TTS...")
+            self._speak_english("JARVIS voice system ready, Sir.")
+            print("[DEBUG] Testing Hindi TTS...")
+            if HINDI_TTS_AVAILABLE:
+                try:
+                    hindi_tts.speak_hindi("Main taiyar hun, Sir.", jarvis_style=True)
+                    print("[OK] Hindi TTS working")
+                except Exception as e:
+                    print(f"[WARNING] Hindi TTS error: {e}")
+            else:
+                print("[WARNING] Hindi TTS not available - install dependencies")
             
         except Exception as e:
             print(f"[ERROR] Failed to initialize TTS engine: {e}")
@@ -59,7 +75,7 @@ class JarvisSpeaker:
     
     def speak(self, text: str, wait: bool = False) -> bool:
         """
-        Make JARVIS speak the given text with improved pronunciation
+        Make JARVIS speak with proper Hindi or English
         
         Args:
             text: The text to speak
@@ -68,15 +84,40 @@ class JarvisSpeaker:
         Returns:
             bool: Success status
         """
-        if not self.engine or not text:
+        if not text:
             return False
         
         try:
-            # Improve Hindi pronunciation
-            processed_text = self._improve_pronunciation(text)
-            
             self.is_speaking = True
             
+            # Check if text contains Hindi and Hindi TTS is available
+            if self._is_hindi_text(text) and HINDI_TTS_AVAILABLE:
+                print("[INFO] Using Hindi TTS for natural pronunciation")
+                try:
+                    success = hindi_tts.speak_hindi(text, jarvis_style=True)
+                    self.is_speaking = False
+                    return success
+                except Exception as e:
+                    print(f"[ERROR] Hindi TTS failed: {e}")
+                    print("[INFO] Falling back to English TTS")
+                    return self._speak_english(text)
+            else:
+                # Use English TTS for English text or if Hindi TTS unavailable
+                if self._is_hindi_text(text) and not HINDI_TTS_AVAILABLE:
+                    print("[WARNING] Hindi detected but Hindi TTS not available")
+                return self._speak_english(text)
+            
+        except Exception as e:
+            print(f"[ERROR] Speech error: {e}")
+            self.is_speaking = False
+            return False
+    
+    def _speak_english(self, text):
+        """Speak English text with pyttsx3"""
+        if not self.engine:
+            return False
+            
+        try:
             # Reinitialize engine to avoid threading issues
             try:
                 self.engine.stop()
@@ -90,7 +131,7 @@ class JarvisSpeaker:
             if self.voices and self.current_voice < len(self.voices):
                 temp_engine.setProperty('voice', self.voices[self.current_voice].id)
             
-            temp_engine.say(processed_text)
+            temp_engine.say(text)
             temp_engine.runAndWait()
             temp_engine.stop()
             
@@ -98,41 +139,37 @@ class JarvisSpeaker:
             return True
             
         except Exception as e:
-            print(f"[ERROR] Speech error: {e}")
+            print(f"[ERROR] English TTS error: {e}")
             self.is_speaking = False
             return False
     
-    def _improve_pronunciation(self, text):
-        """Improve pronunciation with simple phonetic spellings"""
-        # Simple phonetic replacements for better pronunciation
-        replacements = {
-            'main': 'mein',
-            'hun': 'hoon', 
-            'aap': 'aap',
-            'aapka': 'aapka',
-            'kya': 'kya',
-            'hai': 'hey',
-            'theek': 'theek',
-            'bilkul': 'bilkul',
-            'khol': 'khole',
-            'raha': 'raha',
-            'kar': 'kar',
-            'sakta': 'sakta',
-            'taiyar': 'taiyaar',
-            'JARVIS': 'Jarvis',
-            'dhanyawad': 'dhanyawaad',
-            'namaste': 'namasthe',
-            'kaise': 'kaise',
-            'kaun': 'koun',
-            'tumhara': 'tumhara',
-            'naam': 'naam'
-        }
+    def _is_hindi_text(self, text):
+        """Check if text contains Hindi words"""
+        hindi_words = [
+            'main', 'hun', 'aap', 'kya', 'hai', 'theek', 'bilkul', 'kaise', 
+            'kaun', 'kar', 'raha', 'sakta', 'taiyar', 'khol', 'band', 'chalu',
+            'namaste', 'dhanyawad', 'alvida', 'sir', 'haan', 'nahi', 'achha',
+            'badhiya', 'mast', 'din', 'raat', 'samay', 'waqt', 'kaam', 'seva'
+        ]
         
-        processed = text
-        for hindi, phonetic in replacements.items():
-            processed = processed.replace(hindi, phonetic)
-        
-        return processed
+        text_lower = text.lower()
+        return any(word in text_lower for word in hindi_words)
+    
+    def force_english_tts(self, text):
+        """Force use of English TTS even for Hindi text"""
+        return self._speak_english(text)
+    
+    def force_hindi_tts(self, text):
+        """Force use of Hindi TTS"""
+        if HINDI_TTS_AVAILABLE:
+            try:
+                return hindi_tts.speak_hindi(text, jarvis_style=True)
+            except Exception as e:
+                print(f"[ERROR] Hindi TTS failed: {e}")
+                return False
+        else:
+            print("[ERROR] Hindi TTS not available")
+            return False
     
     def set_voice(self, voice_index: int) -> bool:
         """Change the voice"""
@@ -191,22 +228,22 @@ class JarvisSpeaker:
     def change_voice_style(self, style='jarvis'):
         """Change voice to different styles"""
         if style == 'jarvis':
-            self.set_rate(180)  # Steady, measured pace
+            self.set_rate(150)  # Slower pace for clear Hindi
             self.set_volume(1.0)
         elif style == 'fast':
-            self.set_rate(220)
+            self.set_rate(180)
         elif style == 'slow':
-            self.set_rate(150)
+            self.set_rate(120)
         elif style == 'normal':
-            self.set_rate(200)
+            self.set_rate(150)
     
     def test_voices(self) -> None:
-        """Test all available voices"""
+        """Test all available voices with Hindi"""
         print("\nTesting all available voices:")
         for i, voice in enumerate(self.voices):
             print(f"{i+1}. {voice.name}")
             self.set_voice(i)
-            self.speak(f"This is voice number {i+1}. Hello Sir, I am JARVIS.", wait=True)
+            self.speak(f"Voice number {i+1}. Main JARVIS hun, Sir. Kaise ho?", wait=True)
     
     def list_voices(self):
         """List all available voices with details"""
@@ -231,10 +268,53 @@ def change_jarvis_voice(voice_number=None, style='jarvis'):
 
 def list_available_voices():
     """List all available voices"""
+    print("\n=== ENGLISH VOICES ===")
     jarvis_speaker.list_voices()
+    print("\n=== HINDI TTS ===")
+    if HINDI_TTS_AVAILABLE:
+        try:
+            # Test if Hindi TTS actually works
+            test_result = hindi_tts.speak_hindi("test", jarvis_style=False)
+            if test_result:
+                print("✅ Hindi TTS Available (Microsoft Edge + Google)")
+                print("   - hi-IN-MadhurNeural (Male, Deep)")
+                print("   - hi-IN-SwaraNeural (Female)")
+                print("   - Google TTS Hindi")
+            else:
+                print("⚠️ Hindi TTS Installed but not working")
+        except Exception as e:
+            print(f"❌ Hindi TTS Error: {e}")
+    else:
+        print("❌ Hindi TTS Not Available")
+        print("   Run: python install_hindi_tts.py")
+    
     return jarvis_speaker.get_available_voices()
 
 def test_current_voice():
-    """Test current voice"""
-    jarvis_speaker.speak("Hello Sir, I am JARVIS. Your personal AI assistant.")
+    """Test current voice with both English and Hindi"""
+    print("Testing English TTS:")
+    jarvis_speaker._speak_english("Hello Sir, I am JARVIS. Your personal AI assistant.")
+    
+    print("Testing Hindi TTS:")
+    if HINDI_TTS_AVAILABLE:
+        try:
+            jarvis_speaker.force_hindi_tts("Namaste Sir, main JARVIS hun. Aapka personal AI assistant. Kaise ho?")
+        except Exception as e:
+            print(f"Hindi TTS failed: {e}")
+    else:
+        print("Hindi TTS not available. Install with: python install_hindi_tts.py")
+    
     return "Voice test completed"
+
+def test_hindi_voices():
+    """Test Hindi voice options"""
+    if HINDI_TTS_AVAILABLE:
+        try:
+            hindi_tts.test_hindi_voices()
+            return "Hindi voice test completed"
+        except Exception as e:
+            print(f"[ERROR] Hindi voice test failed: {e}")
+            return "Hindi voice test failed"
+    else:
+        print("[ERROR] Hindi TTS not available. Run: python install_hindi_tts.py")
+        return "Hindi TTS not installed"

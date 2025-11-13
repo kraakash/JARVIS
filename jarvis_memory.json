@@ -99,8 +99,8 @@
         "input": "",
         "words": [],
         "context": "casual",
-        "timestamp": "2025-11-13T11:09:18.243534",
-        "frequency": 2
+        "timestamp": "2025-11-13T22:14:06.477955",
+        "frequency": 3
       },
       {
         "input": "ha",
@@ -355,6 +355,19 @@
         "context": "custom_response",
         "timestamp": "2025-11-13T00:11:14.899241",
         "frequency": 2
+      },
+      {
+        "input": "tum kya kya kar sakte ho",
+        "words": [
+          "tum",
+          "kya",
+          "kya",
+          "kar",
+          "sakte"
+        ],
+        "context": "custom_response",
+        "timestamp": "2025-11-13T22:23:12.189060",
+        "frequency": 1
       }
     ],
     "kya_kya_skte": [
@@ -996,6 +1009,118 @@
         "timestamp": "2025-11-13T11:09:32.734783",
         "frequency": 1
       }
+    ],
+    "kar_kya_rahe": [
+      {
+        "input": "kya kar rahe ho",
+        "words": [
+          "kya",
+          "kar",
+          "rahe"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T21:46:09.920350",
+        "frequency": 1
+      }
+    ],
+    "kya_maine_poochha": [
+      {
+        "input": "Maine poochha kya kar rahe ho",
+        "words": [
+          "maine",
+          "poochha",
+          "kya",
+          "kar",
+          "rahe"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T21:46:17.642715",
+        "frequency": 1
+      }
+    ],
+    "bewakoof": [
+      {
+        "input": "bewakoof",
+        "words": [
+          "bewakoof"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T21:50:53.829275",
+        "frequency": 1
+      }
+    ],
+    "pagal": [
+      {
+        "input": "pagal",
+        "words": [
+          "pagal"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T21:50:59.470232",
+        "frequency": 1
+      }
+    ],
+    "chup_raho": [
+      {
+        "input": "chup raho",
+        "words": [
+          "chup",
+          "raho"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T21:51:06.109542",
+        "frequency": 1
+      }
+    ],
+    "bhaii_mstt": [
+      {
+        "input": "mstt bhaiii",
+        "words": [
+          "mstt",
+          "bhaii"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-13T22:13:21.501972",
+        "frequency": 1
+      }
+    ],
+    "about_jarvis_what": [
+      {
+        "input": "jarvis what about you",
+        "words": [
+          "jarvis",
+          "what",
+          "about",
+          "you"
+        ],
+        "context": "question",
+        "timestamp": "2025-11-13T22:13:38.301771",
+        "frequency": 1
+      }
+    ],
+    "kon_tum": [
+      {
+        "input": "tum kon ho",
+        "words": [
+          "tum",
+          "kon"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T22:13:52.417449",
+        "frequency": 1
+      }
+    ],
+    "koun_tum": [
+      {
+        "input": "tum koun ho",
+        "words": [
+          "tum",
+          "koun"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-13T22:14:00.856245",
+        "frequency": 1
+      }
     ]
   },
   "word_associations": {
@@ -1006,11 +1131,11 @@
       "you"
     ],
     "you": [
+      "amazing",
       "rule",
-      "stronger",
-      "remain",
       "learning",
-      "amazing"
+      "stronger",
+      "remain"
     ],
     "kuch": [
       "btao",
@@ -1029,17 +1154,19 @@
       "hai"
     ],
     "kya": [
-      "kar",
-      "rahe",
-      "tum",
-      "skte",
+      "bnaye",
       "haal",
+      "kar",
       "kya",
-      "bnaye"
+      "rahe",
+      "skte",
+      "tum"
     ],
     "tum": [
-      "kya",
+      "kon",
+      "koun",
       "kaun",
+      "kya",
       "merre"
     ],
     "uhmm": [
@@ -1081,8 +1208,8 @@
       "todayy"
     ],
     "byee": [
-      "jarivss",
-      "jarvis"
+      "jarvis",
+      "jarivss"
     ],
     "jarivss": [
       "shotdown"
@@ -1109,7 +1236,9 @@
       "hai"
     ],
     "kar": [
-      "rhe"
+      "rhe",
+      "rahe",
+      "sakte"
     ],
     "amazing": [
       "bro"
@@ -1122,6 +1251,27 @@
     ],
     "hello": [
       "jarvis"
+    ],
+    "maine": [
+      "poochha"
+    ],
+    "poochha": [
+      "kya"
+    ],
+    "chup": [
+      "raho"
+    ],
+    "mstt": [
+      "bhaii"
+    ],
+    "jarvis": [
+      "what"
+    ],
+    "what": [
+      "about"
+    ],
+    "about": [
+      "you"
     ]
   },
   "user_taught_answers": {
@@ -5130,5 +5280,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-13T21:42:20.201877"
+  "last_updated": "2025-11-13T22:23:12.189060"
 }

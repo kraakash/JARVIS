@@ -19,7 +19,7 @@ def main():
     
     # Initialize the core brain
     jarvis = JarvisBrain()
-    
+
     # Main loop with voice input (fallback to text if needed)
     try:
         print("\n[INFO] Starting JARVIS...")
@@ -58,10 +58,8 @@ def main():
                             print("[INFO] Continuing conversation...")
                             # Stay in conversation mode
                         else:
-                            # Exit conversation mode after 3 seconds of no input
-                            import time
-                            time.sleep(1)
-                            print("[INFO] Say something or I'll wait for wake word...")
+                            # Exit conversation mode after response
+                            conversation_mode = False
                             
                     else:
                         jarvis.speak(language_support.get_response('didnt_catch'))
@@ -134,6 +132,7 @@ def main():
             print("\n\nJARVIS: Emergency shutdown initiated.")
             jarvis.speak("Emergency shutdown initiated.")
     except Exception as e:
+        print(f"JARVIS: System error - {e}")  
         print(f"JARVIS: System error - {e}")
 
 if __name__ == "__main__":

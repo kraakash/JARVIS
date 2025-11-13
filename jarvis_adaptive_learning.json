@@ -1,0 +1,61 @@
+{
+  "intent_patterns": {
+    "general": {
+      "patterns": [
+        "kaise ho",
+        "tum kya kya kar sakte ho"
+      ],
+      "keywords": {
+        "kaise": 1,
+        "tum": 1,
+        "kya": 2,
+        "kar": 1,
+        "sakte": 1
+      },
+      "success_count": 2,
+      "total_count": 2
+    },
+    "greeting": {
+      "patterns": [
+        "yah to bahut acchi baat hai",
+        "hello"
+      ],
+      "keywords": {
+        "yah": 1,
+        "bahut": 1,
+        "acchi": 1,
+        "baat": 1,
+        "hai": 1,
+        "hello": 1
+      },
+      "success_count": 2,
+      "total_count": 2
+    }
+  },
+  "response_quality": {},
+  "learning_stats": {
+    "total_interactions": 4,
+    "correct_predictions": 4,
+    "ml_predictions": 0,
+    "learning_rate": 100.0,
+    "ml_accuracy": 0.0,
+    "intent_accuracy": {
+      "general": 100.0,
+      "greeting": 100.0
+    },
+    "last_updated": null
+  },
+  "training_data": [
+    "kaise ho",
+    "tum kya kya kar sakte ho",
+    "yah to bahut acchi baat hai",
+    "hello"
+  ],
+  "training_labels": [
+    "general",
+    "general",
+    "greeting",
+    "greeting"
+  ],
+  "last_updated": "2025-11-13T22:24:05.211573"
+}
