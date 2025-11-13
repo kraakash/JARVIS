@@ -289,6 +289,45 @@ JARVIS/
 │       └── web_controller.py
 ```
 
+## Recent Updates
+
+### Learning & AI System
+- **Machine Learning Integration**: Added TensorFlow LSTM model with neural network foundation
+- **Custom Response System**: Create personalized responses in `custom_responses.json`
+- **Memory Management**: Intelligent pattern learning with duplicate prevention
+- **Smart Conversations**: Context-aware responses with interesting facts
+- **Learning Stats**: Track AI learning progress with `learning stats` command
+
+### Custom Response Editor
+- **JSON-based Editing**: Edit responses in `custom_responses.json` file
+- **Pattern Mapping**: Custom responses override default AI responses
+- **Priority System**: Custom responses → User-taught → TensorFlow → Neural Network
+- **Training Integration**: Custom responses automatically train TensorFlow model
+
+### Enhanced Voice & Language
+- **Improved Hindi Pronunciation**: Better phonetic processing for Hindi responses
+- **JARVIS Voice Selection**: Automatic selection of best available voice
+- **Threading Fixes**: Resolved TTS threading issues for smoother speech
+- **Bilingual Learning**: AI learns patterns in both Hindi and English
+
+### Application Discovery
+- **Dynamic App Scanning**: Automatically discovers ALL installed applications
+- **Registry Integration**: Scans Windows registry for comprehensive app list
+- **Smart App Matching**: Fuzzy matching for application names
+- **Enhanced Commands**: `list apps`, `find app [name]`, `show apps`
+
+### Web & YouTube Enhancements
+- **Video Control**: Pause, resume, and stop YouTube videos
+- **Fallback Modes**: Graceful handling when Chrome automation fails
+- **Result Navigation**: Click results, go back, show results
+- **Search Optimization**: Better query extraction and result presentation
+
+### Memory & Learning Files
+- **jarvis_memory.json**: Stores learned patterns and word associations
+- **custom_responses.json**: User-defined custom responses
+- **TensorFlow Models**: Advanced ML models for conversation improvement
+- **Duplicate Prevention**: Smart learning prevents memory file bloat
+
 ## Contributing
 
 1. Fork the repository
@@ -304,5 +343,6 @@ This project is licensed under the MIT License.
 ## Acknowledgments
 
 - Inspired by Marvel's JARVIS
-- Built with Python, Selenium, and various NLP libraries
+- Built with Python, Selenium, TensorFlow, and various NLP libraries
 - Voice processing using SpeechRecognition and pyttsx3
+- Machine learning with TensorFlow and custom neural networks

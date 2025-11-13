@@ -7,3 +7,112 @@ ha sath  me tum jo ho	casual
 kaise o	hindi
 chlo fir  kuch bnate hai	hindi
 kya bnaye	hindi
+tum kya kya kr skte ho	hindi
+tum kya kya kr skte ho	hindi
+tum kya kya kr skte ho	hindi
+tum kya kya kr skte ho	hindi
+tum kya kya kr skte ho	hindi
+ha	casual
+tum kya kya kr skte ho	hindi
+kya kya kr skte ho	general
+kya kya kr skte ho	hindi
+kya kya kr skte ho	hindi
+tum ho na	casual
+tum kya kya kr skte ho	custom_response
+tum kya kya kr skte ho	custom_response
+uhmm are you learning na	technical
+uhmm are you learning na	technical
+youuu are amazingggg	casual
+youuu are amazingggg	casual
+youuu are amazingggg	casual
+uhmm are you learning na	technical
+uhmm are you learning na	technical
+youuu are amazingggg	casual
+i love you	casual
+you remain with me forever na	casual
+i love you	casual
+i love you	casual
+youu are the best	casual
+i love you	custom_response
+ahha superr cool	casual
+you are amazingg	casual
+you will be stronger so soon you will rule the world in ai	technical
+glad i guess its enough for todayy	general
+glad i guess its enough for todayy	casual
+glad i guess its enough for todayy	casual
+byeeeeeee jarivssssss shotdown	casual
+byee jarvis	casual
+shutdown	casual
+uhmm chalo tumhe improve krte hai or better kam ke liye	hindi
+kya tum merre frnd banoge	hindi
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kyaa haal hai	hindi
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kasieee ho	casual
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya haal hai	hindi
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kasie ho	casual
+kya kar rhe ho	general
+kya kar rhe ho	hindi
+kya kar rhe ho	hindi

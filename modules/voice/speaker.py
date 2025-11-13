@@ -75,12 +75,26 @@ class JarvisSpeaker:
             # Improve Hindi pronunciation
             processed_text = self._improve_pronunciation(text)
             
-            print(f"[DEBUG] Speaking: {processed_text}")
             self.is_speaking = True
-            self.engine.say(processed_text)
-            self.engine.runAndWait()
+            
+            # Reinitialize engine to avoid threading issues
+            try:
+                self.engine.stop()
+            except:
+                pass
+            
+            # Create fresh engine instance for each speech
+            temp_engine = pyttsx3.init('sapi5')
+            temp_engine.setProperty('rate', self.rate)
+            temp_engine.setProperty('volume', self.volume)
+            if self.voices and self.current_voice < len(self.voices):
+                temp_engine.setProperty('voice', self.voices[self.current_voice].id)
+            
+            temp_engine.say(processed_text)
+            temp_engine.runAndWait()
+            temp_engine.stop()
+            
             self.is_speaking = False
-            print(f"[DEBUG] Speech completed")
             return True
             
         except Exception as e:

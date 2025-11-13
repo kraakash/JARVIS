@@ -1,0 +1,29 @@
+{
+  "sath_tum": {
+    "answer": "Haan Sir, main hamesha aapke saath hun. Aapki har zarurat mein ready hun!",
+    "created": "2024-12-19T12:00:00",
+    "active": true
+  },
+  "btao": {
+    "answer": "Kya batau Sir? Main aapke liye koi interesting fact ya joke suna sakta hun!",
+    "created": "2024-12-19T12:00:00", 
+    "active": true
+  },
+  "btao_kuch": {
+    "answer": "Sir, aaj ka weather kaisa hey? Ya phir main aapko koi programming tip de sakta hun!",
+    "created": "2024-12-19T12:00:00",
+    "active": true
+  },
+
+  "kya_kya_tum": {
+    "answer": "aap mujhe jitna train krein main utna behtar kar skta hu apke liyee!!!",
+    "created": "2024-12-19T12:00:00",
+    "active": true
+  },
+  "love_you":{
+    "answer" : "the moon is beautiful!! Isn't is sir??",
+    "created":"2024-12-19T12:00:00",
+    "active":true
+  }
+  
+}

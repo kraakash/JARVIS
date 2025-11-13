@@ -96,7 +96,6 @@ class EmotionEngine:
     def extract_intent(self, text):
         """Extract user intent from natural language"""
         text_lower = text.lower()
-        print(f"[DEBUG] Extracting intent from: '{text_lower}'")
         
         # General conversation - check FIRST before other patterns
         conversation_keywords = [
@@ -108,7 +107,6 @@ class EmotionEngine:
         ]
         for keyword in conversation_keywords:
             if keyword in text_lower:
-                print(f"[DEBUG] Found conversation keyword: '{keyword}'")
                 return 'general_conversation'
         
         # Question patterns (after conversation check)
@@ -121,7 +119,6 @@ class EmotionEngine:
             elif any(word in text_lower for word in ['calculate', 'math', 'plus', 'minus', 'multiply', 'divide']):
                 return 'calculation'
             else:
-                print(f"[DEBUG] Generic question detected")
                 return 'question'
         
         # Emotional expressions
@@ -182,7 +179,6 @@ class EmotionEngine:
         if any(word in text_lower for word in ['play']):
             return 'command'
         
-        print(f"[DEBUG] No specific intent found, returning 'general'")
         return 'general'
     
     def process_natural_language(self, text):

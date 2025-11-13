@@ -10,6 +10,7 @@ from datetime import datetime
 from collections import defaultdict
 from .neural_network import neural_network
 from .tensorflow_model import tensorflow_jarvis
+from .memory_editor import memory_editor
 
 class LearningAI:
     def __init__(self):
@@ -24,6 +25,9 @@ class LearningAI:
         # Load existing knowledge
         self.load_memory()
         
+        # Load training data
+        self.load_training_data()
+        
         # Base JARVIS responses
         self.base_responses = {
             'greeting': [
@@ -37,6 +41,20 @@ class LearningAI:
                 "I'm processing that information, Sir.",
                 "Based on what I know, Sir, I believe...",
                 "Let me analyze that for you, Sir."
+            ],
+            'friendship': [
+                "Bilkul Sir! Main aapka dost hun aur hamesha rahunga.",
+                "Of course, Sir! I would be honored to be your friend.",
+                "Haan Sir, main aapka sabse achha dost hun!"
+            ],
+            'improvement': [
+                "Haan Sir! Main improve hone ke liye ready hun. Aap mujhe kya sikhana chahte hain?",
+                "I'm excited to learn and improve, Sir! What would you like to teach me?",
+                "Bilkul Sir! Main better kaam karne ke liye seekhna chahta hun."
+            ],
+            'capabilities': [
+                "Sir, main bahut kuch kar sakta hun - apps khol sakta hun, web search kar sakta hun, YouTube videos play kar sakta hun!",
+                "I can open applications, search the web, control YouTube, have conversations, and learn from you, Sir!"
             ],
             'unknown': [
                 "Sir, yeh mujhe nahi aata. Kya aap bata sakte hain?",
@@ -67,13 +85,26 @@ class LearningAI:
         if pattern_key not in self.patterns:
             self.patterns[pattern_key] = []
         
-        self.patterns[pattern_key].append({
-            'input': user_input,
-            'words': words,
-            'context': context,
-            'timestamp': datetime.now().isoformat(),
-            'frequency': 1
-        })
+        # Check if this exact input already exists
+        existing_entry = None
+        for entry in self.patterns[pattern_key]:
+            if entry['input'] == user_input and entry['context'] == context:
+                existing_entry = entry
+                break
+        
+        if existing_entry:
+            # Update frequency and timestamp
+            existing_entry['frequency'] += 1
+            existing_entry['timestamp'] = datetime.now().isoformat()
+        else:
+            # Add new entry
+            self.patterns[pattern_key].append({
+                'input': user_input,
+                'words': words,
+                'context': context,
+                'timestamp': datetime.now().isoformat(),
+                'frequency': 1
+            })
         
         # Train models periodically
         if len(self.patterns) % 10 == 0:  # Every 10 new patterns
@@ -95,16 +126,28 @@ class LearningAI:
         if self.waiting_for_answer:
             return self.save_user_answer(user_input)
         
-        # Check for user-taught answers first
+        # Check for custom responses FIRST
+        custom_response = memory_editor.get_custom_response(pattern_key)
+        if custom_response:
+            print(f"[DEBUG] Response source: CUSTOM_RESPONSE (pattern: {pattern_key})")
+            # Add custom response to TensorFlow training for learning
+            if tensorflow_jarvis.available:
+                tensorflow_jarvis.add_training_data(user_input, "custom_response")
+            self.learn_from_input(user_input, "custom_response")
+            return custom_response
+        
+        # Check for user-taught answers second
         taught_answer = self.check_user_taught_answers(user_input)
         if taught_answer:
+            print(f"[DEBUG] Response source: USER_TAUGHT")
             return taught_answer
         
-        # Try TensorFlow model first (Phase 2), fallback to simple neural network
+        # Try TensorFlow model third (Phase 2), fallback to simple neural network
         if tensorflow_jarvis.available:
             predicted_type = tensorflow_jarvis.predict_response_category(user_input)
             tf_response = tensorflow_jarvis.generate_response(user_input)
             if tf_response:
+                print(f"[DEBUG] Response source: TENSORFLOW_MODEL (category: {predicted_type})")
                 # Automatically learn from this interaction
                 tensorflow_jarvis.add_training_data(user_input, predicted_type)
                 self.learn_from_input(user_input, predicted_type)
@@ -114,6 +157,7 @@ class LearningAI:
         
         # Check for learned patterns
         if pattern_key in self.patterns:
+            print(f"[DEBUG] Response source: LEARNED_PATTERN (pattern: {pattern_key})")
             response = self.generate_learned_response(words, user_input)
             # Train neural network with this interaction
             neural_network.add_training_data(user_input, "learned_pattern")
@@ -122,10 +166,12 @@ class LearningAI:
         # Check for similar patterns
         similar_response = self.find_similar_pattern(words)
         if similar_response:
+            print(f"[DEBUG] Response source: SIMILAR_PATTERN")
             neural_network.add_training_data(user_input, "similar_pattern")
             return similar_response
         
         # Generate contextual response and learn from it
+        print(f"[DEBUG] Response source: CONTEXTUAL_RESPONSE (type: {predicted_type})")
         response = self.generate_contextual_response(user_input, words)
         neural_network.add_training_data(user_input, predicted_type)
         
@@ -141,6 +187,20 @@ class LearningAI:
     
     def check_user_taught_answers(self, user_input):
         """Check if user previously taught an answer for this question"""
+        user_input_clean = user_input.lower().replace('?', '').strip()
+        
+        print(f"[DEBUG] Checking user-taught answers for: '{user_input.lower()}'")
+        
+        # First try exact match
+        if user_input.lower() in self.user_taught_answers:
+            print(f"[DEBUG] Found exact match in user-taught answers")
+            return self.user_taught_answers[user_input.lower()]
+        
+        if user_input_clean in self.user_taught_answers:
+            print(f"[DEBUG] Found clean match in user-taught answers")
+            return self.user_taught_answers[user_input_clean]
+        
+        # Then try fuzzy matching
         user_words = set(self.extract_keywords(user_input))
         
         for question, answer in self.user_taught_answers.items():
@@ -148,8 +208,10 @@ class LearningAI:
             
             # Check for word overlap (at least 60% match)
             if len(user_words & question_words) >= len(user_words) * 0.6:
-                return f"Main yaad hey, Sir! {answer}"
+                print(f"[DEBUG] Found fuzzy match in user-taught answers")
+                return answer
         
+        print(f"[DEBUG] No match found in user-taught answers")
         return None
     
     def save_user_answer(self, user_input):
@@ -211,8 +273,15 @@ class LearningAI:
     
     def generate_contextual_response(self, user_input, words):
         """Generate contextual response based on input analysis"""
+        # Check for specific topics first
+        if any(word in user_input.lower() for word in ['friend', 'frnd', 'dost', 'banoge']):
+            base_responses = self.base_responses['friendship']
+        elif any(word in user_input.lower() for word in ['improve', 'better', 'train', 'sikha']):
+            base_responses = self.base_responses['improvement']
+        elif any(word in user_input.lower() for word in ['kya kya', 'what can', 'capabilities', 'skte ho']):
+            base_responses = self.base_responses['capabilities']
         # Detect language
-        if self.is_hindi(user_input):
+        elif self.is_hindi(user_input):
             base_responses = self.base_responses['hindi']
         elif '?' in user_input or any(q in user_input.lower() for q in ['what', 'how', 'why', 'when', 'where']):
             base_responses = self.base_responses['question']
@@ -292,6 +361,47 @@ class LearningAI:
                 print(f"[OK] Loaded {len(self.patterns)} learned patterns and {len(self.user_taught_answers)} user-taught answers")
         except Exception as e:
             print(f"[ERROR] Could not load memory: {e}")
+    
+    def load_training_data(self):
+        """Load training data for better responses"""
+        try:
+            # Load custom training data
+            if os.path.exists("training_data.json"):
+                with open("training_data.json", 'r', encoding='utf-8') as f:
+                    training_data = json.load(f)
+                    
+                # Add training data to TensorFlow if available
+                if tensorflow_jarvis.available:
+                    for category, examples in training_data.items():
+                        for example in examples:
+                            tensorflow_jarvis.add_training_data(example['input'], example['category'])
+            
+            # Load AmbigNQ dataset for general knowledge
+            ambignq_path = "general-qa/ambignq/dev.json"
+            if os.path.exists(ambignq_path):
+                with open(ambignq_path, 'r', encoding='utf-8') as f:
+                    ambignq_data = json.load(f)
+                
+                # Load ALL Q&A pairs for comprehensive knowledge
+                count = 0
+                for item in ambignq_data:
+                    question = item.get('question', '')
+                    answers = item.get('nq_answer', [])
+                    if question and answers:
+                        answer = answers[0] if isinstance(answers, list) else str(answers)
+                        # Store as user-taught answer with exact question matching
+                        self.user_taught_answers[question.lower()] = f"Sir, {answer}."
+                        
+                        # Also add variations for better matching
+                        question_clean = question.lower().replace('?', '').strip()
+                        self.user_taught_answers[question_clean] = f"Sir, {answer}."
+                        count += 1
+                
+                print(f"[OK] Loaded {count} general knowledge Q&A pairs from AmbigNQ")
+            
+            print(f"[OK] Training data loaded successfully")
+        except Exception as e:
+            print(f"[ERROR] Could not load training data: {e}")
     
     def get_learning_stats(self):
         """Get statistics about learned knowledge"""
