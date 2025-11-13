@@ -11,6 +11,8 @@ from collections import defaultdict
 from .neural_network import neural_network
 from .tensorflow_model import tensorflow_jarvis
 from .memory_editor import memory_editor
+from .conversation_context import conversation_context
+from .training_data_generator import training_generator
 
 class LearningAI:
     def __init__(self):
@@ -148,10 +150,24 @@ class LearningAI:
         # Save learning
         self.save_memory()
     
-    def generate_response(self, user_input):
+    def generate_response(self, user_input, emotion='neutral', intent='general'):
         """Generate intelligent response based on learned patterns and ML"""
         words = self.extract_keywords(user_input)
         pattern_key = self.create_pattern_key(words)
+        
+        # Check for contextual response FIRST (human-like conversation)
+        contextual_response = conversation_context.get_contextual_response(user_input, emotion, intent)
+        if contextual_response:
+            print(f"[DEBUG] Response source: CONTEXTUAL_CONVERSATION")
+            # Add to training data for learning
+            training_generator.add_user_conversation(user_input, contextual_response, conversation_context.current_topic)
+            return contextual_response
+        
+        # Check for personalized response based on user profile
+        personalized_response = conversation_context.get_personalized_response(user_input)
+        if personalized_response:
+            print(f"[DEBUG] Response source: PERSONALIZED_RESPONSE")
+            return personalized_response
         
         # Check if user is providing an answer to previous question
         if self.waiting_for_answer:
@@ -237,6 +253,9 @@ class LearningAI:
                 response += " Agar aap mujhe bata denge to main yaad rakh lunga, Sir."
             else:
                 response += " If you teach me, I'll remember it for next time, Sir."
+        
+        # Store conversation exchange for context learning
+        conversation_context.add_exchange(user_input, response, emotion, intent)
         
         return response
     
@@ -408,7 +427,7 @@ class LearningAI:
     
     def is_hindi(self, text):
         """Detect if text contains Hindi"""
-        hindi_words = ['kya', 'hai', 'mein', 'aap', 'kar', 'ho', 'hoon', 'raat', 'rat', 'kaise', 'kaun', 'kab', 'kahan', 'btao', 'rhe', 'chal', 'raha']
+        hindi_words = ['kya', 'hai', 'mein', 'aap', 'kar', 'ho', 'hoon', 'raat', 'rat', 'kaise', 'kaun', 'kab', 'kahan', 'btao', 'rhe', 'chal', 'raha', 'mera', 'din', 'mast', 'ekadam', 'badhiya']
         return any(word in text.lower() for word in hindi_words)
     
     def check_identity_questions(self, user_input):
@@ -475,12 +494,30 @@ class LearningAI:
             else:
                 return random.choice(english_responses)
         
+        # Day-related responses (when JARVIS asked about day)
+        if any(pattern in text_lower for pattern in ['din', 'day', 'mast', 'awesome', 'great', 'badhiya', 'ekadam']):
+            if any(positive in text_lower for positive in ['mast', 'badhiya', 'great', 'awesome', 'achha', 'good']):
+                return random.choice([
+                    "Bahut badhiya, Sir! Kya special hua aaj?",
+                    "Wonderful, Sir! Aaj ka din productive lag raha hai.",
+                    "Great to hear, Sir! Koi interesting plans hain?",
+                    "Excellent, Sir! Main bhi khush hun sunke."
+                ])
+            elif any(negative in text_lower for negative in ['kharab', 'bad', 'nhi', 'not good']):
+                return random.choice([
+                    "Oh, kya hua Sir? Koi problem hai?",
+                    "Sorry to hear that, Sir. Main kuch help kar sakta hun?",
+                    "Kya issue hai, Sir? Batayiye main solve karta hun."
+                ])
+        
         # General positive responses in Hindi
-        if any(pattern in text_lower for pattern in ['mai acha hun', 'main acha hun', 'mai theek hun', 'main theek hun', 'achha hun']):
+        if any(pattern in text_lower for pattern in ['mai acha hun', 'main acha hun', 'mai theek hun', 'main theek hun', 'achha hun', 'mast ja raha', 'badhiya hai', 'achha ja raha']):
             return random.choice([
                 "Bahut khushi ki baat hai, Sir! Main bhi khush hun.",
                 "Excellent, Sir! Aaj kya karna hai?",
-                "Wonderful, Sir! Koi kaam batayiye."
+                "Wonderful, Sir! Koi kaam batayiye.",
+                "Bahut badhiya, Sir! Aaj ka din productive rahega.",
+                "Great to hear, Sir! Kya special plans hain?"
             ])
         
         # General positive responses in English

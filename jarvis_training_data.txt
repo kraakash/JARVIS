@@ -196,3 +196,19 @@ what can you do	capabilities
 	casual
 helllo jarvis	casual
 kya ka rahe ho	hindi
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities

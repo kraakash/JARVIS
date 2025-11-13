@@ -1006,11 +1006,11 @@
       "you"
     ],
     "you": [
-      "remain",
-      "amazing",
-      "learning",
       "rule",
-      "stronger"
+      "stronger",
+      "remain",
+      "learning",
+      "amazing"
     ],
     "kuch": [
       "btao",
@@ -1030,25 +1030,25 @@
     ],
     "kya": [
       "kar",
-      "bnaye",
+      "rahe",
       "tum",
       "skte",
-      "kya",
       "haal",
-      "rahe"
+      "kya",
+      "bnaye"
     ],
     "tum": [
-      "merre",
+      "kya",
       "kaun",
-      "kya"
+      "merre"
     ],
     "uhmm": [
       "you",
       "chalo"
     ],
     "youu": [
-      "amazing",
-      "best"
+      "best",
+      "amazing"
     ],
     "love": [
       "you"
@@ -1081,8 +1081,8 @@
       "todayy"
     ],
     "byee": [
-      "jarvis",
-      "jarivss"
+      "jarivss",
+      "jarvis"
     ],
     "jarivss": [
       "shotdown"
@@ -5130,5 +5130,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-13T11:09:32.734783"
+  "last_updated": "2025-11-13T21:42:20.201877"
 }

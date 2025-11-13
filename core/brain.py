@@ -336,7 +336,9 @@ class JarvisBrain:
         """Handle general conversation and questions"""
         # Try learning AI FIRST for all general conversation
         from modules.ai.learning_ai import learning_ai
-        learned_response = learning_ai.generate_response(command_text)
+        emotion = emotion_data.get('emotion', 'neutral') if emotion_data else 'neutral'
+        intent = emotion_data.get('intent', 'general') if emotion_data else 'general'
+        learned_response = learning_ai.generate_response(command_text, emotion, intent)
         
         if learned_response:
             return learned_response
