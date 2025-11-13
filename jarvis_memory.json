@@ -1131,15 +1131,15 @@
       "you"
     ],
     "you": [
-      "amazing",
-      "rule",
-      "learning",
       "stronger",
-      "remain"
+      "remain",
+      "amazing",
+      "learning",
+      "rule"
     ],
     "kuch": [
-      "btao",
-      "bnate"
+      "bnate",
+      "btao"
     ],
     "sath": [
       "tum"
@@ -1154,19 +1154,19 @@
       "hai"
     ],
     "kya": [
-      "bnaye",
-      "haal",
-      "kar",
       "kya",
-      "rahe",
+      "bnaye",
+      "tum",
       "skte",
-      "tum"
+      "rahe",
+      "haal",
+      "kar"
     ],
     "tum": [
+      "kya",
+      "kaun",
       "kon",
       "koun",
-      "kaun",
-      "kya",
       "merre"
     ],
     "uhmm": [
@@ -1208,8 +1208,8 @@
       "todayy"
     ],
     "byee": [
-      "jarvis",
-      "jarivss"
+      "jarivss",
+      "jarvis"
     ],
     "jarivss": [
       "shotdown"
@@ -1236,8 +1236,8 @@
       "hai"
     ],
     "kar": [
-      "rhe",
       "rahe",
+      "rhe",
       "sakte"
     ],
     "amazing": [
@@ -5280,5 +5280,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-13T22:23:12.189060"
+  "last_updated": "2025-11-13T23:00:54.541781"
 }

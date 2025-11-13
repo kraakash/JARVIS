@@ -6,14 +6,14 @@
         "tum kya kya kar sakte ho"
       ],
       "keywords": {
-        "kaise": 1,
+        "kaise": 5,
         "tum": 1,
         "kya": 2,
         "kar": 1,
         "sakte": 1
       },
-      "success_count": 2,
-      "total_count": 2
+      "success_count": 6,
+      "total_count": 6
     },
     "greeting": {
       "patterns": [
@@ -30,18 +30,35 @@
       },
       "success_count": 2,
       "total_count": 2
+    },
+    "open_app": {
+      "patterns": [
+        "kam to bahut sara hai shuru kahan se karun"
+      ],
+      "keywords": {
+        "kam": 1,
+        "bahut": 1,
+        "sara": 1,
+        "hai": 1,
+        "shuru": 1,
+        "kahan": 1,
+        "karun": 1
+      },
+      "success_count": 1,
+      "total_count": 1
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 4,
-    "correct_predictions": 4,
+    "total_interactions": 9,
+    "correct_predictions": 9,
     "ml_predictions": 0,
     "learning_rate": 100.0,
     "ml_accuracy": 0.0,
     "intent_accuracy": {
       "general": 100.0,
-      "greeting": 100.0
+      "greeting": 100.0,
+      "open_app": 100.0
     },
     "last_updated": null
   },
@@ -49,13 +66,23 @@
     "kaise ho",
     "tum kya kya kar sakte ho",
     "yah to bahut acchi baat hai",
-    "hello"
+    "hello",
+    "kaise ho",
+    "kaise ho",
+    "kaise ho",
+    "kaise ho",
+    "kam to bahut sara hai shuru kahan se karun"
   ],
   "training_labels": [
     "general",
     "general",
     "greeting",
-    "greeting"
+    "greeting",
+    "general",
+    "general",
+    "general",
+    "general",
+    "open_app"
   ],
-  "last_updated": "2025-11-13T22:24:05.211573"
+  "last_updated": "2025-11-13T22:51:29.856111"
 }

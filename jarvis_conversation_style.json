@@ -1,0 +1,14 @@
+{
+  "casual_responses": [],
+  "formal_responses": [],
+  "hindi_patterns": [
+    "kaise ho"
+  ],
+  "english_patterns": [],
+  "user_style_words": {
+    "kaise": 6
+  },
+  "response_templates": {
+    "kaise ho...": "Main bilkul theek hun, Sir! Aapki seva ke liye taiyar hun."
+  }
+}

@@ -120,7 +120,8 @@ class EmotionEngine:
         conversation_keywords = [
             'thank you', 'dhanyawad', 'what can you do', 'tum kya kar sakte ho',
             'good job', 'achha', 'weather', 'mausam', 'joke', 'mazak',
-            'aap kaun hain', 'your name'
+            'aap kaun hain', 'your name', 'kam bahut', 'work hai', 'kaam hai',
+            'busy hun', 'tension hai', 'problem hai'
         ]
         for keyword in conversation_keywords:
             if keyword in text_lower:
@@ -165,17 +166,27 @@ class EmotionEngine:
             return 'learning_stats'
         elif any(phrase in text_lower for phrase in ['adaptive stats', 'ai stats', 'learning rate', 'intent accuracy']):
             return 'adaptive_stats'
+        elif any(phrase in text_lower for phrase in ['teach jarvis', 'sikhao', 'learn this', 'remember this']):
+            return 'teach_response'
+        elif any(phrase in text_lower for phrase in ['style stats', 'conversation style', 'speaking style']):
+            return 'style_stats'
+        elif any(phrase in text_lower for phrase in ['ml test', 'machine learning test', 'model test', 'ai test']):
+            return 'ml_test'
         elif any(phrase in text_lower for phrase in ['test learning', 'check learning', 'learning test', 'seekhna test']):
             return 'test_learning'
         elif any(phrase in text_lower for phrase in ['clean memory', 'memory clean', 'saaf karo', 'memory saaf']):
             return 'clean_memory'
         
-        # App control commands
+        # App control commands (more specific)
         elif any(phrase in text_lower for phrase in ['find app', 'search app', 'show app', 'list app']):
             return 'search_apps'
-        elif any(word in text_lower for word in ['open', 'start', 'launch', 'run']):
+        elif any(phrase in text_lower for phrase in ['open chrome', 'start calculator', 'launch notepad', 'run paint']) or \
+             (any(word in text_lower for word in ['open', 'start', 'launch', 'run']) and 
+              any(word in text_lower for word in ['app', 'application', 'chrome', 'calculator', 'notepad'])):
             return 'open_app'
-        elif any(word in text_lower for word in ['close', 'exit', 'quit', 'stop']):
+        elif any(phrase in text_lower for phrase in ['close chrome', 'exit calculator', 'quit notepad']) or \
+             (any(word in text_lower for word in ['close', 'exit', 'quit', 'stop']) and 
+              any(word in text_lower for word in ['app', 'application', 'chrome', 'calculator'])):
             return 'close_app'
         elif any(phrase in text_lower for phrase in ['list apps', 'list all apps', 'show all apps', 'running apps', 'what apps', 'all apps']):
             return 'list_apps'

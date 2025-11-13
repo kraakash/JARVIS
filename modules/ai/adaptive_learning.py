@@ -109,9 +109,15 @@ class AdaptiveLearning:
         """Learn from user interaction"""
         user_input_lower = user_input.lower().strip()
         
-        # Skip empty inputs
+        # Skip empty inputs and problematic words
         if len(user_input_lower) < 2:
             return
+        
+        # Skip if already learned this exact pattern recently
+        if detected_intent in self.intent_patterns:
+            if user_input_lower in self.intent_patterns[detected_intent]['patterns']:
+                print(f"[ML] Pattern already learned: {user_input_lower}")
+                return
         
         # Initialize intent pattern if not exists
         if detected_intent not in self.intent_patterns:
@@ -293,6 +299,27 @@ class AdaptiveLearning:
             }
         
         return stats
+    
+    def teach_response(self, user_input, correct_response, intent=None):
+        """Manual teaching - user teaches JARVIS new responses"""
+        user_input_lower = user_input.lower().strip()
+        
+        # Add to learning AI memory
+        from modules.ai.learning_ai import learning_ai
+        learning_ai.learn_user_response(user_input_lower, correct_response)
+        
+        # If intent provided, add to training data
+        if intent:
+            self.training_data.append(user_input_lower)
+            self.training_labels.append(intent)
+            
+            # Retrain if enough data
+            if ML_AVAILABLE and len(self.training_data) % 5 == 0:
+                self._train_ml_model()
+        
+        print(f"[TEACH] Learned: '{user_input}' -> '{correct_response}'")
+        self.save_learning_data()
+        return True
     
     def improve_response_quality(self, user_input, response, user_feedback):
         """Learn from response quality feedback"""

@@ -53,6 +53,8 @@ class JarvisBrain:
             'learning_stats': self._handle_learning_stats,
             'test_learning': self._handle_test_learning,
             'adaptive_stats': self._handle_adaptive_stats,
+            'teach_response': self._handle_teach_response,
+            'ml_test': self._handle_ml_test,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -138,6 +140,10 @@ class JarvisBrain:
             response = self.skills['learning_stats'](emotion_data)
         elif intent == 'adaptive_stats':
             response = self.skills['adaptive_stats'](emotion_data)
+        elif intent == 'teach_response':
+            response = self.skills['teach_response'](command_text, emotion_data)
+        elif intent == 'ml_test':
+            response = self.skills['ml_test'](emotion_data)
         elif intent == 'test_learning':
             response = self.skills['test_learning'](emotion_data)
         elif intent == 'clean_memory':
@@ -153,11 +159,23 @@ class JarvisBrain:
             if emotion_data:
                 response = emotion_engine.enhance_response(response, emotion_data)
             
-        # Learn from this interaction
-        adaptive_learning.learn_intent_pattern(command_text, intent, response)
+        # Learn from this interaction (avoid duplicates)
+        if len(command_text.strip()) > 2 and not any(word in command_text.lower() for word in ['main', 'bhi']):
+            adaptive_learning.learn_intent_pattern(command_text, intent, response)
         
-        self.speak(response)
-        return response
+        # Learn conversation style with error handling
+        try:
+            from modules.ai.conversation_style_learning import conversation_style_learning
+            conversation_style_learning.learn_response_style(command_text, response)
+            
+            # Make response more natural
+            natural_response = conversation_style_learning.generate_natural_response(response)
+        except Exception as e:
+            print(f"[STYLE] Error in style learning: {e}")
+            natural_response = response  # Use original response if style learning fails
+        
+        self.speak(natural_response)
+        return natural_response
     
     def _handle_greeting(self, emotion_data=None):
         from datetime import datetime
@@ -697,7 +715,90 @@ class JarvisBrain:
         for intent, data in sorted_intents:
             response += f"  {intent}: {data['accuracy']:.0f}% ({data['total_uses']} uses)\n"
         
+        # Add conversation style stats
+        from modules.ai.conversation_style_learning import conversation_style_learning
+        style_stats = conversation_style_learning.get_style_stats()
+        
+        response += f"\n🗣️ Conversation Style:\n"
+        response += f"  Hindi Patterns: {style_stats['hindi_patterns']}\n"
+        response += f"  English Patterns: {style_stats['english_patterns']}\n"
+        response += f"  Learned Words: {style_stats['learned_words']}\n"
+        
+        if style_stats['top_user_words']:
+            top_words = ', '.join([f"{word}({count})" for word, count in style_stats['top_user_words']])
+            response += f"  Your Style Words: {top_words}\n"
+        
         adaptive_learning.display_learning_progress()
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_teach_response(self, command_text, emotion_data):
+        """Handle manual teaching"""
+        if language_support.current_language == 'hindi':
+            response = "Haan Sir, sikhayiye. Format: 'teach jarvis [question] answer [response]'"
+        else:
+            response = "Yes Sir, teach me. Format: 'teach jarvis [question] answer [response]'"
+        
+        # Parse teaching format
+        if 'answer' in command_text.lower():
+            parts = command_text.lower().split('answer')
+            if len(parts) == 2:
+                question = parts[0].replace('teach jarvis', '').strip()
+                answer = parts[1].strip()
+                
+                if question and answer:
+                    from modules.ai.adaptive_learning import adaptive_learning
+                    success = adaptive_learning.teach_response(question, answer)
+                    
+                    if success:
+                        if language_support.current_language == 'hindi':
+                            response = f"Seekh gaya, Sir! Ab '{question}' ka jawab '{answer}' dunga."
+                        else:
+                            response = f"Learned, Sir! Now I'll answer '{question}' with '{answer}'."
+                    else:
+                        response = "Sorry Sir, couldn't learn that."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_ml_test(self, emotion_data):
+        """Test ML model performance"""
+        from modules.ai.adaptive_learning import adaptive_learning
+        
+        response = "🤖 ML Model Test, Sir:\n"
+        
+        # Test predictions
+        test_inputs = [
+            "kaise ho",
+            "open chrome", 
+            "what time is it",
+            "search google",
+            "thank you"
+        ]
+        
+        correct_predictions = 0
+        total_tests = len(test_inputs)
+        
+        response += "Testing ML Predictions:\n"
+        for test_input in test_inputs:
+            predicted_intent, confidence = adaptive_learning.predict_intent(test_input)
+            response += f"  '{test_input}' -> {predicted_intent} ({confidence:.0f}%)\n"
+            if confidence > 70:
+                correct_predictions += 1
+        
+        # Calculate test accuracy
+        test_accuracy = (correct_predictions / total_tests) * 100
+        response += f"\n📊 Test Results:\n"
+        response += f"  Confident Predictions: {correct_predictions}/{total_tests}\n"
+        response += f"  Test Accuracy: {test_accuracy:.1f}%\n"
+        
+        # Model info
+        stats = adaptive_learning.get_detailed_stats()
+        response += f"  Training Samples: {len(adaptive_learning.training_data)}\n"
+        response += f"  Model Status: {'Trained' if adaptive_learning.model_trained else 'Training'}\n"
         
         if emotion_data:
             return emotion_engine.enhance_response(response, emotion_data)
