@@ -1,0 +1,26 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# AI Learning files (optional - comment out if you want to track them)
+jarvis_memory.json
+user_taught_answers.json
+conversation_context.json
+jarvis_conversation_training.json
+user_conversations.json
+contextual_training.json
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
