@@ -1316,6 +1316,48 @@
         "timestamp": "2025-11-14T10:19:10.101073",
         "frequency": 1
       }
+    ],
+    "bta_kya_tum": [
+      {
+        "input": "kya tum bta skte ho vijay hazare tropy ka first match kab hai",
+        "words": [
+          "kya",
+          "tum",
+          "bta",
+          "skte",
+          "vijay"
+        ],
+        "context": "Sir, Vijay Hazare Trophy ka first match aane wala hai! Mujhe pehle pata nahi tha, lekin mujhe upyog karne ke liye maine internet check kiya. Vijay Hazare Trophy ka first match ki shuruwat 7th September se hoga. Abhi kuch din bache hain, sir. Aapko koi team ka support karna hai? Main aapko team ki jankari bhi provide kar sakta hoon, sir.",
+        "timestamp": "2025-11-14T10:32:55.745733",
+        "frequency": 1
+      }
+    ],
+    "khelenge_rohit_sharama": [
+      {
+        "input": "rohit sharama khelenge ye match?",
+        "words": [
+          "rohit",
+          "sharama",
+          "khelenge",
+          "match"
+        ],
+        "context": "Arre sir, main samjhaunga.\n\n**Definition:** General aisa hota hai jiska kaam sabhi cheezon ko samjhne ka hota hai. Wah ek aisa adhikari hota hai jo saare rules, regulation aur policies ko samjhne ke liye zaroori hota hai.\n\n**Real Example:** Ek school ke principal ka kaam hota hai ki wah sabhi rules aur regulationon ko samjhne ke liye zaroori hota hai, jaise ki school ke samay, uniform, homework, aur sabhi.\n\n**How it works:** General ke kaam mein yeh steps shamil hote hain:\n\n1. Sabhi rules aur regulationon ko samjhna.\n2. Sabhi logon ko samjhaana ki rules aur regulation kya hain.\n3. Sabhi logon ko samjhna ki rules aur regulation ke liye kya karana hoga.\n4. Sabhi logon ko samjhna ki rules aur regulation ke liye kya nahin karana hoga.\n\n**Applications:** General ke kaam mein sabhi fields shamil hain, jaise ki government, military, schools, colleges, aur industry. Unka kaam sabhi logon ko samjhne ke liye zaroori hota hai.\n\nAb sir, aapke puchhe ki rohit sharama khelenge ye match? Main samajhta hoon ki aapne cricket ki batting ke baare mein puchha hai.",
+        "timestamp": "2025-11-14T10:34:12.065858",
+        "frequency": 1
+      }
+    ],
+    "files_kholi_konsi": [
+      {
+        "input": "konsi files kholi?",
+        "words": [
+          "konsi",
+          "files",
+          "kholi"
+        ],
+        "context": "Sir, general samjhiye!\n\n🎯 Definition: Ek general ek prakar ka file hota hai jo har kisi tarah ki file ko cover karta hai. Yeh file har type ke file ko store karta hai, jaise ki word, excel, pdf, aur anya.\n\n📚 Real Example: Ek general ki tarah ek file folder bhi hota hai. Jab aap apne phone ya computer mein ek folder banate hain, toh aap usmein sabhi type ke file store kar sakte hain, jaise ki pictures, documents, aur videos.\n\n🔢 How it works: Jab aap ek file open karte hain, toh yeh general file us file ko identify karta hai aur use open karta hai. Yeh file aapke device ke operating system ke aadhar par kaam karta hai.\n\n🌍 Applications: General file har tarah ke operating system mein uplabdh hote hain, jaise ki Windows, macOS, aur Android. Yeh file aapko apne device par sabhi type ke file ko store aur open karne ka avsar pradan karta hai.",
+        "timestamp": "2025-11-14T11:30:20.289901",
+        "frequency": 1
+      }
     ]
   },
   "word_associations": {
@@ -1326,12 +1368,12 @@
       "you"
     ],
     "you": [
-      "stronger",
       "learning",
       "amazing",
       "think",
-      "remain",
-      "rule"
+      "stronger",
+      "rule",
+      "remain"
     ],
     "kuch": [
       "btao",
@@ -1350,30 +1392,31 @@
       "hai"
     ],
     "kya": [
-      "tum",
-      "kar",
+      "hai",
+      "update",
       "rahe",
       "haal",
-      "update",
-      "hai",
-      "bnaye",
+      "kar",
       "skte",
-      "kya"
+      "kya",
+      "bnaye",
+      "tum"
     ],
     "tum": [
-      "kon",
+      "kaun",
       "koun",
-      "shubh",
-      "kab",
-      "merre",
-      "meri",
       "bewaakoof",
+      "shubh",
       "kya",
-      "kaun"
+      "merre",
+      "kab",
+      "meri",
+      "kon",
+      "bta"
     ],
     "uhmm": [
-      "chalo",
-      "you"
+      "you",
+      "chalo"
     ],
     "youu": [
       "amazing",
@@ -1438,8 +1481,8 @@
       "hai"
     ],
     "kar": [
-      "rhe",
       "sakte",
+      "rhe",
       "rahe"
     ],
     "amazing": [
@@ -1470,9 +1513,9 @@
       "what"
     ],
     "what": [
-      "binary",
       "about",
-      "you"
+      "you",
+      "binary"
     ],
     "about": [
       "you"
@@ -1481,8 +1524,8 @@
       "galtiyan"
     ],
     "galtiyan": [
-      "bata",
-      "bta"
+      "bta",
+      "bata"
     ],
     "bata": [
       "sakte"
@@ -1517,6 +1560,27 @@
     ],
     "intelligent": [
       "banoge"
+    ],
+    "bta": [
+      "skte"
+    ],
+    "skte": [
+      "vijay"
+    ],
+    "rohit": [
+      "sharama"
+    ],
+    "sharama": [
+      "khelenge"
+    ],
+    "khelenge": [
+      "match"
+    ],
+    "konsi": [
+      "files"
+    ],
+    "files": [
+      "kholi"
     ]
   },
   "user_taught_answers": {
@@ -5525,5 +5589,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-14T10:22:10.459825"
+  "last_updated": "2025-11-14T11:30:20.291933"
 }

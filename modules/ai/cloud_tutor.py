@@ -106,7 +106,7 @@ User asked: {question}"""
                     "model": self.model,
                     "messages": [{"role": "user", "content": prompt}],
                     "temperature": 0.7,
-                    "max_tokens": 500
+                    "max_tokens": 800
                 },
                 timeout=20
             )
@@ -115,11 +115,14 @@ User asked: {question}"""
                 result = response.json()
                 response_text = result['choices'][0]['message']['content']
                 
-                # Save to learning model
+                # Save to learning model and train JARVIS model
                 try:
                     from modules.ai.learning_ai import learning_ai
+                    from modules.ai.jarvis_model import jarvis_model
+                    
                     learning_ai.learn_from_input(question, response_text)
-                    print(f"[GROQ] Saved to learning: {question[:30]}...")
+                    jarvis_model.add_conversation(question, response_text)
+                    print(f"[GROQ] Saved to learning & JARVIS model: {question[:30]}...")
                 except Exception as e:
                     print(f"[GROQ] Learning save error: {e}")
                 

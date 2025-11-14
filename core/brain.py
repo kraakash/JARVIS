@@ -19,6 +19,9 @@ from modules.ai.advanced_conversation import advanced_conversation
 from modules.ai.brain_enhancer import brain_enhancer
 from modules.ai.data_trainer import data_trainer
 from modules.ai.book_processor import book_processor
+from modules.ai.general_conversation import general_conversation
+from modules.ai.jarvis_model import jarvis_model
+from modules.ai.openrouter_conversation import openrouter_conversation
 
 class JarvisBrain:
     def __init__(self):
@@ -84,6 +87,7 @@ class JarvisBrain:
             'analyze_work_pattern': self._handle_analyze_work_pattern,
             'get_help': self._handle_get_help,
             'execute_help': self._handle_execute_help,
+            'jarvis_stats': self._handle_jarvis_stats,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -132,7 +136,11 @@ class JarvisBrain:
         elif intent == 'emotional_expression':
             response = self._handle_emotional_expression(command_text, emotion_data)
         elif intent == 'question':
-            response = self._handle_question(command_text, emotion_data)
+            # Check if it's a general question first
+            if any(word in command_text.lower() for word in ['khelenge', 'match', 'cricket', 'football', 'movie', 'song', 'weather', 'mausam']):
+                response = self._handle_general_conversation(command_text, emotion_data)
+            else:
+                response = self._handle_question(command_text, emotion_data)
         elif intent == 'open_app':
             response = self.skills['open_app'](command_text, emotion_data)
         elif intent == 'close_app':
@@ -219,10 +227,7 @@ class JarvisBrain:
         elif 'build knowledge' in command_text.lower():
             data_trainer.build_knowledge_graph()
             response = "Knowledge system built successfully, Sir!"
-        elif intent == 'general_conversation':
-            response = self._handle_general_conversation(command_text, emotion_data)
-        elif intent == 'general':
-            # Route general intent to conversation handler
+        elif intent == 'general_conversation' or intent == 'general':
             response = self._handle_general_conversation(command_text, emotion_data)
         else:
             # Use neural brain for intelligent responses
@@ -568,19 +573,25 @@ class JarvisBrain:
         
         if response:
             print("[DEBUG] Response source: IDENTITY_RESPONSE")
-            # Apply emotional enhancement if needed
-            if emotion_data and emotion_data['emotion'] in ['excited', 'positive']:
-                if language_support.current_language == 'hindi':
-                    response = "Bahut khushi hui! " + response
-                else:
-                    response = "I'm delighted! " + response
-            elif emotion_data and emotion_data['emotion'] in ['sad', 'negative']:
-                if language_support.current_language == 'hindi':
-                    response = "Mein samajh sakta hoon. " + response
-                else:
-                    response = "I understand. " + response
-            
             return response
+        
+        # Try JARVIS personal model first
+        jarvis_response = jarvis_model.generate_response(command_text)
+        if jarvis_response:
+            print("[DEBUG] Response source: JARVIS_MODEL")
+            return jarvis_response
+        
+        # Try OpenRouter DeepSeek for conversation
+        openrouter_response = openrouter_conversation.get_conversation_response(command_text)
+        if openrouter_response:
+            print("[DEBUG] Response source: OPENROUTER_DEEPSEEK")
+            return openrouter_response
+        
+        # Fallback to Groq general conversation
+        groq_response = general_conversation.get_conversation_response(command_text)
+        if groq_response:
+            print("[DEBUG] Response source: GROQ_GENERAL")
+            return groq_response
         
         # Try learning AI for other general conversation
         from modules.ai.learning_ai import learning_ai
@@ -593,19 +604,6 @@ class JarvisBrain:
         
         # Use smart conversation for intelligent responses
         smart_response = smart_conversation.get_smart_response(command_text)
-        
-        # Apply emotional enhancement
-        if emotion_data and emotion_data['emotion'] in ['excited', 'positive']:
-            if language_support.current_language == 'hindi':
-                smart_response = "Bahut achha! " + smart_response
-            else:
-                smart_response = "Excellent! " + smart_response
-        elif emotion_data and emotion_data['emotion'] in ['sad', 'negative']:
-            if language_support.current_language == 'hindi':
-                smart_response = "Mein samajh sakta hoon. " + smart_response
-            else:
-                smart_response = "I understand. " + smart_response
-        
         return smart_response
     
     def _handle_web_search(self, command_text, emotion_data):
@@ -1365,6 +1363,21 @@ class JarvisBrain:
         response += f"Knowledge Base: {data_stats['total_entities']} entities\n"
         response += f"Conversations: {data_stats['total_conversations']} learned\n"
         response += f"Last Updated: {data_stats['last_updated']}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_jarvis_stats(self, emotion_data):
+        """Show JARVIS model statistics"""
+        stats = jarvis_model.get_model_stats()
+        
+        response = f"🤖 JARVIS Personal Model Stats, Sir:\n"
+        response += f"📚 Training Conversations: {stats['total_conversations']}\n"
+        response += f"🧠 Model Size: {stats['model_size']}\n"
+        response += f"⏰ Last Training: {stats['last_training'][:10] if stats['last_training'] != 'Never' else 'Never'}\n"
+        response += f"📊 Data Sources: {', '.join(stats['data_sources'])}\n"
+        response += f"\nMain tumhare responses se seekh raha hun, Sir!"
         
         if emotion_data:
             return emotion_engine.enhance_response(response, emotion_data)

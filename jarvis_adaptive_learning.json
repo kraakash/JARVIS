@@ -101,7 +101,9 @@
         "what is binary search",
         "jarvis, what is binary search?\"",
         "what is recursion",
-        "what is big o notaion"
+        "what is big o notaion",
+        "rohit sharama khelenge ye match?",
+        "konsi files kholi?"
       ],
       "keywords": {
         "what": 5,
@@ -114,17 +116,24 @@
         "search?\"": 1,
         "recursion": 1,
         "big": 1,
-        "notaion": 1
+        "notaion": 1,
+        "rohit": 1,
+        "sharama": 1,
+        "khelenge": 1,
+        "match?": 1,
+        "konsi": 1,
+        "files": 1,
+        "kholi?": 1
       },
-      "success_count": 5,
-      "total_count": 5
+      "success_count": 7,
+      "total_count": 7
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 24,
-    "correct_predictions": 24,
-    "ml_predictions": 24,
+    "total_interactions": 26,
+    "correct_predictions": 26,
+    "ml_predictions": 30,
     "learning_rate": 100.0,
     "ml_accuracy": 70.0,
     "intent_accuracy": {
@@ -162,7 +171,9 @@
     "recusrion smjhao",
     "what is recursion",
     "hello javis",
-    "what is big o notaion"
+    "what is big o notaion",
+    "rohit sharama khelenge ye match?",
+    "konsi files kholi?"
   ],
   "training_labels": [
     "general",
@@ -188,7 +199,9 @@
     "general",
     "question",
     "greeting",
+    "question",
+    "question",
     "question"
   ],
-  "last_updated": "2025-11-14T10:19:42.964538"
+  "last_updated": "2025-11-14T11:30:20.335924"
 }
