@@ -1,0 +1,10 @@
+# Additional requirements for JARVIS training system
+feedparser==6.0.10
+wikipedia==1.4.0
+requests==2.31.0
+textblob==0.17.1
+PyPDF2==3.0.1
+ebooklib==0.18
+python-docx==0.8.11
+beautifulsoup4==4.12.2
+nltk==3.8.1

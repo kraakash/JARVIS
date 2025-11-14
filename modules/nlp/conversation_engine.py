@@ -113,6 +113,22 @@ class ConversationEngine:
                 ]
             },
             
+            # Work Support / Kaam ki madad
+            'work_support': {
+                'english_patterns': ['lot of work', 'busy day', 'work stress', 'where to start'],
+                'hindi_patterns': ['kam bahut hai', 'kaam zyada hai', 'kahan se shuru karun', 'bahut kaam hai'],
+                'english_responses': [
+                    "I understand you have a lot on your plate, Sir. Let's prioritize - what's most urgent?",
+                    "Busy day ahead! Would you like me to help organize your tasks?",
+                    "Take it one step at a time, Sir. What's the first thing you'd like to tackle?"
+                ],
+                'hindi_responses': [
+                    "Samajh gaya Sir, bahut kaam hai. Sabse zaroori kaam pehle karte hain.",
+                    "Koi baat nahi Sir, ek ek karke sab ho jayega. Pehle kya karna hai?",
+                    "Main madad kar sakta hun Sir. Sabse important kaam batayiye."
+                ]
+            },
+            
             # Jokes / Mazak
             'jokes': {
                 'english_patterns': ['tell me a joke', 'make me laugh', 'something funny', 'joke'],
