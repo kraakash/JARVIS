@@ -89,46 +89,41 @@ class BookProcessor:
     
     def extract_chapters(self, text, book_title):
         """Extract chapters from book text"""
-        # Common chapter patterns
-        chapter_patterns = [
-            r'Chapter \d+',
-            r'CHAPTER \d+',
-            r'अध्याय \d+',
-            r'भाग \d+',
-            r'Part \d+',
-            r'Section \d+'
-        ]
+        # Split text into chunks for better processing
+        words = text.split()
+        chunk_size = 2000  # Words per chunk
         
         chapters = []
-        current_chapter = {"title": "Introduction", "content": ""}
         
-        lines = text.split('\n')
+        # If text is small, treat as single chapter
+        if len(words) < chunk_size:
+            chapters.append({
+                "title": "Complete Content",
+                "content": text
+            })
+            return chapters
         
-        for line in lines:
-            line = line.strip()
+        # Split into multiple chapters based on content
+        for i in range(0, len(words), chunk_size):
+            chunk_words = words[i:i + chunk_size]
+            chunk_text = ' '.join(chunk_words)
             
-            # Check if line is a chapter heading
-            is_chapter = False
-            for pattern in chapter_patterns:
-                if re.match(pattern, line, re.IGNORECASE):
-                    # Save previous chapter
-                    if current_chapter["content"]:
-                        chapters.append(current_chapter)
-                    
-                    # Start new chapter
-                    current_chapter = {
-                        "title": line,
-                        "content": ""
-                    }
-                    is_chapter = True
+            # Try to find a good chapter title from first few words
+            first_line = ' '.join(chunk_words[:10])
+            
+            # Look for chapter indicators
+            chapter_indicators = ['chapter', 'introduction', 'algorithm', 'search', 'sort', 'graph', 'tree', 'array']
+            chapter_title = f"Chapter {len(chapters) + 1}"
+            
+            for indicator in chapter_indicators:
+                if indicator.lower() in first_line.lower():
+                    chapter_title = f"Chapter {len(chapters) + 1}: {indicator.title()}"
                     break
             
-            if not is_chapter and line:
-                current_chapter["content"] += line + " "
-        
-        # Add last chapter
-        if current_chapter["content"]:
-            chapters.append(current_chapter)
+            chapters.append({
+                "title": chapter_title,
+                "content": chunk_text
+            })
         
         return chapters
     

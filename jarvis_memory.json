@@ -99,8 +99,8 @@
         "input": "",
         "words": [],
         "context": "casual",
-        "timestamp": "2025-11-13T22:14:06.477955",
-        "frequency": 3
+        "timestamp": "2025-11-14T10:21:55.430077",
+        "frequency": 5
       },
       {
         "input": "ha",
@@ -1019,8 +1019,8 @@
           "rahe"
         ],
         "context": "hindi",
-        "timestamp": "2025-11-13T21:46:09.920350",
-        "frequency": 1
+        "timestamp": "2025-11-14T10:22:10.459825",
+        "frequency": 2
       }
     ],
     "kya_maine_poochha": [
@@ -1056,8 +1056,8 @@
           "pagal"
         ],
         "context": "casual",
-        "timestamp": "2025-11-13T21:50:59.470232",
-        "frequency": 1
+        "timestamp": "2025-11-14T10:09:59.937722",
+        "frequency": 2
       }
     ],
     "chup_raho": [
@@ -1199,6 +1199,123 @@
         "timestamp": "2025-11-14T00:04:03.459618",
         "frequency": 1
       }
+    ],
+    "binary_search_what": [
+      {
+        "input": "what is binary search",
+        "words": [
+          "what",
+          "binary",
+          "search"
+        ],
+        "context": "question",
+        "timestamp": "2025-11-14T00:35:11.941586",
+        "frequency": 1
+      }
+    ],
+    "algorithm_hai_kya": [
+      {
+        "input": "algorithm kya hai",
+        "words": [
+          "algorithm",
+          "kya",
+          "hai"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-14T00:35:38.129660",
+        "frequency": 1
+      }
+    ],
+    "haan_kya_tum": [
+      {
+        "input": "haan tum kya kar rahe ho",
+        "words": [
+          "haan",
+          "tum",
+          "kya",
+          "kar",
+          "rahe"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-14T00:40:17.645192",
+        "frequency": 1
+      }
+    ],
+    "rhega_shubh_tum": [
+      {
+        "input": "tum ho to shubh hi rhega na",
+        "words": [
+          "tum",
+          "shubh",
+          "rhega"
+        ],
+        "context": "greeting",
+        "timestamp": "2025-11-14T10:09:28.531754",
+        "frequency": 1
+      }
+    ],
+    "bewaakoof_tum": [
+      {
+        "input": "tum bewaakoof ho",
+        "words": [
+          "tum",
+          "bewaakoof"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-14T10:09:51.056868",
+        "frequency": 1
+      }
+    ],
+    "recursion_smjhao": [
+      {
+        "input": "recursion smjhao",
+        "words": [
+          "recursion",
+          "smjhao"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-14T10:13:15.021073",
+        "frequency": 1
+      }
+    ],
+    "recusrion_smjhao": [
+      {
+        "input": "recusrion smjhao",
+        "words": [
+          "recusrion",
+          "smjhao"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-14T10:13:26.206863",
+        "frequency": 1
+      }
+    ],
+    "intelligent_kab_tum": [
+      {
+        "input": "tum kab intelligent banoge",
+        "words": [
+          "tum",
+          "kab",
+          "intelligent",
+          "banoge"
+        ],
+        "context": "casual",
+        "timestamp": "2025-11-14T10:18:47.058954",
+        "frequency": 1
+      }
+    ],
+    "hai_kya_recursion": [
+      {
+        "input": "recursion kya hai",
+        "words": [
+          "recursion",
+          "kya",
+          "hai"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-14T10:19:10.101073",
+        "frequency": 1
+      }
     ]
   },
   "word_associations": {
@@ -1209,16 +1326,16 @@
       "you"
     ],
     "you": [
-      "remain",
       "stronger",
-      "amazing",
       "learning",
-      "rule",
-      "think"
+      "amazing",
+      "think",
+      "remain",
+      "rule"
     ],
     "kuch": [
-      "bnate",
-      "btao"
+      "btao",
+      "bnate"
     ],
     "sath": [
       "tum"
@@ -1233,26 +1350,30 @@
       "hai"
     ],
     "kya": [
-      "kya",
-      "haal",
-      "rahe",
-      "bnaye",
-      "kar",
       "tum",
+      "kar",
+      "rahe",
+      "haal",
       "update",
-      "skte"
+      "hai",
+      "bnaye",
+      "skte",
+      "kya"
     ],
     "tum": [
-      "kya",
       "kon",
-      "meri",
-      "kaun",
       "koun",
-      "merre"
+      "shubh",
+      "kab",
+      "merre",
+      "meri",
+      "bewaakoof",
+      "kya",
+      "kaun"
     ],
     "uhmm": [
-      "you",
-      "chalo"
+      "chalo",
+      "you"
     ],
     "youu": [
       "amazing",
@@ -1289,8 +1410,8 @@
       "todayy"
     ],
     "byee": [
-      "jarivss",
-      "jarvis"
+      "jarvis",
+      "jarivss"
     ],
     "jarivss": [
       "shotdown"
@@ -1318,8 +1439,8 @@
     ],
     "kar": [
       "rhe",
-      "rahe",
-      "sakte"
+      "sakte",
+      "rahe"
     ],
     "amazing": [
       "bro"
@@ -1349,6 +1470,7 @@
       "what"
     ],
     "what": [
+      "binary",
       "about",
       "you"
     ],
@@ -1370,6 +1492,31 @@
     ],
     "think": [
       "about"
+    ],
+    "binary": [
+      "search"
+    ],
+    "algorithm": [
+      "kya"
+    ],
+    "haan": [
+      "tum"
+    ],
+    "shubh": [
+      "rhega"
+    ],
+    "recursion": [
+      "kya",
+      "smjhao"
+    ],
+    "recusrion": [
+      "smjhao"
+    ],
+    "kab": [
+      "intelligent"
+    ],
+    "intelligent": [
+      "banoge"
     ]
   },
   "user_taught_answers": {
@@ -5378,5 +5525,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-14T00:04:03.459618"
+  "last_updated": "2025-11-14T10:22:10.459825"
 }

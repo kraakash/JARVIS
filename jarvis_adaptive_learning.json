@@ -4,22 +4,34 @@
       "patterns": [
         "kaise ho",
         "tum kya kya kar sakte ho",
-        "suggest me"
+        "suggest me",
+        "hii kaise ho",
+        "pagal",
+        "recursion smjhao",
+        "recusrion smjhao"
       ],
       "keywords": {
-        "kaise": 5,
+        "kaise": 6,
         "tum": 1,
         "kya": 2,
         "kar": 1,
-        "sakte": 1
+        "sakte": 1,
+        "hii": 1,
+        "pagal": 1,
+        "recursion": 1,
+        "smjhao": 2,
+        "recusrion": 1
       },
-      "success_count": 6,
-      "total_count": 6
+      "success_count": 10,
+      "total_count": 10
     },
     "greeting": {
       "patterns": [
         "yah to bahut acchi baat hai",
-        "hello"
+        "hello",
+        "hello jarvis",
+        "hii jarvis",
+        "hello javis"
       ],
       "keywords": {
         "yah": 1,
@@ -27,10 +39,13 @@
         "acchi": 1,
         "baat": 1,
         "hai": 1,
-        "hello": 1
+        "hello": 3,
+        "jarvis": 2,
+        "hii": 1,
+        "javis": 1
       },
-      "success_count": 2,
-      "total_count": 2
+      "success_count": 5,
+      "total_count": 5
     },
     "open_app": {
       "patterns": [
@@ -82,25 +97,36 @@
     },
     "question": {
       "patterns": [
-        "what do you think about ai"
+        "what do you think about ai",
+        "what is binary search",
+        "jarvis, what is binary search?\"",
+        "what is recursion",
+        "what is big o notaion"
       ],
       "keywords": {
-        "what": 1,
+        "what": 5,
         "you": 1,
         "think": 1,
-        "about": 1
+        "about": 1,
+        "binary": 2,
+        "search": 1,
+        "jarvis,": 1,
+        "search?\"": 1,
+        "recursion": 1,
+        "big": 1,
+        "notaion": 1
       },
-      "success_count": 1,
-      "total_count": 1
+      "success_count": 5,
+      "total_count": 5
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 13,
-    "correct_predictions": 13,
-    "ml_predictions": 4,
+    "total_interactions": 24,
+    "correct_predictions": 24,
+    "ml_predictions": 24,
     "learning_rate": 100.0,
-    "ml_accuracy": 0.0,
+    "ml_accuracy": 70.0,
     "intent_accuracy": {
       "general": 100.0,
       "greeting": 100.0,
@@ -125,7 +151,18 @@
     "start monitoring",
     "current activity",
     "sujhav do",
-    "what do you think about ai"
+    "what do you think about ai",
+    "what is binary search",
+    "hello jarvis",
+    "jarvis, what is binary search?\"",
+    "hii kaise ho",
+    "hii jarvis",
+    "pagal",
+    "recursion smjhao",
+    "recusrion smjhao",
+    "what is recursion",
+    "hello javis",
+    "what is big o notaion"
   ],
   "training_labels": [
     "general",
@@ -140,7 +177,18 @@
     "start_monitoring",
     "current_activity",
     "get_suggestions",
+    "question",
+    "question",
+    "greeting",
+    "question",
+    "general",
+    "greeting",
+    "general",
+    "general",
+    "general",
+    "question",
+    "greeting",
     "question"
   ],
-  "last_updated": "2025-11-14T00:04:03.468198"
+  "last_updated": "2025-11-14T10:19:42.964538"
 }

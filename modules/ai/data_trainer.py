@@ -30,7 +30,13 @@ class DataTrainer:
         """Load existing training data"""
         try:
             with open(self.training_data_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                # Ensure all required keys exist
+                required_keys = ["conversations", "facts", "books", "news", "wikipedia"]
+                for key in required_keys:
+                    if key not in data:
+                        data[key] = []
+                return data
         except:
             return {
                 "conversations": [],
@@ -45,7 +51,13 @@ class DataTrainer:
         """Load knowledge base"""
         try:
             with open(self.knowledge_base_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                # Ensure all required keys exist
+                required_keys = ["topics", "entities", "relationships", "confidence_scores"]
+                for key in required_keys:
+                    if key not in data:
+                        data[key] = {}
+                return data
         except:
             return {
                 "topics": {},
@@ -136,7 +148,9 @@ class DataTrainer:
             except Exception as e:
                 print(f"Error fetching from {source_url}: {e}")
         
-        # Keep only latest 1000 news items
+        # Ensure news key exists and keep only latest 1000 news items
+        if "news" not in self.training_data:
+            self.training_data["news"] = []
         if len(self.training_data["news"]) > 1000:
             self.training_data["news"] = self.training_data["news"][-1000:]
         
@@ -197,17 +211,24 @@ class DataTrainer:
     
     def process_conversation_for_training(self, user_input, jarvis_response):
         """Process user conversations for training"""
+        try:
+            sentiment = str(TextBlob(user_input).sentiment)
+        except:
+            sentiment = "neutral"
+        
         conversation_data = {
             "user_input": user_input,
             "jarvis_response": jarvis_response,
             "timestamp": datetime.now().isoformat(),
-            "sentiment": str(TextBlob(user_input).sentiment),
+            "sentiment": sentiment,
             "type": "conversation"
         }
         
         self.training_data["conversations"].append(conversation_data)
         
-        # Keep only latest 5000 conversations
+        # Ensure conversations key exists and keep only latest 5000 conversations
+        if "conversations" not in self.training_data:
+            self.training_data["conversations"] = []
         if len(self.training_data["conversations"]) > 5000:
             self.training_data["conversations"] = self.training_data["conversations"][-5000:]
         
@@ -215,15 +236,22 @@ class DataTrainer:
     
     def extract_knowledge_entities(self, text):
         """Extract knowledge entities from text"""
-        blob = TextBlob(text)
-        
-        # Extract noun phrases as potential entities
-        entities = []
-        for phrase in blob.noun_phrases:
-            if len(phrase) > 3 and len(phrase) < 50:
-                entities.append(phrase.lower())
-        
-        return entities
+        try:
+            blob = TextBlob(text)
+            
+            # Extract noun phrases as potential entities
+            entities = []
+            for phrase in blob.noun_phrases:
+                if len(phrase) > 3 and len(phrase) < 50:
+                    entities.append(phrase.lower())
+            
+            return entities
+        except Exception as e:
+            print(f"TextBlob error: {e}")
+            # Fallback: simple word extraction
+            import re
+            words = re.findall(r'\b[A-Za-z]{4,}\b', text)
+            return [word.lower() for word in words[:10]]  # Return first 10 words
     
     def build_knowledge_graph(self):
         """Build knowledge graph from training data"""
@@ -269,20 +297,41 @@ class DataTrainer:
         """Get smart response based on training data"""
         user_lower = user_input.lower()
         
-        # Search in knowledge base
-        relevant_entities = []
-        for entity, data in self.knowledge_base["entities"].items():
-            if entity in user_lower:
-                relevant_entities.append((entity, data))
+        # Search in book training data first
+        if "books" in self.training_data:
+            for book_entry in self.training_data["books"]:
+                book_text = book_entry.get("text", "").lower()
+                
+                # Check for algorithm-related keywords
+                algorithm_keywords = ["algorithm", "binary search", "sorting", "big o", "recursion", "data structure"]
+                
+                for keyword in algorithm_keywords:
+                    if keyword in user_lower and keyword in book_text:
+                        # Extract relevant portion
+                        start_idx = book_text.find(keyword)
+                        if start_idx != -1:
+                            # Get context around the keyword
+                            context_start = max(0, start_idx - 100)
+                            context_end = min(len(book_text), start_idx + 300)
+                            context = book_entry["text"][context_start:context_end]
+                            
+                            return f"Sir, from {book_entry.get('source', 'book')}: {context.strip()}..."
         
-        if relevant_entities:
-            # Sort by frequency
-            relevant_entities.sort(key=lambda x: x[1]["frequency"], reverse=True)
-            top_entity = relevant_entities[0]
+        # Search in knowledge base entities
+        if "entities" in self.knowledge_base:
+            relevant_entities = []
+            for entity, data in self.knowledge_base["entities"].items():
+                if entity in user_lower:
+                    relevant_entities.append((entity, data))
             
-            contexts = top_entity[1]["contexts"]
-            if contexts:
-                return f"Sir, {top_entity[0]} ke baare mein: {contexts[0][:150]}..."
+            if relevant_entities:
+                # Sort by frequency
+                relevant_entities.sort(key=lambda x: x[1]["frequency"], reverse=True)
+                top_entity = relevant_entities[0]
+                
+                contexts = top_entity[1].get("contexts", [])
+                if contexts:
+                    return f"Sir, {top_entity[0]} ke baare mein: {contexts[0][:150]}..."
         
         # Search in recent news
         for news in self.training_data.get("news", [])[-50:]:  # Latest 50 news

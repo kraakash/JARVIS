@@ -16,17 +16,59 @@ def train_with_books(books_folder="d:/Code/Books"):
     """Train JARVIS with books from folder"""
     print("🔥 Starting Book Training...")
     
-    if not os.path.exists(books_folder):
-        print(f"Books folder not found: {books_folder}")
-        print("Please create folder and add PDF/TXT/EPUB/DOCX files")
-        return
+    # Check if it's a single file
+    if os.path.isfile(books_folder):
+        print(f"Processing single file: {books_folder}")
+        file_ext = os.path.splitext(books_folder)[1].lower()
+        
+        if file_ext == '.pdf':
+            text = book_processor.process_pdf(books_folder)
+        elif file_ext == '.txt':
+            text = book_processor.process_txt(books_folder)
+        elif file_ext == '.epub':
+            text = book_processor.process_epub(books_folder)
+        elif file_ext == '.docx':
+            text = book_processor.process_docx(books_folder)
+        else:
+            print(f"Unsupported file format: {file_ext}")
+            return
+        
+        if text:
+            chapters = book_processor.extract_chapters(text, os.path.basename(books_folder))
+            book_data = {
+                "title": os.path.splitext(os.path.basename(books_folder))[0],
+                "file_path": books_folder,
+                "chapters": chapters,
+                "total_words": len(text.split()),
+                "processed_date": datetime.now().isoformat(),
+                "file_type": file_ext
+            }
+            book_processor.processed_books.append(book_data)
+            print(f"📚 Processed 1 book with {len(chapters)} chapters")
+        else:
+            print("❌ Failed to extract text from file")
+            return
     
-    # Process all books
-    processed_count = book_processor.process_book_folder(books_folder)
-    print(f"📚 Processed {processed_count} books")
+    elif os.path.isdir(books_folder):
+        if not os.path.exists(books_folder):
+            print(f"Books folder not found: {books_folder}")
+            print("Please create folder and add PDF/TXT/EPUB/DOCX files")
+            return
+        
+        # Process all books in folder
+        processed_count = book_processor.process_book_folder(books_folder)
+        print(f"📚 Processed {processed_count} books")
+    
+    else:
+        print(f"Path not found: {books_folder}")
+        return
     
     # Save processed books
     book_processor.save_processed_books()
+    
+    if not book_processor.processed_books:
+        print("❌ No books were processed")
+        return
     
     # Convert to training data
     training_count = 0

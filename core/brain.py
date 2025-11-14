@@ -246,18 +246,51 @@ class JarvisBrain:
                     if emotion_data:
                         response = emotion_engine.enhance_response(response, emotion_data)
             
-            # Check trained knowledge first
-            trained_response = data_trainer.get_smart_response(command_text)
-            if trained_response:
-                response = trained_response
-            else:
-                # Enhance response with brain enhancer for maximum intelligence
+            # Check Groq cloud tutor first for ALL queries
+            try:
+                from modules.ai.cloud_tutor import cloud_tutor
+                tutor_response = cloud_tutor.get_tutor_response("general", command_text)
+                if tutor_response and len(tutor_response) > 50:
+                    print(f"[DEBUG] Using Groq cloud tutor response")
+                    response = tutor_response
+                else:
+                    # Fallback to Ollama tutor
+                    from modules.ai.ollama_tutor import ollama_tutor
+                    tutor_response = ollama_tutor.get_interactive_response(command_text)
+                    if tutor_response and len(tutor_response) > 100:
+                        print(f"[DEBUG] Using Ollama tutor response")
+                        response = tutor_response
+                    else:
+                        # Fallback to clean responses
+                        from modules.ai.clean_responses import get_algorithm_response
+                        clean_response = get_algorithm_response(command_text)
+                        if clean_response:
+                            print(f"[DEBUG] Using clean algorithm response")
+                            response = clean_response
+                        else:
+                            # Check trained knowledge
+                            trained_response = data_trainer.get_smart_response(command_text)
+                            if trained_response:
+                                print(f"[DEBUG] Using trained knowledge: {trained_response[:50]}...")
+                                response = trained_response
+                            else:
+                                print("[DEBUG] No trained knowledge found, using neural brain")
+                                # Enhance response with brain enhancer for maximum intelligence
+                                context = {'activity': current_activity} if current_activity else None
+                                response = brain_enhancer.enhance_response_intelligence(command_text, response, context)
+                                response = brain_enhancer.enhance_emotional_intelligence(command_text, response)
+            except Exception as e:
+                print(f"[DEBUG] Response generation error: {e}")
+                # Fallback to neural brain
                 context = {'activity': current_activity} if current_activity else None
                 response = brain_enhancer.enhance_response_intelligence(command_text, response, context)
                 response = brain_enhancer.enhance_emotional_intelligence(command_text, response)
             
             # Process conversation for continuous learning
-            data_trainer.process_conversation_for_training(command_text, response)
+            try:
+                data_trainer.process_conversation_for_training(command_text, response)
+            except Exception as e:
+                print(f"[DEBUG] Learning error: {e}")
             
         # Learn from this interaction (avoid duplicates and problematic words)
         if len(command_text.strip()) > 2 and not any(word in command_text.lower() for word in ['main', 'bhi', 'meri', 'tum', 'kya', 'suggestions']):
@@ -387,7 +420,46 @@ class JarvisBrain:
     
     def _handle_question(self, command_text, emotion_data):
         """Handle general questions with emotional context"""
-        # Try learning AI first for knowledge-based questions
+        # Try Groq cloud tutor first for ALL questions
+        try:
+            from modules.ai.cloud_tutor import cloud_tutor
+            tutor_response = cloud_tutor.get_tutor_response("general", command_text)
+            if tutor_response and len(tutor_response) > 50:
+                print(f"[DEBUG] Using Groq cloud tutor response")
+                return tutor_response
+        except Exception as e:
+            print(f"[DEBUG] Cloud tutor error: {e}")
+        
+        # Fallback to Ollama tutor
+        try:
+            from modules.ai.ollama_tutor import ollama_tutor
+            tutor_response = ollama_tutor.get_interactive_response(command_text)
+            if tutor_response and len(tutor_response) > 100:
+                print(f"[DEBUG] Using Ollama tutor response")
+                return tutor_response
+        except Exception as e:
+            print(f"[DEBUG] Ollama tutor error: {e}")
+        
+        # Fallback to clean algorithm responses
+        try:
+            from modules.ai.clean_responses import get_algorithm_response
+            clean_response = get_algorithm_response(command_text)
+            if clean_response:
+                print(f"[DEBUG] Using clean algorithm response")
+                return clean_response
+        except Exception as e:
+            print(f"[DEBUG] Clean response error: {e}")
+        
+        # Try trained book knowledge
+        try:
+            trained_response = data_trainer.get_smart_response(command_text)
+            if trained_response:
+                print(f"[DEBUG] Found book knowledge: {trained_response[:50]}...")
+                return trained_response
+        except Exception as e:
+            print(f"[DEBUG] Book knowledge error: {e}")
+        
+        # Try learning AI for other knowledge
         from modules.ai.learning_ai import learning_ai
         learned_response = learning_ai.generate_response(command_text)
         

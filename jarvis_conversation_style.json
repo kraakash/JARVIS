@@ -2,24 +2,51 @@
   "casual_responses": [],
   "formal_responses": [],
   "hindi_patterns": [
-    "kaise ho"
+    "kaise ho",
+    "hii kaise ho"
   ],
   "english_patterns": [
     "start monitoring",
     "current activity",
     "sujhav do",
     "what do you think about ai",
-    "suggestions"
+    "suggestions",
+    "what is binary search",
+    "hello jarvis",
+    "jarvis, what is binary search?\"",
+    "hii jarvis",
+    "pagal",
+    "recursion smjhao",
+    "recusrion smjhao",
+    "what is recursion",
+    "hello javis",
+    "what is big o notaion",
+    "",
+    "hello"
   ],
   "user_style_words": {
-    "kaise": 6
+    "kaise": 8
   },
   "response_templates": {
-    "kaise ho...": "Main bilkul theek hun, Sir! Aapki seva ke liye taiyar hun.",
+    "kaise ho...": "Main bahut achha hun, Sir. Aap kaise hain?",
     "start monitoring...": "Desktop monitoring shuru kar diya, Sir. Ab main aapki activities track karunga.",
     "current activity...": "Current Activity, Sir: Code.exe - 0 minutes 21 seconds se use kar rahe hain.",
     "sujhav do...": "Abhi koi suggestions nahi hain, Sir. Thoda aur activity karne ke baad milenge.",
     "what do you think ab...": "Good to see you, Sir!",
-    "suggestions...": "No suggestions available yet, Sir. Use your system for a while to get suggestions."
+    "suggestions...": "No suggestions available yet, Sir. Use your system for a while to get suggestions.",
+    "what is binary searc...": "Sir, binary search samjhiye step-by-step!\n\n🎯 Simple Definition:\nBinary search ek smart technique hai jo sorted array mein element dhundti hai by dividing search space in half.\n\n📚 Real-World Analogy:\nDictionary mein word dhundna - aap middle page khol ke dekh te hain, phir decide karte hain left ya right jaana hai!\n\n🔢 Live Example:\nArray: [1, 3, 5, 7, 9, 11, 13]\nTarget: 7\n\nStep 1: Middle = 7 (index 3) → Found it! ✅\nAgar 5 dhundte: Middle = 7 → \"Too high\" → Left half mein dhundo\n\n💻 Working Code:\n```python\ndef binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    \n    while left <= right:\n        mid = (left + right) // 2\n        \n        if arr[mid] == target:\n            return mid  # Mil gaya!\n        elif arr[mid] < target:\n            left = mid + 1  # Right side dhundo\n        else:\n            right = mid - 1  # Left side dhundo\n    \n    return -1  # Nahi mila\n```\n\n🌍 Real Applications:\nGoogle search, phone contacts, library systems, database queries!\n\n❓ Quick Question:\nAgar 1000 elements hain, maximum kitne comparisons lagenge? (Hint: log₂(1000) ≈ 10)",
+    "hello jarvis...": "Good evening, Sir! Working late tonight?",
+    "jarvis, what is bina...": "Sir, from Grokking Algorithms - Chapter 1: Algorithm: hms 1 Introduction 1 What youll learn about performance 2 What youll learn about solving problems 2 Binary search 3 A better way to search 5 Running time 10 Big O notation 10 Algorithm running times grow at different rates 11 Visualizing different Big O run times 13 Big O establishes a worst-case run time 15 Some common Big O run times 15 The traveling salesperson 17 Recap 19 2 Selection sort 21 H...",
+    "hii kaise ho...": "Main bahut achha hun, Sir. Aap kaise hain?",
+    "mai bhi mst ...": "Namasthe Sir! Raat mein kaam kar rahe hain?",
+    "hii jarvis...": "Good morning, Sir!",
+    "pagal...": "I understand, Sir.",
+    "recursion smjhao...": "Indeed, Sir.",
+    "recusrion smjhao...": "I understand, Sir.",
+    "what is recursion...": "Sir, recursion ka matlab kya hai?\n\n🎯 Definition: Recursion ek tarah ka algorithm hai jismein ek function apne aap ko call karta hai, lekin phir woh function apne aap ko dobara call karne se pehle, apne aap ko solve karta hai.\n\n📚 Real Example: Ek bachcha apne maa ko khaana khilane ke liye bolta hai. Maa bachche ko bolta hai ki woh aapke bade bhai se puchhe, aur woh bade bhai bhi maa se bolta hai, lekin jab woh maa se puchhta hai to maa kahte hain ki woh apne dadaji se puchhe. Is tarah se bachcha apne dadaji se puchhta hai. Yeh recursion ka ek aisa example hai.\n\n🔢 How it works: Recursion ka process nimnalikhit hai:\n- Ek function apne aap ko call karta hai.\n- Function apne aap ko solve karta hai, aur phir apne aap ko call karta hai.\n- Is process ko repeat karte rahe, jab tak koi condition nahi purn hoti hai.\n- Jab condition purn hoti hai, to function apne aap ko stop karta hai aur result return karta hai.\n\n🌍 Applications: Recursion ka upyog Fibonacci series, binary search, array traversal, tree traversal aur graph traversal jaise kai algorithms mein kiya jata hai.",
+    "hello javis...": "Good morning, Sir!",
+    "what is big o notaio...": "Sir, general ke baare mein cloud service unavailable hai. Local response use kar raha hun.",
+    "...": "Quite right, Sir.",
+    "hello...": "Good morning, Sir!"
   }
 }
