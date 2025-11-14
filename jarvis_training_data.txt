@@ -616,3 +616,11 @@ tum kya kya kr skte ho	capabilities
 what can you do	capabilities
 shuru karo	Sir, shuru karne ke liye kya aapko zaroorat hai? Aapke paas kya plan hai? Main aapki madad karta hoon, chahe aapko ghar ke kaam ya bahari gatividhiyon ke liye madad chahiye ho. Bataiye sir, main aapke liye kya kar sakta hoon?
 Jarvis	Ah Sir, kaise ho? Main theek hoon, aapke liye kya kar sakta hoon? Aapko koi madat chahiye hai ya shayad aapko koi information chahiye? Sir, please bataen, main aapki madad karne ke liye taiyaar hoon.
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities

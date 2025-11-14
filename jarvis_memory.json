@@ -1488,16 +1488,16 @@
       "you"
     ],
     "you": [
-      "rule",
       "learning",
-      "remain",
       "amazing",
-      "think",
-      "stronger"
+      "rule",
+      "stronger",
+      "remain",
+      "think"
     ],
     "kuch": [
-      "btao",
-      "bnate"
+      "bnate",
+      "btao"
     ],
     "sath": [
       "tum"
@@ -1512,34 +1512,34 @@
       "hai"
     ],
     "kya": [
-      "rahe",
-      "hai",
-      "update",
-      "aap",
-      "kya",
-      "tum",
-      "haal",
-      "hal",
       "kar",
       "bnaye",
+      "haal",
+      "update",
+      "tum",
+      "hai",
+      "aap",
+      "rahe",
+      "kya",
+      "hal",
       "skte"
     ],
     "tum": [
-      "kaun",
-      "koun",
-      "merre",
-      "meri",
-      "kya",
       "kon",
-      "kyon"
+      "merre",
+      "kaun",
+      "kya",
+      "kyon",
+      "meri",
+      "koun"
     ],
     "uhmm": [
       "chalo",
       "you"
     ],
     "youu": [
-      "amazing",
-      "best"
+      "best",
+      "amazing"
     ],
     "love": [
       "you"
@@ -1572,8 +1572,8 @@
       "todayy"
     ],
     "byee": [
-      "jarivss",
-      "jarvis"
+      "jarvis",
+      "jarivss"
     ],
     "jarivss": [
       "shotdown"
@@ -1600,10 +1600,10 @@
       "hai"
     ],
     "kar": [
-      "raha",
-      "sakte",
       "rahe",
-      "rhe"
+      "rhe",
+      "sakte",
+      "raha"
     ],
     "amazing": [
       "bro"
@@ -1618,8 +1618,8 @@
       "jarvis"
     ],
     "maine": [
-      "shutdown",
-      "poochha"
+      "poochha",
+      "shutdown"
     ],
     "poochha": [
       "kya"
@@ -1634,8 +1634,8 @@
       "what"
     ],
     "what": [
-      "you",
       "about",
+      "you",
       "binary"
     ],
     "about": [
@@ -5777,5 +5777,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-15T01:13:29.452831"
+  "last_updated": "2025-11-15T01:16:23.270120"
 }

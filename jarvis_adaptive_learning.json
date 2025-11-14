@@ -257,13 +257,26 @@
       },
       "success_count": 2,
       "total_count": 2
+    },
+    "real_time_search": {
+      "patterns": [
+        "bihar election kaun jita"
+      ],
+      "keywords": {
+        "bihar": 1,
+        "election": 1,
+        "kaun": 1,
+        "jita": 1
+      },
+      "success_count": 1,
+      "total_count": 1
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 47,
-    "correct_predictions": 47,
-    "ml_predictions": 77,
+    "total_interactions": 48,
+    "correct_predictions": 48,
+    "ml_predictions": 78,
     "learning_rate": 100.0,
     "ml_accuracy": 80.0,
     "intent_accuracy": {
@@ -278,7 +291,8 @@
       "set_name": 100.0,
       "play_video": 100.0,
       "pause_video": 100.0,
-      "close_app": 100.0
+      "close_app": 100.0,
+      "real_time_search": 100.0
     },
     "last_updated": null
   },
@@ -329,7 +343,8 @@
     "shuru karo",
     "jarvis",
     "chrome close karo",
-    "close chrome"
+    "close chrome",
+    "bihar election kaun jita"
   ],
   "training_labels": [
     "general",
@@ -378,7 +393,8 @@
     "general_conversation",
     "general_conversation",
     "close_app",
-    "close_app"
+    "close_app",
+    "real_time_search"
   ],
-  "last_updated": "2025-11-15T01:14:31.792486"
+  "last_updated": "2025-11-15T01:17:49.352503"
 }
