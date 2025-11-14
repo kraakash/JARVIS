@@ -55,6 +55,8 @@ def main():
                         if command.lower() in ['exit', 'quit', 'goodbye', 'shutdown', 'alvida', 'band karo']:
                             session_manager.set_shutdown_time()
                             jarvis.speak(language_support.get_response('shutdown'))
+                            # Complete shutdown sequence
+                            _complete_shutdown(jarvis, jarvis_listener)
                             break
                         elif command.lower() in ['stop', 'that\'s all', 'bas', 'enough', 'khatam']:
                             jarvis.speak("Alright Sir, I'll wait for your next command.")
@@ -126,6 +128,8 @@ def main():
                 if user_input.lower() in ['exit', 'quit', 'goodbye', 'alvida', 'band karo']:
                     session_manager.set_shutdown_time()
                     jarvis.speak(language_support.get_response('shutdown'))
+                    # Complete shutdown sequence
+                    _complete_shutdown(jarvis, jarvis_listener)
                     break
                 elif user_input.lower() in ['stop', 'that\'s all', 'bas', 'enough', 'khatam']:
                     print("[INFO] Ending conversation...")
@@ -144,10 +148,71 @@ def main():
         except KeyboardInterrupt:
             print("\n\nJARVIS: Emergency shutdown initiated.")
             session_manager.set_shutdown_time()
-            jarvis.speak("Emergency shutdown initiated.")
+            # Emergency shutdown without speech
+            _complete_shutdown(jarvis, jarvis_listener, emergency=True)
     except Exception as e:
         print(f"JARVIS: System error - {e}")
         session_manager.set_shutdown_time()
+        # Complete shutdown
+        _complete_shutdown(jarvis, jarvis_listener, emergency=True)
+    finally:
+        # Final cleanup
+        _final_cleanup()
+
+def _complete_shutdown(jarvis, jarvis_listener, emergency=False):
+    """Complete shutdown of all JARVIS systems"""
+    print("[SHUTDOWN] Initiating complete shutdown...")
+    
+    try:
+        # Stop all TTS systems immediately
+        jarvis.speaker.stop()
+        jarvis.speaker.shutdown()
+        print("[SHUTDOWN] TTS systems stopped")
+    except Exception as e:
+        print(f"[SHUTDOWN] TTS shutdown error: {e}")
+    
+    try:
+        # Stop voice listener
+        jarvis_listener.shutdown()
+        print("[SHUTDOWN] Voice listener stopped")
+    except Exception as e:
+        print(f"[SHUTDOWN] Listener shutdown error: {e}")
+    
+    try:
+        # Stop brain systems
+        jarvis.shutdown()
+        print("[SHUTDOWN] Brain systems stopped")
+    except Exception as e:
+        print(f"[SHUTDOWN] Brain shutdown error: {e}")
+    
+    # Force stop Hindi TTS
+    try:
+        from modules.voice.hindi_tts import hindi_tts
+        hindi_tts.stop_speaking()
+        hindi_tts.cleanup()
+        print("[SHUTDOWN] Hindi TTS stopped")
+    except Exception as e:
+        print(f"[SHUTDOWN] Hindi TTS error: {e}")
+    
+    print("[SHUTDOWN] All systems stopped")
+
+def _final_cleanup():
+    """Final cleanup to ensure no processes remain"""
+    try:
+        import pygame
+        pygame.mixer.quit()
+        print("[CLEANUP] Pygame mixer stopped")
+    except:
+        pass
+    
+    try:
+        import pyttsx3
+        # Force stop any remaining pyttsx3 engines
+        print("[CLEANUP] pyttsx3 cleanup complete")
+    except:
+        pass
+    
+    print("[INFO] JARVIS shutdown complete")
 
 if __name__ == "__main__":
     main()

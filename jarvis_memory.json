@@ -99,8 +99,8 @@
         "input": "",
         "words": [],
         "context": "casual",
-        "timestamp": "2025-11-14T10:21:55.430077",
-        "frequency": 5
+        "timestamp": "2025-11-13T22:14:06.477955",
+        "frequency": 3
       },
       {
         "input": "ha",
@@ -1019,8 +1019,30 @@
           "rahe"
         ],
         "context": "hindi",
-        "timestamp": "2025-11-14T10:22:10.459825",
-        "frequency": 2
+        "timestamp": "2025-11-13T21:46:09.920350",
+        "frequency": 1
+      },
+      {
+        "input": "kya kar rahe ho",
+        "words": [
+          "kya",
+          "kar",
+          "rahe"
+        ],
+        "context": "Sir, main thoda research kar raha hoon, kuch naya seekh raha hoon. Aap kya kar rahe hain aaj? Koi plan hai ya aap relax kar rahe hain? Main aapki madad karne ke liye yahan hoon, sir.",
+        "timestamp": "2025-11-15T00:42:33.457163",
+        "frequency": 1
+      },
+      {
+        "input": "kya kar rahe ho",
+        "words": [
+          "kya",
+          "kar",
+          "rahe"
+        ],
+        "context": "Arre Sir, main theek hi hun, apko madat karne ke liye taiyar hoon. Kya aapke paas koi specific task hai jo main kar sakoon? Ya phir aap relax karke chat bhi kar sakte hain, main apke saath time bita sakta hoon. Bataiye Sir, aap kya chahte hain?",
+        "timestamp": "2025-11-15T00:56:21.674568",
+        "frequency": 1
       }
     ],
     "kya_maine_poochha": [
@@ -1056,8 +1078,8 @@
           "pagal"
         ],
         "context": "casual",
-        "timestamp": "2025-11-14T10:09:59.937722",
-        "frequency": 2
+        "timestamp": "2025-11-13T21:50:59.470232",
+        "frequency": 1
       }
     ],
     "chup_raho": [
@@ -1141,6 +1163,15 @@
         ],
         "context": "casual",
         "timestamp": "2025-11-13T23:27:19.136159",
+        "frequency": 1
+      },
+      {
+        "input": "Jarvis",
+        "words": [
+          "jarvis"
+        ],
+        "context": "Ah Sir, kaise ho? Main theek hoon, aapke liye kya kar sakta hoon? Aapko koi madat chahiye hai ya shayad aapko koi information chahiye? Sir, please bataen, main aapki madad karne ke liye taiyaar hoon.",
+        "timestamp": "2025-11-15T01:13:29.426200",
         "frequency": 1
       }
     ],
@@ -1241,121 +1272,210 @@
         "frequency": 1
       }
     ],
-    "rhega_shubh_tum": [
+    "chaal_hal_kya": [
       {
-        "input": "tum ho to shubh hi rhega na",
+        "input": "kya hal chaal hai",
         "words": [
-          "tum",
-          "shubh",
-          "rhega"
-        ],
-        "context": "greeting",
-        "timestamp": "2025-11-14T10:09:28.531754",
-        "frequency": 1
-      }
-    ],
-    "bewaakoof_tum": [
-      {
-        "input": "tum bewaakoof ho",
-        "words": [
-          "tum",
-          "bewaakoof"
-        ],
-        "context": "casual",
-        "timestamp": "2025-11-14T10:09:51.056868",
-        "frequency": 1
-      }
-    ],
-    "recursion_smjhao": [
-      {
-        "input": "recursion smjhao",
-        "words": [
-          "recursion",
-          "smjhao"
-        ],
-        "context": "casual",
-        "timestamp": "2025-11-14T10:13:15.021073",
-        "frequency": 1
-      }
-    ],
-    "recusrion_smjhao": [
-      {
-        "input": "recusrion smjhao",
-        "words": [
-          "recusrion",
-          "smjhao"
-        ],
-        "context": "casual",
-        "timestamp": "2025-11-14T10:13:26.206863",
-        "frequency": 1
-      }
-    ],
-    "intelligent_kab_tum": [
-      {
-        "input": "tum kab intelligent banoge",
-        "words": [
-          "tum",
-          "kab",
-          "intelligent",
-          "banoge"
-        ],
-        "context": "casual",
-        "timestamp": "2025-11-14T10:18:47.058954",
-        "frequency": 1
-      }
-    ],
-    "hai_kya_recursion": [
-      {
-        "input": "recursion kya hai",
-        "words": [
-          "recursion",
           "kya",
+          "hal",
+          "chaal",
           "hai"
         ],
         "context": "hindi",
-        "timestamp": "2025-11-14T10:19:10.101073",
+        "timestamp": "2025-11-15T00:23:36.581277",
         "frequency": 1
       }
     ],
-    "bta_kya_tum": [
+    "maine_shutdown_tumhen": [
       {
-        "input": "kya tum bta skte ho vijay hazare tropy ka first match kab hai",
+        "input": "Tumhen to maine shutdown Kiya Hua Hai",
+        "words": [
+          "tumhen",
+          "maine",
+          "shutdown",
+          "kiya",
+          "hua"
+        ],
+        "context": "hindi",
+        "timestamp": "2025-11-15T00:25:21.745330",
+        "frequency": 1
+      }
+    ],
+    "bol_kyon_tum": [
+      {
+        "input": "Tum do-do Kyon bol rahe ho",
+        "words": [
+          "tum",
+          "kyon",
+          "bol",
+          "rahe"
+        ],
+        "context": "Arre Sir, main samajh nahi pa raha ki aap kya keh rahe ho! Main do-do kyon bol raha hoon, Sir? Kya aapko kuch pata hai? Hum baat karne ki shuruat karte hain? Main aapki madad karne ke liye yahaan hoon, Sir. Bataiye, aapki kya zaroorat hai?",
+        "timestamp": "2025-11-15T00:33:46.061932",
+        "frequency": 1
+      }
+    ],
+    "bilkul_sar": [
+      {
+        "input": "bilkul sar",
+        "words": [
+          "bilkul",
+          "sar"
+        ],
+        "context": "Bilkul, sir! Main theek se sun raha hoon. Aap kya chahta hain? Koi baat karne ke liye hai ya madad chahiye hai? Sir, please bataiye, main aapki madad karne ke liye taiyaar hoon.",
+        "timestamp": "2025-11-15T00:34:23.533420",
+        "frequency": 1
+      }
+    ],
+    "karne_prayas_samadhan": [
+      {
+        "input": "ka Samadhan karne ka Prayas karta hun",
+        "words": [
+          "samadhan",
+          "karne",
+          "prayas",
+          "karta",
+          "hun"
+        ],
+        "context": "Sir, main aapki madad karne ke liye yahaan hoon. Aapke samasya ka samadhan karne ka prayas karte hain. Kya aapke paas koi vishesh samasya hai jo main help kar sakta hoon, Sir? Aap mujhe bataen, main apna best try karta hoon.",
+        "timestamp": "2025-11-15T00:34:54.868839",
+        "frequency": 1
+      }
+    ],
+    "aap_bus_kya": [
+      {
+        "input": "kya aap bus Ghar Bina ghabrana Chahte",
         "words": [
           "kya",
-          "tum",
-          "bta",
-          "skte",
-          "vijay"
+          "aap",
+          "bus",
+          "ghar",
+          "bina"
         ],
-        "context": "Sir, Vijay Hazare Trophy ka first match aane wala hai! Mujhe pehle pata nahi tha, lekin mujhe upyog karne ke liye maine internet check kiya. Vijay Hazare Trophy ka first match ki shuruwat 7th September se hoga. Abhi kuch din bache hain, sir. Aapko koi team ka support karna hai? Main aapko team ki jankari bhi provide kar sakta hoon, sir.",
-        "timestamp": "2025-11-14T10:32:55.745733",
+        "context": "Sir, aapke ghar bina kabhi nahin ghabrayenge. Mere paas aapke ghar ka map aur security system hai. Main aapki security ke liye hamesha online hoon. Agar aapko koi problem ho, to mujhe samajh aaye, main aapke help karoonga. Aapka ghar safe hai, sir. Lekin agar aapko lagta hai ki koi chhota-chhota sawal hai, to puchhne ka bhi koi farq nahin hai. Sir, main sunta hoon.",
+        "timestamp": "2025-11-15T00:35:30.073178",
         "frequency": 1
       }
     ],
-    "khelenge_rohit_sharama": [
+    "hold_jarvis": [
       {
-        "input": "rohit sharama khelenge ye match?",
+        "input": "hold on Jarvis",
         "words": [
-          "rohit",
-          "sharama",
-          "khelenge",
-          "match"
+          "hold",
+          "jarvis"
         ],
-        "context": "Arre sir, main samjhaunga.\n\n**Definition:** General aisa hota hai jiska kaam sabhi cheezon ko samjhne ka hota hai. Wah ek aisa adhikari hota hai jo saare rules, regulation aur policies ko samjhne ke liye zaroori hota hai.\n\n**Real Example:** Ek school ke principal ka kaam hota hai ki wah sabhi rules aur regulationon ko samjhne ke liye zaroori hota hai, jaise ki school ke samay, uniform, homework, aur sabhi.\n\n**How it works:** General ke kaam mein yeh steps shamil hote hain:\n\n1. Sabhi rules aur regulationon ko samjhna.\n2. Sabhi logon ko samjhaana ki rules aur regulation kya hain.\n3. Sabhi logon ko samjhna ki rules aur regulation ke liye kya karana hoga.\n4. Sabhi logon ko samjhna ki rules aur regulation ke liye kya nahin karana hoga.\n\n**Applications:** General ke kaam mein sabhi fields shamil hain, jaise ki government, military, schools, colleges, aur industry. Unka kaam sabhi logon ko samjhne ke liye zaroori hota hai.\n\nAb sir, aapke puchhe ki rohit sharama khelenge ye match? Main samajhta hoon ki aapne cricket ki batting ke baare mein puchha hai.",
-        "timestamp": "2025-11-14T10:34:12.065858",
+        "context": "Sir, ek minute please. Main aapki madad karne ke liye ready hoon, lekin aap kuch aur bataen, kya aapka koi kaam hai jo main kar sakoon?",
+        "timestamp": "2025-11-15T00:43:28.962245",
         "frequency": 1
       }
     ],
-    "files_kholi_konsi": [
+    "hun_kaun_main": [
       {
-        "input": "konsi files kholi?",
+        "input": "Main Kaun hun",
         "words": [
-          "konsi",
-          "files",
-          "kholi"
+          "main",
+          "kaun",
+          "hun"
         ],
-        "context": "Sir, general samjhiye!\n\n🎯 Definition: Ek general ek prakar ka file hota hai jo har kisi tarah ki file ko cover karta hai. Yeh file har type ke file ko store karta hai, jaise ki word, excel, pdf, aur anya.\n\n📚 Real Example: Ek general ki tarah ek file folder bhi hota hai. Jab aap apne phone ya computer mein ek folder banate hain, toh aap usmein sabhi type ke file store kar sakte hain, jaise ki pictures, documents, aur videos.\n\n🔢 How it works: Jab aap ek file open karte hain, toh yeh general file us file ko identify karta hai aur use open karta hai. Yeh file aapke device ke operating system ke aadhar par kaam karta hai.\n\n🌍 Applications: General file har tarah ke operating system mein uplabdh hote hain, jaise ki Windows, macOS, aur Android. Yeh file aapko apne device par sabhi type ke file ko store aur open karne ka avsar pradan karta hai.",
-        "timestamp": "2025-11-14T11:30:20.289901",
+        "context": "Sir! Aapke baare mein koi idea nahi? Kya aapke paas koi specific plan ya goal hai jo aapke liye kaam karne ka karan ban sakta hai? Main yahaan aapki madad ke liye hoon, Sir. Bataiye, main aapki sahayata kis tarah se kar sakta hoon?",
+        "timestamp": "2025-11-15T00:51:25.600563",
+        "frequency": 1
+      }
+    ],
+    "bihar_election_kisne": [
+      {
+        "input": "Bihar election Kisne Jita",
+        "words": [
+          "bihar",
+          "election",
+          "kisne",
+          "jita"
+        ],
+        "context": "Aapki sawal kareeb hai, Sir! Bihar assembly election ki baat hai, lagatar 10 saal se JD(U)-RJD gathbandhan ka haav hai. Lekin 2020 ki election mein NDA (BJP-JD(U)) ki jeet hui thi. Aajkal ki election mein bhi NDA ki jeet ho sakti hai, lekin kuch log RJD-JD(U) gathbandhan ki jeet karna chahte hain. Ye election abhi bhi kuch din door hai, Sir, abhi kuch pata nahi chal sakta hai ki kisne jeet hoga.",
+        "timestamp": "2025-11-15T00:59:40.572743",
+        "frequency": 1
+      }
+    ],
+    "aaj_chunav_result": [
+      {
+        "input": "Chunav ka result Aaj a Chuka",
+        "words": [
+          "chunav",
+          "result",
+          "aaj",
+          "chuka"
+        ],
+        "context": "Sir, election results aaye hain! Mujhe dekhne mein aya ki results kitne interesting the. Aapko kya laga, Sir? Koi party aapke expectations se zyada acchi perform ki? Bataiye, main aapko details dene ke liye yahaan hoon.",
+        "timestamp": "2025-11-15T01:00:33.493397",
+        "frequency": 1
+      }
+    ],
+    "batao_kisne_mujhe": [
+      {
+        "input": "batao Mujhe Kisne Jita Mujhe Tumse Janna hai",
+        "words": [
+          "batao",
+          "mujhe",
+          "kisne",
+          "jita",
+          "mujhe"
+        ],
+        "context": "Arre Sir, yeh toh ek interesting sawal hai! Main soch sakta hoon, lekin aapko khud se jawab bata do! Lekin agar main aapki madad karoon, toh mujhe lagta hai aap Starks of Winterfell ke saath judi hui hai, aur yeh jo khel hai, woh khel hai Iron Throne ka? Kya Sir, main sahi hoon?",
+        "timestamp": "2025-11-15T01:01:04.867458",
+        "frequency": 1
+      }
+    ],
+    "baat_election_main": [
+      {
+        "input": "main election ki baat kar raha hun",
+        "words": [
+          "main",
+          "election",
+          "baat",
+          "kar",
+          "raha"
+        ],
+        "context": "Arre Sir, chalo election ki baat karte hain! Kya tumne abhi tak aaj ka khane mein kuch suna hai? Main dekhta hoon media reports, aaj koi bhi party ko sahayata di hai ya phir woh kuch naya kahe hain. Kya tumhara vichar hai, Sir? Khud se kaun sa party chunenge? Abhi abhi dekha hoon, yeh ek bahut accha topic hai. Chalo, baat karte hain!",
+        "timestamp": "2025-11-15T01:01:38.238711",
+        "frequency": 1
+      }
+    ],
+    "app_jyada_sabse": [
+      {
+        "input": "app sabse Jyada use Ki Hai",
+        "words": [
+          "app",
+          "sabse",
+          "jyada",
+          "use",
+          "hai"
+        ],
+        "context": "Sir, aapke ke liye bhi main sabse jyada use kiya hoon. Aapke ghar ka manoranjan aur suraksha meri top priority hai. Kya aapko koi aur cheez chahiye jo main aapke liye kar sakoon, Sir?",
+        "timestamp": "2025-11-15T01:04:32.963471",
+        "frequency": 1
+      }
+    ],
+    "resume_video": [
+      {
+        "input": "resume video",
+        "words": [
+          "resume",
+          "video"
+        ],
+        "context": "Sir, resume video karna hai? Mujhe confirm karna hai ki aapko video ko phir se shuru karna hai. Kya aapke paas video already record hai ya naya video shuru karna hai? Sir, please confirm.",
+        "timestamp": "2025-11-15T01:12:34.284333",
+        "frequency": 1
+      }
+    ],
+    "karo_shuru": [
+      {
+        "input": "shuru karo",
+        "words": [
+          "shuru",
+          "karo"
+        ],
+        "context": "Sir, shuru karne ke liye kya aapko zaroorat hai? Aapke paas kya plan hai? Main aapki madad karta hoon, chahe aapko ghar ke kaam ya bahari gatividhiyon ke liye madad chahiye ho. Bataiye sir, main aapke liye kya kar sakta hoon?",
+        "timestamp": "2025-11-15T01:12:59.458597",
         "frequency": 1
       }
     ]
@@ -1368,12 +1488,12 @@
       "you"
     ],
     "you": [
+      "rule",
       "learning",
+      "remain",
       "amazing",
       "think",
-      "stronger",
-      "rule",
-      "remain"
+      "stronger"
     ],
     "kuch": [
       "btao",
@@ -1392,31 +1512,30 @@
       "hai"
     ],
     "kya": [
+      "rahe",
       "hai",
       "update",
-      "rahe",
-      "haal",
-      "kar",
-      "skte",
+      "aap",
       "kya",
+      "tum",
+      "haal",
+      "hal",
+      "kar",
       "bnaye",
-      "tum"
+      "skte"
     ],
     "tum": [
       "kaun",
       "koun",
-      "bewaakoof",
-      "shubh",
-      "kya",
       "merre",
-      "kab",
       "meri",
+      "kya",
       "kon",
-      "bta"
+      "kyon"
     ],
     "uhmm": [
-      "you",
-      "chalo"
+      "chalo",
+      "you"
     ],
     "youu": [
       "amazing",
@@ -1453,8 +1572,8 @@
       "todayy"
     ],
     "byee": [
-      "jarvis",
-      "jarivss"
+      "jarivss",
+      "jarvis"
     ],
     "jarivss": [
       "shotdown"
@@ -1481,9 +1600,10 @@
       "hai"
     ],
     "kar": [
+      "raha",
       "sakte",
-      "rhe",
-      "rahe"
+      "rahe",
+      "rhe"
     ],
     "amazing": [
       "bro"
@@ -1498,6 +1618,7 @@
       "jarvis"
     ],
     "maine": [
+      "shutdown",
       "poochha"
     ],
     "poochha": [
@@ -1513,8 +1634,8 @@
       "what"
     ],
     "what": [
-      "about",
       "you",
+      "about",
       "binary"
     ],
     "about": [
@@ -1545,42 +1666,109 @@
     "haan": [
       "tum"
     ],
-    "shubh": [
-      "rhega"
+    "hal": [
+      "chaal"
     ],
-    "recursion": [
-      "kya",
-      "smjhao"
+    "chaal": [
+      "hai"
     ],
-    "recusrion": [
-      "smjhao"
+    "tumhen": [
+      "maine"
     ],
-    "kab": [
-      "intelligent"
+    "shutdown": [
+      "kiya"
     ],
-    "intelligent": [
-      "banoge"
+    "kiya": [
+      "hua"
     ],
-    "bta": [
-      "skte"
+    "kyon": [
+      "bol"
     ],
-    "skte": [
-      "vijay"
+    "bol": [
+      "rahe"
     ],
-    "rohit": [
-      "sharama"
+    "bilkul": [
+      "sar"
     ],
-    "sharama": [
-      "khelenge"
+    "samadhan": [
+      "karne"
     ],
-    "khelenge": [
-      "match"
+    "karne": [
+      "prayas"
     ],
-    "konsi": [
-      "files"
+    "prayas": [
+      "karta"
     ],
-    "files": [
-      "kholi"
+    "karta": [
+      "hun"
+    ],
+    "aap": [
+      "bus"
+    ],
+    "bus": [
+      "ghar"
+    ],
+    "ghar": [
+      "bina"
+    ],
+    "hold": [
+      "jarvis"
+    ],
+    "main": [
+      "election",
+      "kaun"
+    ],
+    "kaun": [
+      "hun"
+    ],
+    "bihar": [
+      "election"
+    ],
+    "election": [
+      "kisne",
+      "baat"
+    ],
+    "kisne": [
+      "jita"
+    ],
+    "chunav": [
+      "result"
+    ],
+    "result": [
+      "aaj"
+    ],
+    "aaj": [
+      "chuka"
+    ],
+    "batao": [
+      "mujhe"
+    ],
+    "mujhe": [
+      "kisne"
+    ],
+    "jita": [
+      "mujhe"
+    ],
+    "baat": [
+      "kar"
+    ],
+    "app": [
+      "sabse"
+    ],
+    "sabse": [
+      "jyada"
+    ],
+    "jyada": [
+      "use"
+    ],
+    "use": [
+      "hai"
+    ],
+    "resume": [
+      "video"
+    ],
+    "shuru": [
+      "karo"
     ]
   },
   "user_taught_answers": {
@@ -5589,5 +5777,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-14T11:30:20.291933"
+  "last_updated": "2025-11-15T01:13:29.452831"
 }

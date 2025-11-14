@@ -61,22 +61,29 @@ class JarvisModel:
             self.tokenizer = GPT2Tokenizer.from_pretrained(self.model_path)
             self.model = GPT2LMHeadModel.from_pretrained(self.model_path)
             print("[JARVIS] Loaded existing model")
-        except:
-            # Create new model
-            self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-            self.tokenizer.pad_token = self.tokenizer.eos_token
-            
-            config = GPT2Config(
-                vocab_size=self.tokenizer.vocab_size,
-                n_positions=512,
-                n_ctx=512,
-                n_embd=768,
-                n_layer=12,
-                n_head=12
-            )
-            
-            self.model = GPT2LMHeadModel(config)
-            print("[JARVIS] Created new model")
+        except Exception as e:
+            print(f"[JARVIS] No existing model found: {e}")
+            try:
+                # Create new model
+                print("[JARVIS] Creating new model...")
+                self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+                self.tokenizer.pad_token = self.tokenizer.eos_token
+                
+                config = GPT2Config(
+                    vocab_size=self.tokenizer.vocab_size,
+                    n_positions=512,
+                    n_ctx=512,
+                    n_embd=768,
+                    n_layer=12,
+                    n_head=12
+                )
+                
+                self.model = GPT2LMHeadModel(config)
+                print("[JARVIS] Created new model successfully")
+            except Exception as setup_error:
+                print(f"[JARVIS] Model setup failed: {setup_error}")
+                self.model = None
+                self.tokenizer = None
     
     def load_training_data(self):
         """Load existing training data"""
@@ -206,6 +213,10 @@ class JarvisModel:
         
         return None
     
+    def is_available(self):
+        """Check if model is available"""
+        return self.model is not None and self.tokenizer is not None
+    
     def get_model_stats(self):
         """Get model statistics"""
         return {
@@ -216,4 +227,9 @@ class JarvisModel:
         }
 
 # Global instance
-jarvis_model = JarvisModel()
+try:
+    jarvis_model = JarvisModel()
+    print("[JARVIS] Model initialized successfully")
+except Exception as e:
+    print(f"[JARVIS] Model initialization failed: {e}")
+    jarvis_model = None

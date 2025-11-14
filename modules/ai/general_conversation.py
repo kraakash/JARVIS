@@ -60,13 +60,17 @@ User said: {user_input}"""
                 # Save to learning model and train JARVIS model
                 try:
                     from modules.ai.learning_ai import learning_ai
-                    from modules.ai.jarvis_model import jarvis_model
-                    
                     learning_ai.learn_from_input(user_input, response_text)
-                    jarvis_model.add_conversation(user_input, response_text)
-                    print(f"[GENERAL] Saved to learning & JARVIS model: {user_input[:30]}...")
+                    print(f"[GROQ] Saved to learning AI: {user_input[:30]}...")
+                    
+                    try:
+                        from modules.ai.jarvis_model import jarvis_model
+                        jarvis_model.add_conversation(user_input, response_text)
+                        print(f"[GROQ] Saved to JARVIS model: {user_input[:30]}...")
+                    except:
+                        print(f"[GROQ] JARVIS model not available")
                 except Exception as e:
-                    print(f"[GENERAL] Learning save error: {e}")
+                    print(f"[GROQ] Learning save error: {e}")
                 
                 return response_text
                 

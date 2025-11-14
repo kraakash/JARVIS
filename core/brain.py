@@ -14,22 +14,37 @@ from modules.apps import app_controller
 from modules.web import web_controller
 from modules.ai.smart_conversation import smart_conversation
 from modules.core.session_manager import session_manager
+from modules.core.personal_data import personal_data_manager
+from modules.nlp import language_support
 from modules.ai.neural_brain import neural_brain
 from modules.ai.advanced_conversation import advanced_conversation
 from modules.ai.brain_enhancer import brain_enhancer
 from modules.ai.data_trainer import data_trainer
 from modules.ai.book_processor import book_processor
 from modules.ai.general_conversation import general_conversation
-from modules.ai.jarvis_model import jarvis_model
+try:
+    from modules.ai.jarvis_model import jarvis_model
+    JARVIS_MODEL_AVAILABLE = True
+except (ImportError, ValueError) as e:
+    print(f"[INFO] JARVIS model disabled: {e}")
+    JARVIS_MODEL_AVAILABLE = False
+    jarvis_model = None
 from modules.ai.openrouter_conversation import openrouter_conversation
+from modules.voice.continuous_listener import ContinuousListener
+
+# Debug AI model loading
+print(f"[DEBUG] OpenRouter Llama 3.3 available: {openrouter_conversation.is_available()}")
+print(f"[DEBUG] Groq available: {general_conversation.is_available() if hasattr(general_conversation, 'is_available') else 'Unknown'}")
+print(f"[DEBUG] JARVIS model available: {JARVIS_MODEL_AVAILABLE}")
 
 class JarvisBrain:
     def __init__(self):
         self.active = True
-        self.user_name = "Sir"
+        self.user_name = personal_data_manager.get_user_name()
         self.speaker = jarvis_speaker  # Use the speaker instance
         self.monitoring_active = session_manager.is_monitoring_active()
         session_manager.increment_session()
+        self.continuous_listener = None
         self.load_skills()
         
         # Auto-resume monitoring if it was active
@@ -88,6 +103,10 @@ class JarvisBrain:
             'get_help': self._handle_get_help,
             'execute_help': self._handle_execute_help,
             'jarvis_stats': self._handle_jarvis_stats,
+            'personal_info': self._handle_personal_info,
+            'set_name': self._handle_set_name,
+            'restart_jarvis': self._handle_restart_jarvis,
+            'real_time_search': self._handle_real_time_search,
         }
         print("Skills loaded:", list(self.skills.keys()))
     
@@ -211,10 +230,14 @@ class JarvisBrain:
             response = self.skills['get_improvements'](emotion_data)
         elif intent == 'analyze_work_pattern':
             response = self.skills['analyze_work_pattern'](emotion_data)
+        elif intent == 'continuous_conversation':
+            response = self._handle_continuous_conversation(command_text, emotion_data)
         elif intent == 'get_help':
             response = self.skills['get_help'](command_text, emotion_data)
         elif intent == 'execute_help':
             response = self.skills['execute_help'](command_text, emotion_data)
+        elif intent == 'real_time_search':
+            response = self._handle_real_time_search(command_text, emotion_data)
         elif intent == 'get_suggestions':
             response = self.skills['get_suggestions'](emotion_data)
         elif intent == 'test_learning':
@@ -224,11 +247,21 @@ class JarvisBrain:
             response = "Continuous learning started, Sir! I'll now learn from real-time data automatically."
         elif intent == 'clean_memory':
             response = self.skills['clean_memory'](emotion_data)
+        elif intent == 'personal_info':
+            response = self.skills['personal_info'](emotion_data)
+        elif intent == 'set_name':
+            response = self.skills['set_name'](command_text, emotion_data)
+        elif intent == 'restart_jarvis':
+            response = self._handle_restart_jarvis(emotion_data)
         elif 'build knowledge' in command_text.lower():
             data_trainer.build_knowledge_graph()
             response = "Knowledge system built successfully, Sir!"
         elif intent == 'general_conversation' or intent == 'general':
-            response = self._handle_general_conversation(command_text, emotion_data)
+            # Check if it's a real-time query first
+            if any(word in command_text.lower() for word in ['result', 'jita', 'winner', 'latest', 'aaj', 'current']):
+                response = self._handle_real_time_search(command_text, emotion_data)
+            else:
+                response = self._handle_general_conversation(command_text, emotion_data)
         else:
             # Use neural brain for intelligent responses
             from modules.monitoring.desktop_monitor import desktop_monitor
@@ -297,6 +330,20 @@ class JarvisBrain:
             except Exception as e:
                 print(f"[DEBUG] Learning error: {e}")
             
+        # Save personal data and conversation locally
+        try:
+            personal_data_manager.extract_and_save_info(command_text, response)
+        except Exception as e:
+            print(f"[PERSONAL] Data save error: {e}")
+        
+        # ALWAYS train JARVIS model with final response (regardless of source)
+        if JARVIS_MODEL_AVAILABLE and len(command_text.strip()) > 2:
+            try:
+                jarvis_model.learn_from_response(command_text, response)
+                print(f"[JARVIS] Trained model with response from any source")
+            except Exception as e:
+                print(f"[JARVIS] Training error: {e}")
+        
         # Learn from this interaction (avoid duplicates and problematic words)
         if len(command_text.strip()) > 2 and not any(word in command_text.lower() for word in ['main', 'bhi', 'meri', 'tum', 'kya', 'suggestions']):
             try:
@@ -575,34 +622,50 @@ class JarvisBrain:
             print("[DEBUG] Response source: IDENTITY_RESPONSE")
             return response
         
-        # Try JARVIS personal model first
-        jarvis_response = jarvis_model.generate_response(command_text)
-        if jarvis_response:
-            print("[DEBUG] Response source: JARVIS_MODEL")
-            return jarvis_response
+        # Priority Chain: OpenRouter → Groq → Fallbacks (ONE RESPONSE ONLY)
+        print(f"[DEBUG] AI Priority Chain for: {command_text[:30]}...")
         
-        # Try OpenRouter DeepSeek for conversation
-        openrouter_response = openrouter_conversation.get_conversation_response(command_text)
-        if openrouter_response:
-            print("[DEBUG] Response source: OPENROUTER_DEEPSEEK")
-            return openrouter_response
+        # 1. OpenRouter Llama 3.3 (Primary)
+        if openrouter_conversation.is_available():
+            print(f"[DEBUG] [1/2] OpenRouter Llama 3.3...")
+            try:
+                openrouter_response = openrouter_conversation.get_conversation_response(command_text)
+                if openrouter_response and len(openrouter_response.strip()) > 5:
+                    print("[DEBUG] ✅ OpenRouter SUCCESS - returning response")
+                    return openrouter_response
+                print("[DEBUG] ❌ OpenRouter empty response")
+            except Exception as e:
+                print(f"[DEBUG] ❌ OpenRouter error: {e}")
+        else:
+            print("[DEBUG] ❌ OpenRouter unavailable")
         
-        # Fallback to Groq general conversation
-        groq_response = general_conversation.get_conversation_response(command_text)
-        if groq_response:
-            print("[DEBUG] Response source: GROQ_GENERAL")
-            return groq_response
+        # 2. Groq (Fallback)
+        if general_conversation.is_available():
+            print(f"[DEBUG] [2/2] Groq fallback...")
+            try:
+                groq_response = general_conversation.get_conversation_response(command_text)
+                if groq_response and len(groq_response.strip()) > 5:
+                    print("[DEBUG] ✅ Groq SUCCESS - returning response")
+                    return groq_response
+                print("[DEBUG] ❌ Groq empty response")
+            except Exception as e:
+                print(f"[DEBUG] ❌ Groq error: {e}")
+        else:
+            print("[DEBUG] ❌ Groq unavailable")
         
-        # Try learning AI for other general conversation
+        # 3. Local Fallbacks
+        print("[DEBUG] Using local fallbacks...")
         from modules.ai.learning_ai import learning_ai
         emotion = emotion_data.get('emotion', 'neutral') if emotion_data else 'neutral'
         intent = emotion_data.get('intent', 'general') if emotion_data else 'general'
         learned_response = learning_ai.generate_response(command_text, emotion, intent)
         
-        if learned_response:
+        if learned_response and len(learned_response.strip()) > 5:
+            print("[DEBUG] ✅ Learning AI SUCCESS")
             return learned_response
         
-        # Use smart conversation for intelligent responses
+        # Final fallback
+        print("[DEBUG] ✅ Smart conversation fallback")
         smart_response = smart_conversation.get_smart_response(command_text)
         return smart_response
     
@@ -1368,16 +1431,141 @@ class JarvisBrain:
             return emotion_engine.enhance_response(response, emotion_data)
         return response
     
+    def _handle_continuous_conversation(self, command_text, emotion_data):
+        """Handle continuous conversation mode"""
+        if any(word in command_text.lower() for word in ['start', 'begin', 'continuous', 'keep talking']):
+            if not self.continuous_listener:
+                self.continuous_listener = ContinuousListener(self.process_command)
+            
+            self.continuous_listener.start_continuous_listening()
+            return "Continuous conversation started, Sir. I'll keep listening and responding naturally."
+        
+        elif any(word in command_text.lower() for word in ['stop', 'exit', 'end', 'band karo']):
+            if self.continuous_listener:
+                self.continuous_listener.stop_continuous_listening()
+            return "Continuous conversation stopped, Sir."
+        
+        else:
+            return "Say 'start continuous conversation' to begin or 'stop continuous conversation' to end, Sir."
+    
     def _handle_jarvis_stats(self, emotion_data):
         """Show JARVIS model statistics"""
-        stats = jarvis_model.get_model_stats()
+        if JARVIS_MODEL_AVAILABLE:
+            stats = jarvis_model.get_model_stats()
+            response = f"🤖 JARVIS Personal Model Stats, Sir:\n"
+            response += f"📚 Training Conversations: {stats['total_conversations']}\n"
+            response += f"🧠 Model Size: {stats['model_size']}\n"
+            response += f"⏰ Last Training: {stats['last_training'][:10] if stats['last_training'] != 'Never' else 'Never'}\n"
+            response += f"📊 Data Sources: {', '.join(stats['data_sources'])}\n"
+            response += f"\nMain tumhare responses se seekh raha hun, Sir!"
+        else:
+            response = f"🤖 JARVIS Personal Model Stats, Sir:\n"
+            response += f"📚 Status: Disabled (missing dependencies)\n"
+            response += f"🧠 Current Mode: Using OpenRouter Llama 3.3 + Groq\n"
+            response += f"⏰ Install: pip install torch tf-keras\n"
+            response += f"\nUsing cloud AI for now, Sir!"
         
-        response = f"🤖 JARVIS Personal Model Stats, Sir:\n"
-        response += f"📚 Training Conversations: {stats['total_conversations']}\n"
-        response += f"🧠 Model Size: {stats['model_size']}\n"
-        response += f"⏰ Last Training: {stats['last_training'][:10] if stats['last_training'] != 'Never' else 'Never'}\n"
-        response += f"📊 Data Sources: {', '.join(stats['data_sources'])}\n"
-        response += f"\nMain tumhare responses se seekh raha hun, Sir!"
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_personal_info(self, emotion_data):
+        """Show personal information summary"""
+        # Update user name from personal data
+        self.user_name = personal_data_manager.get_user_name()
+        
+        summary = personal_data_manager.get_user_info_summary()
+        response = f"📋 Aapki Personal Information, {self.user_name}:\n{summary}"
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_set_name(self, command_text, emotion_data):
+        """Set user's name"""
+        words = command_text.split()
+        name = None
+        text_lower = command_text.lower()
+        
+        # Don't process if it's a question about name
+        if any(word in text_lower for word in ['kya', 'what', '?']):
+            return "Aapka naam kya hai? 'Mera naam [name] hai' boliye."
+        
+        # Pattern: "mera naam [name] hai"
+        if 'mera naam' in text_lower and 'hai' in text_lower:
+            naam_idx = -1
+            hai_idx = -1
+            for i, word in enumerate(words):
+                if word.lower() == 'naam':
+                    naam_idx = i
+                elif word.lower() == 'hai':
+                    hai_idx = i
+            
+            if naam_idx != -1 and hai_idx != -1 and hai_idx > naam_idx + 1:
+                name_words = words[naam_idx + 1:hai_idx]
+                name = ' '.join(name_words).strip('.,!?')
+        
+        # Pattern: "my name is [name]"
+        elif 'my name is' in text_lower:
+            parts = text_lower.split('my name is')
+            if len(parts) > 1:
+                name = parts[1].strip().split()[0].strip('.,!?')
+        
+        if name and len(name) > 1 and name.lower() not in ['kya', 'what', 'hai', 'is']:
+            result = personal_data_manager.set_user_name(name)
+            self.user_name = name
+            response = result
+        else:
+            response = "Aapka naam kya hai? 'Mera naam [name] hai' boliye."
+        
+        if emotion_data:
+            return emotion_engine.enhance_response(response, emotion_data)
+        return response
+    
+    def _handle_restart_jarvis(self, emotion_data):
+        """Handle JARVIS restart/reload command"""
+        import os
+        import sys
+        
+        if language_support.current_language == 'hindi':
+            response = "JARVIS restart kar raha hun, Sir. Ek moment..."
+        else:
+            response = "Restarting JARVIS, Sir. One moment..."
+        
+        self.speak(response)
+        
+        # Complete shutdown
+        self.shutdown()
+        
+        # Restart the program
+        print("[RESTART] Restarting JARVIS...")
+        os.execv(sys.executable, ['python'] + sys.argv)
+        
+        return response
+    
+    def _handle_real_time_search(self, command_text, emotion_data):
+        """Handle real-time information search using NewsAPI"""
+        try:
+            from modules.web.news_scraper import news_scraper
+            
+            # Determine search type
+            if any(word in command_text.lower() for word in ['election', 'chunav', 'jita', 'result']):
+                # Get election results
+                result = news_scraper.get_election_results(command_text)
+                response = f"{result}\n\nAur kya jaanna chahte hain election ke baare mein?"
+            elif any(word in command_text.lower() for word in ['headlines', 'top news', 'breaking']):
+                # Get top headlines
+                result = news_scraper.get_top_headlines()
+                response = f"{result}\n\nKoi specific news topic hai jo aap jaanna chahte hain?"
+            else:
+                # Get general news
+                result = news_scraper.get_current_news(command_text)
+                response = f"{result}\n\nIs topic pe aur details chahiye?"
+            
+        except Exception as e:
+            print(f"[NEWS] Error: {e}")
+            # Fallback to AI response with disclaimer
+            response = "Sir, real-time news fetch karne mein thoda issue aa raha hai. NewsAPI service check kar raha hun. Thoda baad try kariye."
         
         if emotion_data:
             return emotion_engine.enhance_response(response, emotion_data)
@@ -1385,8 +1573,38 @@ class JarvisBrain:
     
     def speak(self, text):
         """Unified speaking method"""
+        if not self.active:
+            print(f"[BRAIN] System inactive, skipping speech: {text}")
+            return False
+        
         print(f"[DEBUG] Attempting to speak: {text}")
         success = self.speaker.speak(text)
         print(f"[DEBUG] Speech success: {success}")
         if not success:
             print(f"[FALLBACK] {text}")
+        return success
+    
+    def shutdown(self):
+        """Complete shutdown of JARVIS brain"""
+        try:
+            print("[BRAIN] Shutting down JARVIS brain...")
+            self.active = False
+            
+            # Stop continuous listener first
+            if self.continuous_listener:
+                self.continuous_listener.stop_continuous_listening()
+            
+            # Stop speaker systems
+            self.speaker.shutdown()
+            
+            # Stop monitoring if active
+            if self.monitoring_active:
+                try:
+                    from modules.monitoring.desktop_monitor import desktop_monitor
+                    desktop_monitor.stop_monitoring()
+                except:
+                    pass
+            
+            print("[BRAIN] JARVIS brain shutdown complete")
+        except Exception as e:
+            print(f"[BRAIN] Shutdown error: {e}")

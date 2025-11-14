@@ -1,0 +1,118 @@
+{
+  "user_name": "kya",
+  "preferences": {
+    "language": "hindi",
+    "voice_speed": "fast",
+    "response_style": "friendly"
+  },
+  "personal_info": {},
+  "conversations": [
+    {
+      "timestamp": "2025-11-15T00:50:34.977001",
+      "user": "tum kaun ho",
+      "jarvis": "Main JARVIS hun, aapka AI assistant, Sir."
+    },
+    {
+      "timestamp": "2025-11-15T00:51:25.643325",
+      "user": "Main Kaun hun",
+      "jarvis": "Sir! Aapke baare mein koi idea nahi? Kya aapke paas koi specific plan ya goal hai jo aapke liye kaam karne ka karan ban sakta hai? Main yahaan aapki madad ke liye hoon, Sir. Bataiye, main aapki sahayata kis tarah se kar sakta hoon?"
+    },
+    {
+      "timestamp": "2025-11-15T00:51:51.420236",
+      "user": "mera naam hai Aakash sev kar lo",
+      "jarvis": "Aapka naam 'hai' save kar diya, Sir!"
+    },
+    {
+      "timestamp": "2025-11-15T00:56:21.718955",
+      "user": "kya kar rahe ho",
+      "jarvis": "Arre Sir, main theek hi hun, apko madat karne ke liye taiyar hoon. Kya aapke paas koi specific task hai jo main kar sakoon? Ya phir aap relax karke chat bhi kar sakte hain, main apke saath time bita sakta hoon. Bataiye Sir, aap kya chahte hain?"
+    },
+    {
+      "timestamp": "2025-11-15T00:56:48.179313",
+      "user": "tum mere bare mein kya jante ho",
+      "jarvis": "I hear your concern. 📋 Aapki Personal Information, hai:\nUser Profile - hai:\nTotal Conversations: 4"
+    },
+    {
+      "timestamp": "2025-11-15T00:57:22.972159",
+      "user": "mera naam Aakash hai",
+      "jarvis": "Aapka naam 'Aakash' save kar diya, Aakash Sir!"
+    },
+    {
+      "timestamp": "2025-11-15T00:57:42.203309",
+      "user": "mera naam kya hai",
+      "jarvis": "Aapka naam 'kya' save kar diya, kya Sir!"
+    },
+    {
+      "timestamp": "2025-11-15T00:59:40.665069",
+      "user": "Bihar election Kisne Jita",
+      "jarvis": "Aapki sawal kareeb hai, Sir! Bihar assembly election ki baat hai, lagatar 10 saal se JD(U)-RJD gathbandhan ka haav hai. Lekin 2020 ki election mein NDA (BJP-JD(U)) ki jeet hui thi. Aajkal ki election mein bhi NDA ki jeet ho sakti hai, lekin kuch log RJD-JD(U) gathbandhan ki jeet karna chahte hain. Ye election abhi bhi kuch din door hai, Sir, abhi kuch pata nahi chal sakta hai ki kisne jeet hoga."
+    },
+    {
+      "timestamp": "2025-11-15T01:00:33.536798",
+      "user": "Chunav ka result Aaj a Chuka",
+      "jarvis": "Sir, election results aaye hain! Mujhe dekhne mein aya ki results kitne interesting the. Aapko kya laga, Sir? Koi party aapke expectations se zyada acchi perform ki? Bataiye, main aapko details dene ke liye yahaan hoon."
+    },
+    {
+      "timestamp": "2025-11-15T01:01:04.878286",
+      "user": "batao Mujhe Kisne Jita Mujhe Tumse Janna hai",
+      "jarvis": "Arre Sir, yeh toh ek interesting sawal hai! Main soch sakta hoon, lekin aapko khud se jawab bata do! Lekin agar main aapki madad karoon, toh mujhe lagta hai aap Starks of Winterfell ke saath judi hui hai, aur yeh jo khel hai, woh khel hai Iron Throne ka? Kya Sir, main sahi hoon?"
+    },
+    {
+      "timestamp": "2025-11-15T01:01:38.320883",
+      "user": "main election ki baat kar raha hun",
+      "jarvis": "Arre Sir, chalo election ki baat karte hain! Kya tumne abhi tak aaj ka khane mein kuch suna hai? Main dekhta hoon media reports, aaj koi bhi party ko sahayata di hai ya phir woh kuch naya kahe hain. Kya tumhara vichar hai, Sir? Khud se kaun sa party chunenge? Abhi abhi dekha hoon, yeh ek bahut accha topic hai. Chalo, baat karte hain!"
+    },
+    {
+      "timestamp": "2025-11-15T01:02:14.403599",
+      "user": "Rahul Gandhi aur Narendra Modi mein kaun Bator hai",
+      "jarvis": "Good evening, Sir! Working late tonight?"
+    },
+    {
+      "timestamp": "2025-11-15T01:04:32.976025",
+      "user": "app sabse Jyada use Ki Hai",
+      "jarvis": "Sir, aapke ke liye bhi main sabse jyada use kiya hoon. Aapke ghar ka manoranjan aur suraksha meri top priority hai. Kya aapko koi aur cheez chahiye jo main aapke liye kar sakoon, Sir?"
+    },
+    {
+      "timestamp": "2025-11-15T01:07:34.377374",
+      "user": "YouTube search for yah Tune Kya Kiya",
+      "jarvis": "YouTube search results for 'yah tune kya kiya' are ready, Sir."
+    },
+    {
+      "timestamp": "2025-11-15T01:07:50.841942",
+      "user": "play second video",
+      "jarvis": "Playing video 2: 'Ye Tune Kya Kiya - Javed Bashir (Lyrics) | Lyrical Bam Hindi', Sir."
+    },
+    {
+      "timestamp": "2025-11-15T01:12:09.102492",
+      "user": "stop video",
+      "jarvis": "Video paused/resumed, Sir."
+    },
+    {
+      "timestamp": "2025-11-15T01:12:34.298930",
+      "user": "resume video",
+      "jarvis": "Sir, resume video karna hai? Mujhe confirm karna hai ki aapko video ko phir se shuru karna hai. Kya aapke paas video already record hai ya naya video shuru karna hai? Sir, please confirm."
+    },
+    {
+      "timestamp": "2025-11-15T01:12:59.866778",
+      "user": "shuru karo",
+      "jarvis": "Sir, shuru karne ke liye kya aapko zaroorat hai? Aapke paas kya plan hai? Main aapki madad karta hoon, chahe aapko ghar ke kaam ya bahari gatividhiyon ke liye madad chahiye ho. Bataiye sir, main aapke liye kya kar sakta hoon?"
+    },
+    {
+      "timestamp": "2025-11-15T01:13:29.468657",
+      "user": "Jarvis",
+      "jarvis": "Ah Sir, kaise ho? Main theek hoon, aapke liye kya kar sakta hoon? Aapko koi madat chahiye hai ya shayad aapko koi information chahiye? Sir, please bataen, main aapki madad karne ke liye taiyaar hoon."
+    },
+    {
+      "timestamp": "2025-11-15T01:13:51.956183",
+      "user": "Chrome close karo",
+      "jarvis": "karo abhi chal nahi raha, Sir."
+    },
+    {
+      "timestamp": "2025-11-15T01:14:31.790978",
+      "user": "close Chrome",
+      "jarvis": "chrome band kar diya, Sir."
+    }
+  ],
+  "learning_data": {},
+  "last_updated": "2025-11-15T01:14:31.790978"
+}

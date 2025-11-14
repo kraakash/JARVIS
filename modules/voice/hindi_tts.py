@@ -18,7 +18,7 @@ class HindiTTS:
         self.use_online = True
         self.voice_engine = "edge"  # edge, gtts, or azure
         self.hindi_voice = "hi-IN-MadhurNeural"  # Microsoft Edge Hindi voice
-        self.rate = "slow"  # slow, medium, fast
+        self.rate = "fast"  # slow, medium, fast
         
         # Initialize pygame for audio playback
         try:
@@ -51,7 +51,7 @@ class HindiTTS:
             # Generate speech in memory
             async def generate_speech():
                 audio_data = b""
-                communicate = edge_tts.Communicate(text, self.hindi_voice, rate='-20%')
+                communicate = edge_tts.Communicate(text, self.hindi_voice, rate='+10%')
                 async for chunk in communicate.stream():
                     if chunk["type"] == "audio":
                         audio_data += chunk["data"]
@@ -68,9 +68,9 @@ class HindiTTS:
             pygame.mixer.music.load(audio_buffer)
             pygame.mixer.music.play()
             
-            # Wait for playback to finish
+            # Wait for playback to finish (with interrupt check)
             while pygame.mixer.music.get_busy():
-                pygame.time.wait(100)
+                pygame.time.wait(50)  # Shorter wait for better responsiveness
             
             return True
             
@@ -82,7 +82,7 @@ class HindiTTS:
         """Use Google TTS for Hindi with in-memory audio"""
         try:
             # Create gTTS object
-            tts = gTTS(text=text, lang='hi', slow=True)
+            tts = gTTS(text=text, lang='hi', slow=False)
             
             # Save to memory buffer instead of file
             audio_buffer = io.BytesIO()
@@ -93,9 +93,9 @@ class HindiTTS:
             pygame.mixer.music.load(audio_buffer)
             pygame.mixer.music.play()
             
-            # Wait for playback to finish
+            # Wait for playback to finish (with interrupt check)
             while pygame.mixer.music.get_busy():
-                pygame.time.wait(100)
+                pygame.time.wait(50)  # Shorter wait for better responsiveness
             
             return True
                 
@@ -191,6 +191,25 @@ class HindiTTS:
             self.hindi_voice = voice
             self.speak_hindi(test_text)
             input("Press Enter for next voice...")
+    
+    def stop_speaking(self):
+        """Stop current speech immediately"""
+        try:
+            pygame.mixer.music.stop()
+            pygame.mixer.stop()  # Stop all sounds
+            print("[HINDI_TTS] Speech stopped")
+        except Exception as e:
+            print(f"[HINDI_TTS] Stop error: {e}")
+    
+    def cleanup(self):
+        """Complete cleanup of all audio resources"""
+        try:
+            pygame.mixer.music.stop()
+            pygame.mixer.stop()  # Stop all sounds
+            pygame.mixer.quit()  # Quit mixer completely
+            print("[HINDI_TTS] Cleanup complete")
+        except Exception as e:
+            print(f"[HINDI_TTS] Cleanup error: {e}")
     
     def is_available(self):
         """Check if Hindi TTS is available"""

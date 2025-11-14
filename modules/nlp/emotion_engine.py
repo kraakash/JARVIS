@@ -116,12 +116,26 @@ class EmotionEngine:
             else:
                 return 'question'
         
+        # Training/Teaching patterns - check before general conversation
+        training_keywords = [
+            'train kar raha', 'training de raha', 'seekha raha', 'sikh jao', 
+            'kamen sikh', 'sabhi kamen', 'acche se sikh', 'main tumhen',
+            'tumhen train', 'tumhe sikhana', 'seekhna hai', 'training hai'
+        ]
+        for keyword in training_keywords:
+            if keyword in text_lower:
+                return 'general_conversation'
+        
         # General conversation - check after questions
         conversation_keywords = [
             'thank you', 'dhanyawad', 'what can you do', 'tum kya kar sakte ho',
             'good job', 'achha', 'weather', 'mausam', 'joke', 'mazak',
             'aap kaun hain', 'your name', 'kam bahut', 'work hai', 'kaam hai',
-            'busy hun', 'tension hai', 'problem hai'
+            'busy hun', 'tension hai', 'problem hai', 'achi bat', 'acchi baat',
+            'nice', 'good', 'great', 'awesome', 'badiya', 'zabardast',
+            'theek hai', 'thik hai', 'sahi hai', 'perfect', 'bilkul',
+            'haan', 'yes', 'okay', 'ok', 'right', 'correct', 'sach',
+            'whats happening', 'kya chal raha', 'kya ho raha', 'what happening'
         ]
         for keyword in conversation_keywords:
             if keyword in text_lower:
@@ -166,7 +180,7 @@ class EmotionEngine:
             return 'learning_stats'
         elif any(phrase in text_lower for phrase in ['adaptive stats', 'ai stats', 'learning rate', 'intent accuracy']):
             return 'adaptive_stats'
-        elif any(phrase in text_lower for phrase in ['teach jarvis', 'sikhao', 'learn this', 'remember this']):
+        elif any(phrase in text_lower for phrase in ['teach jarvis', 'sikhao', 'learn this', 'remember this', 'train kar raha', 'training de raha', 'seekha raha', 'sikh jao', 'kamen sikh']):
             return 'teach_response'
         elif any(phrase in text_lower for phrase in ['style stats', 'conversation style', 'speaking style']):
             return 'style_stats'
@@ -184,7 +198,7 @@ class EmotionEngine:
             return 'get_suggestions'
         elif any(phrase in text_lower for phrase in ['meri galtiyan', 'my mistakes', 'analyze mistakes', 'galti analysis', 'productivity analysis']):
             return 'analyze_mistakes'
-        elif any(phrase in text_lower for phrase in ['kya update hai', 'what update', 'kya chal raha', 'whats happening', 'status kya hai']):
+        elif any(phrase in text_lower for phrase in ['kya update hai', 'what update', 'status kya hai']):
             return 'status_update'
         elif any(phrase in text_lower for phrase in ['automation suggestions', 'smart suggestions', 'workflow tips', 'optimize workflow']):
             return 'automation_suggestions'
@@ -202,6 +216,16 @@ class EmotionEngine:
             return 'test_learning'
         elif any(phrase in text_lower for phrase in ['clean memory', 'memory clean', 'saaf karo', 'memory saaf']):
             return 'clean_memory'
+        elif any(phrase in text_lower for phrase in ['personal info', 'meri jankari', 'about me', 'mere bare mein', 'my information']):
+            return 'personal_info'
+        elif any(phrase in text_lower for phrase in ['mera naam kya hai', 'what is my name', 'naam kya hai', 'my name kya hai']):
+            return 'personal_info'
+        elif any(phrase in text_lower for phrase in ['mera naam', 'my name is', 'naam hai', 'set name']) and not any(word in text_lower for word in ['kya', 'what']):
+            return 'set_name'
+        elif any(phrase in text_lower for phrase in ['restart', 'reload', 'reboot', 'restart jarvis', 'reload jarvis']):
+            return 'restart_jarvis'
+        elif any(phrase in text_lower for phrase in ['election result', 'chunav result', 'kisne jita', 'who won', 'latest news', 'current news', 'aaj ka news', 'headlines', 'top news']):
+            return 'real_time_search'
         
         # App control commands (more specific)
         elif any(phrase in text_lower for phrase in ['find app', 'search app', 'show app', 'list app']):
@@ -217,11 +241,23 @@ class EmotionEngine:
         elif any(phrase in text_lower for phrase in ['list apps', 'list all apps', 'show all apps', 'running apps', 'what apps', 'all apps']):
             return 'list_apps'
         
-        # Greetings - only for simple greetings without questions
-        if any(word in text_lower for word in ['hello', 'hi', 'hey', 'greetings']) and not has_question_word and not ends_with_question:
+        # Greetings - only for simple greetings without questions or conversational words
+        greeting_words = ['hello', 'hi', 'hey', 'greetings', 'namaste']
+        conversational_words = ['achi', 'acchi', 'good', 'nice', 'great', 'theek', 'sahi', 'haan', 'yes', 'okay', 'whats', 'happening', 'train', 'sikh', 'seekh']
+        
+        has_greeting = any(word in text_lower for word in greeting_words)
+        has_conversational = any(word in text_lower for word in conversational_words)
+        
+        if has_greeting and not has_question_word and not ends_with_question and not has_conversational:
             return 'greeting'
         
         # Help commands
+        # Continuous conversation detection
+        elif any(phrase in text_lower for phrase in ['continuous conversation', 'keep talking', 'start talking', 'continuous mode']):
+            return 'continuous_conversation'
+        elif any(phrase in text_lower for phrase in ['stop conversation', 'exit conversation', 'band karo conversation']):
+            return 'continuous_conversation'
+        
         elif any(phrase in text_lower for phrase in ['help me', 'help karo', 'madad karo', 'solve karo', 'fix karo']):
             return 'get_help'
         elif any(phrase in text_lower for phrase in ['google search', 'search karo', 'stackoverflow', 'documentation']):
@@ -231,7 +267,26 @@ class EmotionEngine:
         if any(word in text_lower for word in ['play']):
             return 'command'
         
-        return 'general'
+        # Check for real-time information requests
+        realtime_keywords = [
+            'result', 'news', 'latest', 'current', 'aaj', 'abhi', 'recent',
+            'jita', 'won', 'winner', 'election', 'chunav', 'headlines', 'breaking'
+        ]
+        
+        if any(keyword in text_lower for keyword in realtime_keywords):
+            return 'real_time_search'
+        
+        # Check for Hindi conversational patterns that might be missed
+        hindi_conversation_patterns = [
+            'main', 'tumhen', 'tumhe', 'aap', 'hum', 'sabhi', 'acche se',
+            'bus', 'bas', 'kar raha', 'de raha', 'ho raha', 'kya hai'
+        ]
+        
+        if any(pattern in text_lower for pattern in hindi_conversation_patterns):
+            return 'general_conversation'
+        
+        # Default to general conversation for unmatched patterns
+        return 'general_conversation'
     
     def process_natural_language(self, text):
         """Process natural language input and return enhanced response data"""

@@ -13,7 +13,7 @@ load_dotenv()
 
 class OpenRouterConversation:
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = "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"
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
         self.model = "meta-llama/llama-3.3-8b-instruct:free"
     
@@ -64,18 +64,31 @@ User said: {user_input}"""
                 # Save to learning model
                 try:
                     from modules.ai.learning_ai import learning_ai
-                    from modules.ai.jarvis_model import jarvis_model
+                    try:
+                        from modules.ai.jarvis_model import jarvis_model
+                        if jarvis_model and jarvis_model.is_available():
+                            jarvis_model.add_conversation(user_input, cleaned_response)
+                            print(f"[OPENROUTER] Saved to JARVIS model: {user_input[:30]}...")
+                        else:
+                            print(f"[OPENROUTER] JARVIS model not available")
+                    except Exception as je:
+                        print(f"[OPENROUTER] JARVIS model error: {je}")
                     
                     learning_ai.learn_from_input(user_input, cleaned_response)
-                    jarvis_model.add_conversation(user_input, cleaned_response)
-                    print(f"[OPENROUTER] Saved conversation: {user_input[:30]}...")
+                    print(f"[OPENROUTER] Saved to learning AI: {user_input[:30]}...")
                 except Exception as e:
                     print(f"[OPENROUTER] Learning save error: {e}")
                 
+                print(f"[OPENROUTER] Generated response: {cleaned_response[:50]}...")
+                
                 return cleaned_response
+            else:
+                print(f"[OPENROUTER] HTTP Error {response.status_code}: {response.text}")
+                return None
                 
         except Exception as e:
-            print(f"[OPENROUTER] Error: {e}")
+            print(f"[OPENROUTER] Exception: {e}")
+            return None
         
         return None
 

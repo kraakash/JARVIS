@@ -8,7 +8,9 @@
         "hii kaise ho",
         "pagal",
         "recursion smjhao",
-        "recusrion smjhao"
+        "recusrion smjhao",
+        "madad karne ke liye yahan hun",
+        "mere pass aapke ghar ka map aur"
       ],
       "keywords": {
         "kaise": 6,
@@ -20,10 +22,21 @@
         "pagal": 1,
         "recursion": 1,
         "smjhao": 2,
-        "recusrion": 1
+        "recusrion": 1,
+        "madad": 1,
+        "karne": 1,
+        "liye": 1,
+        "yahan": 1,
+        "hun": 1,
+        "mere": 1,
+        "pass": 1,
+        "aapke": 1,
+        "ghar": 1,
+        "map": 1,
+        "aur": 1
       },
-      "success_count": 10,
-      "total_count": 10
+      "success_count": 12,
+      "total_count": 12
     },
     "greeting": {
       "patterns": [
@@ -31,21 +44,33 @@
         "hello",
         "hello jarvis",
         "hii jarvis",
-        "hello javis"
+        "hello javis",
+        "achi bat hai ye to",
+        "rahul gandhi aur narendra modi mein kaun bator hai"
       ],
       "keywords": {
         "yah": 1,
         "bahut": 1,
         "acchi": 1,
         "baat": 1,
-        "hai": 1,
+        "hai": 3,
         "hello": 3,
         "jarvis": 2,
         "hii": 1,
-        "javis": 1
+        "javis": 1,
+        "achi": 1,
+        "bat": 1,
+        "rahul": 1,
+        "gandhi": 1,
+        "aur": 1,
+        "narendra": 1,
+        "modi": 1,
+        "mein": 1,
+        "kaun": 1,
+        "bator": 1
       },
-      "success_count": 5,
-      "total_count": 5
+      "success_count": 7,
+      "total_count": 7
     },
     "open_app": {
       "patterns": [
@@ -103,7 +128,8 @@
         "what is recursion",
         "what is big o notaion",
         "rohit sharama khelenge ye match?",
-        "konsi files kholi?"
+        "konsi files kholi?",
+        "koi suggestion?"
       ],
       "keywords": {
         "what": 5,
@@ -123,19 +149,123 @@
         "match?": 1,
         "konsi": 1,
         "files": 1,
-        "kholi?": 1
+        "kholi?": 1,
+        "koi": 1,
+        "suggestion?": 1
       },
-      "success_count": 7,
-      "total_count": 7
+      "success_count": 8,
+      "total_count": 8
+    },
+    "general_conversation": {
+      "patterns": [
+        "bihar election ka result btao",
+        "check krke btaokoun  jeet raha",
+        "mujhe bihar ellection ke bare me btao  koun jeet rha kaun aage hai",
+        "hold on jarvis",
+        "bihar election kisne jita",
+        "chunav ka result aaj a chuka",
+        "app sabse jyada use ki hai",
+        "resume video",
+        "shuru karo",
+        "jarvis"
+      ],
+      "keywords": {
+        "bihar": 3,
+        "election": 2,
+        "result": 2,
+        "btao": 2,
+        "check": 1,
+        "krke": 1,
+        "btaokoun": 1,
+        "jeet": 2,
+        "raha": 1,
+        "mujhe": 1,
+        "ellection": 1,
+        "bare": 1,
+        "koun": 1,
+        "rha": 1,
+        "kaun": 1,
+        "aage": 1,
+        "hai": 2,
+        "hold": 1,
+        "jarvis": 2,
+        "kisne": 1,
+        "jita": 1,
+        "chunav": 1,
+        "aaj": 1,
+        "chuka": 1,
+        "app": 1,
+        "sabse": 1,
+        "jyada": 1,
+        "use": 1,
+        "resume": 1,
+        "video": 1,
+        "shuru": 1,
+        "karo": 1
+      },
+      "success_count": 10,
+      "total_count": 10
+    },
+    "set_name": {
+      "patterns": [
+        "mera naam hai aakash sev kar lo",
+        "mera naam aakash hai"
+      ],
+      "keywords": {
+        "mera": 2,
+        "naam": 2,
+        "hai": 2,
+        "aakash": 2,
+        "sev": 1,
+        "kar": 1
+      },
+      "success_count": 2,
+      "total_count": 2
+    },
+    "play_video": {
+      "patterns": [
+        "play second video"
+      ],
+      "keywords": {
+        "play": 1,
+        "second": 1,
+        "video": 1
+      },
+      "success_count": 1,
+      "total_count": 1
+    },
+    "pause_video": {
+      "patterns": [
+        "stop video"
+      ],
+      "keywords": {
+        "stop": 1,
+        "video": 1
+      },
+      "success_count": 1,
+      "total_count": 1
+    },
+    "close_app": {
+      "patterns": [
+        "chrome close karo",
+        "close chrome"
+      ],
+      "keywords": {
+        "chrome": 2,
+        "close": 2,
+        "karo": 1
+      },
+      "success_count": 2,
+      "total_count": 2
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 26,
-    "correct_predictions": 26,
-    "ml_predictions": 30,
+    "total_interactions": 47,
+    "correct_predictions": 47,
+    "ml_predictions": 77,
     "learning_rate": 100.0,
-    "ml_accuracy": 70.0,
+    "ml_accuracy": 80.0,
     "intent_accuracy": {
       "general": 100.0,
       "greeting": 100.0,
@@ -143,7 +273,12 @@
       "start_monitoring": 100.0,
       "current_activity": 100.0,
       "get_suggestions": 100.0,
-      "question": 100.0
+      "question": 100.0,
+      "general_conversation": 100.0,
+      "set_name": 100.0,
+      "play_video": 100.0,
+      "pause_video": 100.0,
+      "close_app": 100.0
     },
     "last_updated": null
   },
@@ -173,7 +308,28 @@
     "hello javis",
     "what is big o notaion",
     "rohit sharama khelenge ye match?",
-    "konsi files kholi?"
+    "konsi files kholi?",
+    "achi bat hai ye to",
+    "bihar election ka result btao",
+    "check krke btaokoun  jeet raha",
+    "mujhe bihar ellection ke bare me btao  koun jeet rha kaun aage hai",
+    "koi suggestion?",
+    "madad karne ke liye yahan hun",
+    "mere pass aapke ghar ka map aur",
+    "hold on jarvis",
+    "mera naam hai aakash sev kar lo",
+    "mera naam aakash hai",
+    "bihar election kisne jita",
+    "chunav ka result aaj a chuka",
+    "rahul gandhi aur narendra modi mein kaun bator hai",
+    "app sabse jyada use ki hai",
+    "play second video",
+    "stop video",
+    "resume video",
+    "shuru karo",
+    "jarvis",
+    "chrome close karo",
+    "close chrome"
   ],
   "training_labels": [
     "general",
@@ -201,7 +357,28 @@
     "greeting",
     "question",
     "question",
-    "question"
+    "question",
+    "greeting",
+    "general_conversation",
+    "general_conversation",
+    "general_conversation",
+    "question",
+    "general",
+    "general",
+    "general_conversation",
+    "set_name",
+    "set_name",
+    "general_conversation",
+    "general_conversation",
+    "greeting",
+    "general_conversation",
+    "play_video",
+    "pause_video",
+    "general_conversation",
+    "general_conversation",
+    "general_conversation",
+    "close_app",
+    "close_app"
   ],
-  "last_updated": "2025-11-14T11:30:20.335924"
+  "last_updated": "2025-11-15T01:14:31.792486"
 }

@@ -133,7 +133,13 @@ class JarvisSpeaker:
             
             temp_engine.say(text)
             temp_engine.runAndWait()
-            temp_engine.stop()
+            
+            # Ensure engine is properly stopped
+            try:
+                temp_engine.stop()
+                del temp_engine
+            except:
+                pass
             
             self.is_speaking = False
             return True
@@ -193,8 +199,38 @@ class JarvisSpeaker:
     
     def stop(self) -> None:
         """Stop speaking immediately"""
-        if self.engine:
-            self.engine.stop()
+        try:
+            if self.engine:
+                self.engine.stop()
+            # Also stop Hindi TTS if available
+            if HINDI_TTS_AVAILABLE:
+                hindi_tts.stop_speaking()
+            print("[SPEAKER] All TTS stopped")
+        except Exception as e:
+            print(f"[SPEAKER] Stop error: {e}")
+        self.is_speaking = False
+    
+    def shutdown(self) -> None:
+        """Complete shutdown of TTS system"""
+        try:
+            print("[SPEAKER] Shutting down TTS systems...")
+            self.stop()
+            
+            # Force stop pyttsx3 engine
+            if self.engine:
+                try:
+                    self.engine.stop()
+                    self.engine = None
+                except:
+                    pass
+            
+            # Force stop Hindi TTS
+            if HINDI_TTS_AVAILABLE:
+                hindi_tts.cleanup()
+            
+            print("[SPEAKER] TTS shutdown complete")
+        except Exception as e:
+            print(f"[SPEAKER] Shutdown error: {e}")
         self.is_speaking = False
     
     def get_available_voices(self) -> list:
