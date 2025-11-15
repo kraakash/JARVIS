@@ -339,8 +339,8 @@ class JarvisBrain:
         # ALWAYS train JARVIS model with final response (regardless of source)
         if JARVIS_MODEL_AVAILABLE and len(command_text.strip()) > 2:
             try:
-                jarvis_model.learn_from_response(command_text, response)
-                print(f"[JARVIS] Trained model with response from any source")
+                jarvis_model.add_conversation(command_text, response)
+                print(f"[JARVIS] Added conversation to training data")
             except Exception as e:
                 print(f"[JARVIS] Training error: {e}")
         

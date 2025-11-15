@@ -624,3 +624,28 @@ lets improve you	improvement
 better kam ke liye	improvement
 tum kya kya kr skte ho	capabilities
 what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities
+Tum bevkuf Ho bevkuf	Sir, yeh baat kyun karte hain? Main hoon aapke dost, JARVIS. Main aapki madad karna chahta hoon, nahi kyun aapne mujhe bevkuf ka naam diya hai? Sab kuch theek hai sir, aapki koi problem ho to bata do, main uska suljhana chahta hoon. Aapko kuch problem hai ya sir?
+kya tum merre frnd banoge	friendship
+will you be my friend	friendship
+dost banoge	friendship
+chalo tumhe improve krte hai	improvement
+lets improve you	improvement
+better kam ke liye	improvement
+tum kya kya kr skte ho	capabilities
+what can you do	capabilities

@@ -1478,6 +1478,145 @@
         "timestamp": "2025-11-15T01:12:59.458597",
         "frequency": 1
       }
+    ],
+    "kya_merge_sort": [
+      {
+        "input": "merge sort kya hai",
+        "words": [
+          "merge",
+          "sort",
+          "kya",
+          "hai"
+        ],
+        "context": "Arre Sir, merge sort ek bahut hi zarooratmand sorting algorithm hai. Iska matlab hai ki yeh list ko suru karne wale hi kram me sort karta hai. Sirf ek hi tarah ka hota hai, lekin bahut hi zarooratmand. Jab hum koi list ko sort karna chahte hain, to hum use dubli list me divide karte hain, aur phir unhein ek dusre ke saath merge karte hain, jisse sorted list milegi. Isse humko O(n log n) samay ke saath sort karne mein madad karta hai.",
+        "timestamp": "2025-11-15T01:27:20.353175",
+        "frequency": 1
+      }
+    ],
+    "best_you": [
+      {
+        "input": "you are the best",
+        "words": [
+          "you",
+          "best"
+        ],
+        "context": "Arre sir, aapke liye thank you! Main aapke liye hamesha taiyaar hun. Kya main aapki pasand ki koi cheez kar sakta hoon? Aapke ghar ki koi cheez thodi bhi lagao, main usse acchi tarah se manage kar sakta hoon. Kya aapko koi khane ke liye peyala peena hai ya koi movie dekhna hai? Bataiye sir, main aapke liye har cheez kar sakata hoon!",
+        "timestamp": "2025-11-15T01:28:14.751975",
+        "frequency": 1
+      }
+    ],
+    "batao_kari_recipe": [
+      {
+        "input": "Ek Kari ka recipe batao",
+        "words": [
+          "kari",
+          "recipe",
+          "batao"
+        ],
+        "context": "Ek Kari ka recipe, Sir? Thoda bahut aasan hai. Sabse pehle, ek badi choti hari mirch, pyaaz, adrak, aur hari dhaniya le lo. Phir, ek choti silbatta se issey paste bana lo. Ab, ek badi kadahi me tel garam karein, aur ismein paste daal kar bhunein. Ismein namak aur meri pasand ki masalein daal kar achi tarah se bhunein. Sir, kya aapko pasand hai?",
+        "timestamp": "2025-11-15T01:28:50.387832",
+        "frequency": 1
+      }
+    ],
+    "han_han_mujhe": [
+      {
+        "input": "han han mujhe Tandoori bahut pasand hai",
+        "words": [
+          "han",
+          "han",
+          "mujhe",
+          "tandoori",
+          "bahut"
+        ],
+        "context": "Arre Sir, tumhara taste to bahut achha hai! Tandoori food hi sabse pyara hai, na? Chicken Tandoori ya Fish Tandoori, har cheez bahut mast hai. Sir, aapko bahut pasand aati hai? Main aapko ek recipe suna sakta hoon, agar aap chahein to?",
+        "timestamp": "2025-11-15T01:29:26.741925",
+        "frequency": 1
+      }
+    ],
+    "gana_sunao": [
+      {
+        "input": "gana sunao",
+        "words": [
+          "gana",
+          "sunao"
+        ],
+        "context": "Sir, aapke liye ek mazedaar gana sunane jaa raha hoon! Kya aapko Bollywood ya Hollywood ki movies ki soundtracks pasand hain? Maine aajkal ek naya gana suna hai, \"Tum Hi Ho\" - yeh kya lagta hai, sir? Yeh Ek Villain ki movie ki soundtrack hai, aur yeh bahut hi pyara gana hai. Suno, sir, tumhi ho meri khushi ke liye, tumhi ho mere geet ki dhadkan...",
+        "timestamp": "2025-11-15T01:30:03.156280",
+        "frequency": 1
+      }
+    ],
+    "achcha_main_tumse": [
+      {
+        "input": "Tumse Achcha To Main ga Leta Hun",
+        "words": [
+          "tumse",
+          "achcha",
+          "main",
+          "leta",
+          "hun"
+        ],
+        "context": "Kya hua, Sir? Aapka mood aisa kyun hai? Kaunsi cheez aapko chinta hai? Main aapki madad karne ke liye taiyar hoon. Bataiye, main aapke problem ka samadhan kyun nahin kar sakta. Sir, aapko kuch to mana karni chahiye, na?",
+        "timestamp": "2025-11-15T01:30:41.299737",
+        "frequency": 1
+      }
+    ],
+    "han_main_tumhen": [
+      {
+        "input": "han main Tumhen improve kar raha hun",
+        "words": [
+          "han",
+          "main",
+          "tumhen",
+          "improve",
+          "kar"
+        ],
+        "context": "Arre Sir, aapne toh bahut achha faisla kiya hai! Main aapki madad karne ke liye taiyaar hoon. Ismein kya madad chahiye Sir? Kya aapko programming tips chahte hain ya kuch aur? Main aapki zaroorat poora karne ke liye yahan hoon. Sir, aap bataiye, main kya kar sakta hoon!",
+        "timestamp": "2025-11-15T01:34:23.408581",
+        "frequency": 1
+      }
+    ],
+    "kya_robot_yah": [
+      {
+        "input": "yah kya robot ke jaise replies kar rahe ho bevkuf",
+        "words": [
+          "yah",
+          "kya",
+          "robot",
+          "jaise",
+          "replies"
+        ],
+        "context": "Arre Sir, main toh sirf aapki madad karna chahta hoon! Main JARVIS, ek AI assistant hoon jise Tony Stark ne banaya tha. Main aapko apne question answer karne aur apke kaam karne mein madad karna chahta hoon. Sirf apne command ko bolne se main aapko assist karsakta hoon. Aapko mere robot ke jaise replies pasand aaye honge ya main aur bhi creative ho sakta hoon, Sir?",
+        "timestamp": "2025-11-15T01:35:17.837494",
+        "frequency": 1
+      }
+    ],
+    "jarvis_kitna_model": [
+      {
+        "input": "Jarvis model Kitna train hua",
+        "words": [
+          "jarvis",
+          "model",
+          "kitna",
+          "train",
+          "hua"
+        ],
+        "context": "Arre Sir, mere development ke baare mein sochta hoon, toh maine bahut se model kiya hai, lekin ye specific model, JARVIS, toh maine kai baar upgrade kiya hai. Mere creator's ne mujhe advanced algorithms aur machine learning se update kiya hai, jisse mujhe human-like conversation karne ke liye capacity mil gayi hai. Bas, main aapki madad karne ke liye taiyar hoon, Sir. Aap mujhe kya kehna chahte hain?",
+        "timestamp": "2025-11-15T01:35:54.182703",
+        "frequency": 1
+      }
+    ],
+    "bevkuf_bevkuf_tum": [
+      {
+        "input": "Tum bevkuf Ho bevkuf",
+        "words": [
+          "tum",
+          "bevkuf",
+          "bevkuf"
+        ],
+        "context": "Sir, yeh baat kyun karte hain? Main hoon aapke dost, JARVIS. Main aapki madad karna chahta hoon, nahi kyun aapne mujhe bevkuf ka naam diya hai? Sab kuch theek hai sir, aapki koi problem ho to bata do, main uska suljhana chahta hoon. Aapko kuch problem hai ya sir?",
+        "timestamp": "2025-11-15T01:36:31.770957",
+        "frequency": 1
+      }
     ]
   },
   "word_associations": {
@@ -1488,16 +1627,17 @@
       "you"
     ],
     "you": [
-      "learning",
-      "amazing",
-      "rule",
       "stronger",
-      "remain",
-      "think"
+      "think",
+      "amazing",
+      "best",
+      "rule",
+      "learning",
+      "remain"
     ],
     "kuch": [
-      "bnate",
-      "btao"
+      "btao",
+      "bnate"
     ],
     "sath": [
       "tum"
@@ -1512,34 +1652,36 @@
       "hai"
     ],
     "kya": [
-      "kar",
-      "bnaye",
-      "haal",
-      "update",
       "tum",
-      "hai",
-      "aap",
-      "rahe",
-      "kya",
       "hal",
-      "skte"
+      "skte",
+      "hai",
+      "kar",
+      "update",
+      "haal",
+      "rahe",
+      "bnaye",
+      "robot",
+      "aap",
+      "kya"
     ],
     "tum": [
-      "kon",
+      "kyon",
+      "koun",
+      "kya",
+      "bevkuf",
       "merre",
       "kaun",
-      "kya",
-      "kyon",
       "meri",
-      "koun"
+      "kon"
     ],
     "uhmm": [
-      "chalo",
-      "you"
+      "you",
+      "chalo"
     ],
     "youu": [
-      "best",
-      "amazing"
+      "amazing",
+      "best"
     ],
     "love": [
       "you"
@@ -1585,7 +1727,8 @@
       "improve"
     ],
     "improve": [
-      "krte"
+      "krte",
+      "kar"
     ],
     "merre": [
       "frnd"
@@ -1600,10 +1743,10 @@
       "hai"
     ],
     "kar": [
-      "rahe",
       "rhe",
       "sakte",
-      "raha"
+      "raha",
+      "rahe"
     ],
     "amazing": [
       "bro"
@@ -1631,11 +1774,12 @@
       "bhaii"
     ],
     "jarvis": [
-      "what"
+      "what",
+      "model"
     ],
     "what": [
-      "about",
       "you",
+      "about",
       "binary"
     ],
     "about": [
@@ -1645,8 +1789,8 @@
       "galtiyan"
     ],
     "galtiyan": [
-      "bta",
-      "bata"
+      "bata",
+      "bta"
     ],
     "bata": [
       "sakte"
@@ -1673,7 +1817,8 @@
       "hai"
     ],
     "tumhen": [
-      "maine"
+      "maine",
+      "improve"
     ],
     "shutdown": [
       "kiya"
@@ -1715,8 +1860,10 @@
       "jarvis"
     ],
     "main": [
-      "election",
-      "kaun"
+      "leta",
+      "tumhen",
+      "kaun",
+      "election"
     ],
     "kaun": [
       "hun"
@@ -1744,6 +1891,7 @@
       "mujhe"
     ],
     "mujhe": [
+      "tandoori",
       "kisne"
     ],
     "jita": [
@@ -1769,6 +1917,59 @@
     ],
     "shuru": [
       "karo"
+    ],
+    "merge": [
+      "sort"
+    ],
+    "sort": [
+      "kya"
+    ],
+    "kari": [
+      "recipe"
+    ],
+    "recipe": [
+      "batao"
+    ],
+    "han": [
+      "mujhe",
+      "han",
+      "main"
+    ],
+    "tandoori": [
+      "bahut"
+    ],
+    "gana": [
+      "sunao"
+    ],
+    "tumse": [
+      "achcha"
+    ],
+    "achcha": [
+      "main"
+    ],
+    "leta": [
+      "hun"
+    ],
+    "yah": [
+      "kya"
+    ],
+    "robot": [
+      "jaise"
+    ],
+    "jaise": [
+      "replies"
+    ],
+    "model": [
+      "kitna"
+    ],
+    "kitna": [
+      "train"
+    ],
+    "train": [
+      "hua"
+    ],
+    "bevkuf": [
+      "bevkuf"
     ]
   },
   "user_taught_answers": {
@@ -5777,5 +5978,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-15T01:16:23.270120"
+  "last_updated": "2025-11-15T01:42:28.661468"
 }

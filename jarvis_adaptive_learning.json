@@ -46,14 +46,17 @@
         "hii jarvis",
         "hello javis",
         "achi bat hai ye to",
-        "rahul gandhi aur narendra modi mein kaun bator hai"
+        "rahul gandhi aur narendra modi mein kaun bator hai",
+        "mujhe achcha nahin lag raha hai jar",
+        "problem to nahin hai but",
+        "din mein time nahin milta na"
       ],
       "keywords": {
         "yah": 1,
         "bahut": 1,
         "acchi": 1,
         "baat": 1,
-        "hai": 3,
+        "hai": 5,
         "hello": 3,
         "jarvis": 2,
         "hii": 1,
@@ -65,12 +68,23 @@
         "aur": 1,
         "narendra": 1,
         "modi": 1,
-        "mein": 1,
+        "mein": 2,
         "kaun": 1,
-        "bator": 1
+        "bator": 1,
+        "mujhe": 1,
+        "achcha": 1,
+        "nahin": 3,
+        "lag": 1,
+        "raha": 1,
+        "jar": 1,
+        "problem": 1,
+        "but": 1,
+        "din": 1,
+        "time": 1,
+        "milta": 1
       },
-      "success_count": 7,
-      "total_count": 7
+      "success_count": 10,
+      "total_count": 10
     },
     "open_app": {
       "patterns": [
@@ -167,7 +181,13 @@
         "app sabse jyada use ki hai",
         "resume video",
         "shuru karo",
-        "jarvis"
+        "jarvis",
+        "merge sort kaise hota hai",
+        "you are the best",
+        "ek kari ka recipe batao",
+        "han han mujhe tandoori bahut pasand hai",
+        "gana sunao",
+        "jarvis model kitna train hua"
       ],
       "keywords": {
         "bihar": 3,
@@ -179,16 +199,16 @@
         "btaokoun": 1,
         "jeet": 2,
         "raha": 1,
-        "mujhe": 1,
+        "mujhe": 2,
         "ellection": 1,
         "bare": 1,
         "koun": 1,
         "rha": 1,
         "kaun": 1,
         "aage": 1,
-        "hai": 2,
+        "hai": 4,
         "hold": 1,
-        "jarvis": 2,
+        "jarvis": 3,
         "kisne": 1,
         "jita": 1,
         "chunav": 1,
@@ -201,10 +221,31 @@
         "resume": 1,
         "video": 1,
         "shuru": 1,
-        "karo": 1
+        "karo": 1,
+        "merge": 1,
+        "sort": 1,
+        "kaise": 1,
+        "hota": 1,
+        "you": 1,
+        "are": 1,
+        "the": 1,
+        "best": 1,
+        "kari": 1,
+        "recipe": 1,
+        "batao": 1,
+        "han": 2,
+        "tandoori": 1,
+        "bahut": 1,
+        "pasand": 1,
+        "gana": 1,
+        "sunao": 1,
+        "model": 1,
+        "kitna": 1,
+        "train": 1,
+        "hua": 1
       },
-      "success_count": 10,
-      "total_count": 10
+      "success_count": 16,
+      "total_count": 16
     },
     "set_name": {
       "patterns": [
@@ -260,25 +301,31 @@
     },
     "real_time_search": {
       "patterns": [
-        "bihar election kaun jita"
+        "bihar election kaun jita",
+        "selection sort kaise hota hai"
       ],
       "keywords": {
         "bihar": 1,
         "election": 1,
         "kaun": 1,
-        "jita": 1
+        "jita": 1,
+        "selection": 1,
+        "sort": 1,
+        "kaise": 1,
+        "hota": 1,
+        "hai": 1
       },
-      "success_count": 1,
-      "total_count": 1
+      "success_count": 2,
+      "total_count": 2
     }
   },
   "response_quality": {},
   "learning_stats": {
-    "total_interactions": 48,
-    "correct_predictions": 48,
-    "ml_predictions": 78,
+    "total_interactions": 58,
+    "correct_predictions": 58,
+    "ml_predictions": 97,
     "learning_rate": 100.0,
-    "ml_accuracy": 80.0,
+    "ml_accuracy": 40.0,
     "intent_accuracy": {
       "general": 100.0,
       "greeting": 100.0,
@@ -344,7 +391,17 @@
     "jarvis",
     "chrome close karo",
     "close chrome",
-    "bihar election kaun jita"
+    "bihar election kaun jita",
+    "merge sort kaise hota hai",
+    "selection sort kaise hota hai",
+    "you are the best",
+    "ek kari ka recipe batao",
+    "han han mujhe tandoori bahut pasand hai",
+    "gana sunao",
+    "mujhe achcha nahin lag raha hai jar",
+    "jarvis model kitna train hua",
+    "problem to nahin hai but",
+    "din mein time nahin milta na"
   ],
   "training_labels": [
     "general",
@@ -394,7 +451,17 @@
     "general_conversation",
     "close_app",
     "close_app",
-    "real_time_search"
+    "real_time_search",
+    "general_conversation",
+    "real_time_search",
+    "general_conversation",
+    "general_conversation",
+    "general_conversation",
+    "general_conversation",
+    "greeting",
+    "general_conversation",
+    "greeting",
+    "greeting"
   ],
-  "last_updated": "2025-11-15T01:17:49.352503"
+  "last_updated": "2025-11-15T01:37:25.497562"
 }

@@ -113,6 +113,12 @@ class EmotionEngine:
             # Check if it's a general conversation question
             elif any(keyword in text_lower for keyword in ['how are you', 'kaise ho', 'what is your name', 'tumhara naam', 'who are you', 'tum kaun ho', 'whats your name', 'naam batao']):
                 return 'general_conversation'
+            # Check for programming questions - should be handled as questions
+            elif any(keyword in text_lower for keyword in ['sort', 'algorithm', 'code', 'programming', 'function', 'variable', 'loop', 'array', 'string', 'class', 'method', 'python', 'java', 'javascript', 'html', 'css', 'sql', 'database']):
+                return 'question'
+            # Check for "how to" programming questions in Hindi/English
+            elif any(phrase in text_lower for phrase in ['kaise hota hai', 'kaise karte hain', 'kaise banate hain', 'how does', 'how to', 'what is']) and any(keyword in text_lower for keyword in ['sort', 'algorithm', 'code', 'programming', 'function', 'variable', 'loop', 'array', 'string', 'class', 'method']):
+                return 'question'
             else:
                 return 'question'
         
@@ -135,7 +141,9 @@ class EmotionEngine:
             'nice', 'good', 'great', 'awesome', 'badiya', 'zabardast',
             'theek hai', 'thik hai', 'sahi hai', 'perfect', 'bilkul',
             'haan', 'yes', 'okay', 'ok', 'right', 'correct', 'sach',
-            'whats happening', 'kya chal raha', 'kya ho raha', 'what happening'
+            'whats happening', 'kya chal raha', 'kya ho raha', 'what happening',
+            'kya karun', 'din ko time', 'nahin milta', 'raat mein', 'time nahin',
+            'milta hai', 'kar raha hun', 'kaam kar', 'busy', 'free time'
         ]
         for keyword in conversation_keywords:
             if keyword in text_lower:
@@ -243,12 +251,16 @@ class EmotionEngine:
         
         # Greetings - only for simple greetings without questions or conversational words
         greeting_words = ['hello', 'hi', 'hey', 'greetings', 'namaste']
-        conversational_words = ['achi', 'acchi', 'good', 'nice', 'great', 'theek', 'sahi', 'haan', 'yes', 'okay', 'whats', 'happening', 'train', 'sikh', 'seekh']
+        conversational_words = ['achi', 'acchi', 'good', 'nice', 'great', 'theek', 'sahi', 'haan', 'yes', 'okay', 'whats', 'happening', 'train', 'sikh', 'seekh', 'karun', 'milta', 'nahin', 'din', 'time', 'raat', 'kaam', 'kar', 'raha', 'hun']
         
         has_greeting = any(word in text_lower for word in greeting_words)
         has_conversational = any(word in text_lower for word in conversational_words)
         
-        if has_greeting and not has_question_word and not ends_with_question and not has_conversational:
+        # If it contains conversational words, treat as general conversation
+        if has_conversational:
+            return 'general_conversation'
+        
+        if has_greeting and not has_question_word and not ends_with_question:
             return 'greeting'
         
         # Help commands
@@ -267,14 +279,24 @@ class EmotionEngine:
         if any(word in text_lower for word in ['play']):
             return 'command'
         
-        # Check for real-time information requests
-        realtime_keywords = [
-            'result', 'news', 'latest', 'current', 'aaj', 'abhi', 'recent',
-            'jita', 'won', 'winner', 'election', 'chunav', 'headlines', 'breaking'
+        # Check for real-time information requests (but exclude programming questions)
+        programming_keywords = [
+            'sort', 'algorithm', 'code', 'programming', 'function', 'variable',
+            'loop', 'array', 'string', 'class', 'method', 'python', 'java',
+            'javascript', 'html', 'css', 'sql', 'database'
         ]
         
-        if any(keyword in text_lower for keyword in realtime_keywords):
-            return 'real_time_search'
+        # If it's a programming question, don't treat as real-time search
+        is_programming = any(keyword in text_lower for keyword in programming_keywords)
+        
+        if not is_programming:
+            realtime_keywords = [
+                'result', 'news', 'latest', 'current', 'aaj', 'abhi', 'recent',
+                'jita', 'won', 'winner', 'election', 'chunav', 'headlines', 'breaking'
+            ]
+            
+            if any(keyword in text_lower for keyword in realtime_keywords):
+                return 'real_time_search'
         
         # Check for Hindi conversational patterns that might be missed
         hindi_conversation_patterns = [

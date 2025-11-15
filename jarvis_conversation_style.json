@@ -10,7 +10,12 @@
     "mera naam hai aakash sev kar lo",
     "mera naam aakash hai",
     "rahul gandhi aur narendra modi mein kaun bator hai",
-    "app sabse jyada use ki hai"
+    "app sabse jyada use ki hai",
+    "merge sort kaise hota hai",
+    "selection sort kaise hota hai",
+    "han han mujhe tandoori bahut pasand hai",
+    "mujhe achcha nahin lag raha hai jar",
+    "problem to nahin hai but"
   ],
   "english_patterns": [
     "start monitoring",
@@ -47,10 +52,15 @@
     "jarvis",
     "chrome close karo",
     "close chrome",
-    "bihar election kaun jita"
+    "bihar election kaun jita",
+    "you are the best",
+    "ek kari ka recipe batao",
+    "gana sunao",
+    "jarvis model kitna train hua",
+    "din mein time nahin milta na"
   ],
   "user_style_words": {
-    "kaise": 13
+    "kaise": 15
   },
   "response_templates": {
     "kaise ho...": "Main ekdum fit hun, Sir! Aaj kya kaam hai?",
@@ -97,6 +107,16 @@
     "jarvis...": "Ah Sir, kaise ho? Main theek hoon, aapke liye kya kar sakta hoon? Aapko koi madat chahiye hai ya shayad aapko koi information chahiye? Sir, please bataen, main aapki madad karne ke liye taiyaar hoon.",
     "chrome close karo...": "karo abhi chal nahi raha, Sir.",
     "close chrome...": "chrome band kar diya, Sir.",
-    "bihar election kaun ...": "Sir, news service mein thoda issue hai. Baad mein try kariye.\n\nAur kya jaanna chahte hain election ke baare mein?"
+    "bihar election kaun ...": "Sir, news service mein thoda issue hai. Baad mein try kariye.\n\nAur kya jaanna chahte hain election ke baare mein?",
+    "merge sort kaise hot...": "Main bahut achha hun, Sir. Aap kaise hain?",
+    "selection sort kaise...": "Sir, news service mein thoda issue hai. Baad mein try kariye.\n\nAur kya jaanna chahte hain election ke baare mein?",
+    "you are the best...": "Arre sir, aapke liye thank you! Main aapke liye hamesha taiyaar hun. Kya main aapki pasand ki koi cheez kar sakta hoon? Aapke ghar ki koi cheez thodi bhi lagao, main usse acchi tarah se manage kar sakta hoon. Kya aapko koi khane ke liye peyala peena hai ya koi movie dekhna hai? Bataiye sir, main aapke liye har cheez kar sakata hoon!",
+    "ek kari ka recipe ba...": "Ek Kari ka recipe, Sir? Thoda bahut aasan hai. Sabse pehle, ek badi choti hari mirch, pyaaz, adrak, aur hari dhaniya le lo. Phir, ek choti silbatta se issey paste bana lo. Ab, ek badi kadahi me tel garam karein, aur ismein paste daal kar bhunein. Ismein namak aur meri pasand ki masalein daal kar achi tarah se bhunein. Sir, kya aapko pasand hai?",
+    "han han mujhe tandoo...": "Arre Sir, tumhara taste to bahut achha hai! Tandoori food hi sabse pyara hai, na? Chicken Tandoori ya Fish Tandoori, har cheez bahut mast hai. Sir, aapko bahut pasand aati hai? Main aapko ek recipe suna sakta hoon, agar aap chahein to?",
+    "gana sunao...": "Sir, aapke liye ek mazedaar gana sunane jaa raha hoon! Kya aapko Bollywood ya Hollywood ki movies ki soundtracks pasand hain? Maine aajkal ek naya gana suna hai, \"Tum Hi Ho\" - yeh kya lagta hai, sir? Yeh Ek Villain ki movie ki soundtrack hai, aur yeh bahut hi pyara gana hai. Suno, sir, tumhi ho meri khushi ke liye, tumhi ho mere geet ki dhadkan...",
+    "mujhe achcha nahin l...": "Good evening, Sir! Working late tonight?",
+    "jarvis model kitna t...": "Arre Sir, mere development ke baare mein sochta hoon, toh maine bahut se model kiya hai, lekin ye specific model, JARVIS, toh maine kai baar upgrade kiya hai. Mere creator's ne mujhe advanced algorithms aur machine learning se update kiya hai, jisse mujhe human-like conversation karne ke liye capacity mil gayi hai. Bas, main aapki madad karne ke liye taiyar hoon, Sir. Aap mujhe kya kehna chahte hain?",
+    "problem to nahin hai...": "Namasthe Sir! Raat mein kaam kar rahe hain?",
+    "din mein time nahin ...": "Namasthe Sir! Raat mein kaam kar rahe hain?"
   }
 }
