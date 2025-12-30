@@ -71,6 +71,10 @@ class EmotionEngine:
         else:
             emotion = 'neutral'
             
+        # Keyword overrides for specific emotional contexts
+        if any(word in text.lower() for word in ['friend', 'dost', 'yaar', 'bhai', 'behen']):
+            emotion = 'friend'
+            
         return emotion, polarity, subjectivity
     
     def get_emotional_response(self, emotion):
@@ -110,10 +114,18 @@ class EmotionEngine:
                 return 'weather_query'
             elif any(word in text_lower for word in ['calculate', 'math', 'plus', 'minus', 'multiply', 'divide']):
                 return 'calculation'
-            # Check if it's a general conversation question
-            elif any(keyword in text_lower for keyword in ['how are you', 'kaise ho', 'what is your name', 'tumhara naam', 'who are you', 'tum kaun ho', 'whats your name', 'naam batao']):
+            
+            # Check for CONVERSATIONAL questions first (don't treat these as technical questions)
+            conversational_questions = [
+                'how are you', 'kaise ho', 'what is your name', 'tumhara naam', 
+                'who are you', 'tum kaun ho', 'whats your name', 'naam batao', 
+                'whats up', 'what up', 'whats going on', 'what is going on',
+                'what are you doing', 'kya kar rahe', 'kya chal raha'
+            ]
+            if any(phrase in text_lower for phrase in conversational_questions):
                 return 'general_conversation'
-            # Check for programming questions - should be handled as questions
+
+            # Check for programming questions
             elif any(keyword in text_lower for keyword in ['sort', 'algorithm', 'code', 'programming', 'function', 'variable', 'loop', 'array', 'string', 'class', 'method', 'python', 'java', 'javascript', 'html', 'css', 'sql', 'database']):
                 return 'question'
             # Check for "how to" programming questions in Hindi/English
@@ -132,6 +144,14 @@ class EmotionEngine:
             if keyword in text_lower:
                 return 'general_conversation'
         
+        # YouTube commands - prioritized by specificity
+        if any(phrase in text_lower for phrase in ['play video', 'video chalao', 'play first', 'play second', 'play third']) or ('play' in text_lower and 'youtube' in text_lower):
+            return 'play_video'
+        elif any(phrase in text_lower for phrase in ['youtube search', 'yt search', 'youtube mein search']) or ('search' in text_lower and 'youtube' in text_lower):
+            return 'youtube_search'
+        elif any(phrase in text_lower for phrase in ['open youtube', 'youtube kholo', 'yt open']):
+            return 'open_youtube'
+        
         # General conversation - check after questions
         conversation_keywords = [
             'thank you', 'dhanyawad', 'what can you do', 'tum kya kar sakte ho',
@@ -141,7 +161,8 @@ class EmotionEngine:
             'nice', 'good', 'great', 'awesome', 'badiya', 'zabardast',
             'theek hai', 'thik hai', 'sahi hai', 'perfect', 'bilkul',
             'haan', 'yes', 'okay', 'ok', 'right', 'correct', 'sach',
-            'whats happening', 'kya chal raha', 'kya ho raha', 'what happening',
+            'whats happening', "what's happening", 'kya chal raha', 'kya ho raha', 
+            'what happening', 'whats going on', "what's going on",
             'kya karun', 'din ko time', 'nahin milta', 'raat mein', 'time nahin',
             'milta hai', 'kar raha hun', 'kaam kar', 'busy', 'free time'
         ]
@@ -235,29 +256,43 @@ class EmotionEngine:
         elif any(phrase in text_lower for phrase in ['election result', 'chunav result', 'kisne jita', 'who won', 'latest news', 'current news', 'aaj ka news', 'headlines', 'top news']):
             return 'real_time_search'
         
-        # App control commands (more specific)
+        # App control commands (more specific) - CHECK FIRST
+        close_triggers = ['close', 'exit', 'quit', 'stop', 'band', 'khatam', 'rok']
+        open_triggers = ['open', 'start', 'launch', 'run', 'kholo', 'chalu']
+        
+        # Close app detection - PRIORITY
+        if any(trigger in text_lower for trigger in close_triggers):
+            # Common app names to detect
+            app_names = ['chrome', 'calculator', 'notepad', 'paint', 'whatsapp', 'discord', 'spotify', 'steam', 'word', 'excel', 'powerpoint', 'outlook', 'teams', 'zoom', 'skype', 'firefox', 'edge']
+            if any(app in text_lower for app in app_names) or any(word in text_lower for word in ['app', 'application']):
+                return 'close_app'
+        
+        # Open app detection
+        elif any(trigger in text_lower for trigger in open_triggers):
+            app_names = ['chrome', 'calculator', 'notepad', 'paint', 'whatsapp', 'discord', 'spotify', 'steam', 'word', 'excel', 'powerpoint', 'outlook', 'teams', 'zoom', 'skype', 'firefox', 'edge']
+            if any(app in text_lower for app in app_names) or any(word in text_lower for word in ['app', 'application']):
+                return 'open_app'
+        
+        # App search and listing
         elif any(phrase in text_lower for phrase in ['find app', 'search app', 'show app', 'list app']):
             return 'search_apps'
-        elif any(phrase in text_lower for phrase in ['open chrome', 'start calculator', 'launch notepad', 'run paint']) or \
-             (any(word in text_lower for word in ['open', 'start', 'launch', 'run']) and 
-              any(word in text_lower for word in ['app', 'application', 'chrome', 'calculator', 'notepad'])):
-            return 'open_app'
-        elif any(phrase in text_lower for phrase in ['close chrome', 'exit calculator', 'quit notepad']) or \
-             (any(word in text_lower for word in ['close', 'exit', 'quit', 'stop']) and 
-              any(word in text_lower for word in ['app', 'application', 'chrome', 'calculator'])):
-            return 'close_app'
         elif any(phrase in text_lower for phrase in ['list apps', 'list all apps', 'show all apps', 'running apps', 'what apps', 'all apps']):
             return 'list_apps'
         
-        # Greetings - only for simple greetings without questions or conversational words
+        # Greetings - check if it's ONLY a greeting
         greeting_words = ['hello', 'hi', 'hey', 'greetings', 'namaste']
-        conversational_words = ['achi', 'acchi', 'good', 'nice', 'great', 'theek', 'sahi', 'haan', 'yes', 'okay', 'whats', 'happening', 'train', 'sikh', 'seekh', 'karun', 'milta', 'nahin', 'din', 'time', 'raat', 'kaam', 'kar', 'raha', 'hun']
+        conversational_words = [
+            'friend', 'dost', 'yaar', 'bhai', 'achi', 'acchi', 'good', 'nice', 'great', 
+            'theek', 'sahi', 'haan', 'yes', 'okay', 'whats', 'happening', 'train', 
+            'sikh', 'seekh', 'karun', 'milta', 'nahin', 'din', 'time', 'raat', 
+            'kaam', 'kar', 'raha', 'hun'
+        ]
         
-        has_greeting = any(word in text_lower for word in greeting_words)
+        has_greeting = any(word in text_lower.split() for word in greeting_words)
         has_conversational = any(word in text_lower for word in conversational_words)
         
-        # If it contains conversational words, treat as general conversation
-        if has_conversational:
+        # If it contains conversational words or is quite long, treat as general conversation
+        if has_conversational or len(text_lower.split()) > 2:
             return 'general_conversation'
         
         if has_greeting and not has_question_word and not ends_with_question:
@@ -306,6 +341,12 @@ class EmotionEngine:
         
         if any(pattern in text_lower for pattern in hindi_conversation_patterns):
             return 'general_conversation'
+        
+        # Final check for app control before defaulting
+        if any(word in text_lower for word in ['close', 'exit', 'quit', 'stop', 'band', 'khatam']):
+            return 'close_app'
+        elif any(word in text_lower for word in ['open', 'start', 'launch', 'run', 'kholo']):
+            return 'open_app'
         
         # Default to general conversation for unmatched patterns
         return 'general_conversation'

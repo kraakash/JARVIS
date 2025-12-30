@@ -13,29 +13,40 @@ import edge_tts
 import asyncio
 import threading
 
+try:
+    from .openai_tts import openai_tts
+except ImportError:
+    openai_tts = None
+
 class HindiTTS:
     def __init__(self):
         self.use_online = True
-        self.voice_engine = "edge"  # edge, gtts, or azure
+        self.voice_engine = "openai" if (openai_tts and openai_tts.is_available()) else "edge"
         self.hindi_voice = "hi-IN-MadhurNeural"  # Microsoft Edge Hindi voice
         self.rate = "fast"  # slow, medium, fast
         
         # Initialize pygame for audio playback
         try:
             pygame.mixer.init()
-            print("[OK] Hindi TTS system initialized")
+            print(f"[OK] Hindi TTS system initialized (Engine: {self.voice_engine})")
         except:
             print("[ERROR] Could not initialize audio system")
     
     def speak_hindi(self, text, jarvis_style=True):
         """Speak Hindi text with proper pronunciation"""
         try:
+            # Check for OpenAI first if configured as default or available
+            if openai_tts and openai_tts.is_available() and self.voice_engine == "openai":
+                return openai_tts.speak(text)
+
             if jarvis_style:
                 # Add JARVIS-like pauses and tone
                 text = self._add_jarvis_style(text)
             
             if self.voice_engine == "edge":
                 return self._speak_with_edge(text)
+            elif self.voice_engine == "openai": # Fallback if default but failed
+                 return self._speak_with_edge(text)
             elif self.voice_engine == "gtts":
                 return self._speak_with_gtts(text)
             else:
@@ -51,7 +62,8 @@ class HindiTTS:
             # Generate speech in memory
             async def generate_speech():
                 audio_data = b""
-                communicate = edge_tts.Communicate(text, self.hindi_voice, rate='+10%')
+                # Use a more natural rate for Neural voices
+                communicate = edge_tts.Communicate(text, self.hindi_voice, rate='+0%')
                 async for chunk in communicate.stream():
                     if chunk["type"] == "audio":
                         audio_data += chunk["data"]
@@ -126,7 +138,7 @@ class HindiTTS:
             ssml = f"""
             <speak version='1.0' xml:lang='hi-IN'>
                 <voice xml:lang='hi-IN' xml:gender='Male' name='hi-IN-MadhurNeural'>
-                    <prosody rate='slow' pitch='medium'>
+                    <prosody rate='0%' pitch='medium'>
                         {text}
                     </prosody>
                 </voice>
@@ -154,15 +166,20 @@ class HindiTTS:
     
     def _add_jarvis_style(self, text):
         """Add JARVIS-like pauses and emphasis"""
-        # Clean any existing SSML tags
+        # Clean any existing SSML or Markdown tags
         import re
         text = re.sub(r'<[^>]+>', '', text)
+        text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text) # Remove bold
+        text = re.sub(r'\*([^*]+)\*', r'\1', text) # Remove italics
         
-        # Add natural pauses after "Sir" (just period, no SSML)
-        text = text.replace("Sir,", "Sir.")
-        text = text.replace("sir,", "sir.")
+        # Add natural pauses after "Sir" or "JARVIS"
+        text = re.sub(r'(?i)\bSir\b', 'Sir,', text)
+        text = re.sub(r'(?i)\bJARVIS\b', 'JARVIS,', text)
         
-        return text
+        # Ensure punctuation has a space after it for TTS engines
+        text = text.replace(".", ". ").replace(",", ", ").replace("?", "? ").replace("!", "! ")
+        
+        return text.strip()
     
     def set_voice_style(self, style="jarvis"):
         """Set voice style for different moods"""

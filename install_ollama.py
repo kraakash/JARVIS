@@ -62,14 +62,14 @@ def start_ollama_service():
     return False
 
 def download_model():
-    """Download CodeLlama model"""
-    print("📥 Downloading CodeLlama model (this may take a few minutes)...")
+    """Download lightweight model"""
+    print("📥 Downloading Llama 3.2 3B model (faster download)...")
     
     try:
-        result = subprocess.run(['ollama', 'pull', 'codellama:7b-instruct'], 
+        result = subprocess.run(['ollama', 'pull', 'llama3.2:3b'], 
                               capture_output=True, text=True)
         if result.returncode == 0:
-            print("✅ CodeLlama model downloaded")
+            print("✅ Llama 3.2 model downloaded")
             return True
         else:
             print(f"❌ Download failed: {result.stderr}")

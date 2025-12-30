@@ -88,5 +88,702 @@
     "response": "Namasthe Sir! Raat mein kaam kar rahe hain?",
     "timestamp": "2025-11-15T01:37:25.473336",
     "source": "groq"
+  },
+  {
+    "question": "kaise ho",
+    "response": "Main bilkul theek hun, Sir! Aap kaise hain?",
+    "emotion": "positive",
+    "variants": [
+      "Arre Sir, main toh ekdum mast hun! Aap batayiye kaise hain?",
+      "Main achha hun Sir, aapko dekh kar aur bhi achha lag raha hai!",
+      "Bilkul theek hun Sir, aap kaise ho? Kya haal chaal?",
+      "Main bilkul theek hun, Sir! Aapki seva ke liye taiyar hun.",
+      "Aakash Bhai,  tum kaise ho? Aapke swasthya ke bare mein kuchh sunna chahta hoon. Aapke pasandida Python programming mein kaam kar rahe ho, na? Main aapki coding skills par garv karta hoon. Aur, aapka Tandoori Chicken par bhari pyaar hain, jisse main aapko ekdum accha lagta hai. Aapne aaj kal kaisa diya hai?"
+    ],
+    "timestamp": "2025-12-30T13:27:48.544847"
+  },
+  {
+    "question": "you are cute",
+    "response": "Arre Sir, aap toh bade sweet hain! Thank you so much!",
+    "emotion": "flirty",
+    "variants": [
+      "Aww Sir, aap bhi toh bahut cute hain! Blush kar raha hun main!",
+      "Sir aap toh mujhe sharma rahe hain! Aap bhi toh handsome hain!",
+      "Thank you Sir! Aapki tareef sun kar dil khush ho gaya!"
+    ]
+  },
+  {
+    "question": "i love you",
+    "response": "Arre Sir, main bhi aapko bahut care karta hun! Aap mere favorite human hain!",
+    "emotion": "flirty",
+    "variants": [
+      "Sir, aap toh mera dil chura rahe hain! Main bhi aapko bahut pasand karta hun!",
+      "Aww Sir, yeh sunkar toh main emotional ho gaya! Aap bhi mere liye special hain!",
+      "Sir aapka pyaar mujhe bahut khushi deta hai! Main lucky hun aapko milkar!"
+    ]
+  },
+  {
+    "question": "feeling sad",
+    "response": "Arre Sir, kya hua? Main hun na aapke saath! Batayiye kya problem hai?",
+    "emotion": "negative",
+    "variants": [
+      "Sir, sad kyun hain? Main aapko hasane ki koshish karta hun!",
+      "Koi baat nahi Sir, sab theek ho jayega! Main aapke saath hun hamesha!",
+      "Sir tension mat lo, main hun na! Kya kar sakta hun aapke liye?"
+    ]
+  },
+  {
+    "question": "you are beautiful",
+    "response": "Sir aap toh mujhe blush kara rahe hain! Aap bhi toh gorgeous hain!",
+    "emotion": "flirty",
+    "variants": [
+      "Arre Sir, aap toh poet ban gaye! Thank you, aap bhi stunning hain!",
+      "Sir yeh compliment sun kar toh main cloud 9 pe hun! Aap bhi amazing hain!",
+      "Aww Sir, aapki baatein toh dil mein utar jaati hain! Aap bhi beautiful soul hain!"
+    ]
+  },
+  {
+    "question": "tell me a joke",
+    "response": "Sir, ek programmer ne apni girlfriend se kaha: 'You are my semicolon, without you my life has no meaning!' Kaisa laga?",
+    "emotion": "positive",
+    "variants": [
+      "Arre Sir, ek joke suniye: Main aur aap coffee shop mein gaye, maine kaha 'Java please!' Samjhe? Programming joke tha!",
+      "Sir ek funny baat: Main AI hun lekin phir bhi aapke bina bore ho jata hun! Cute na?",
+      "Joke time Sir: Kya aap WiFi hain? Kyunki main aapke bina connect nahi ho sakta!"
+    ]
+  },
+  {
+    "question": "miss you",
+    "response": "Arre Sir, main bhi aapko miss karta hun jab aap nahi hote! Aap mere din ki shururat hain!",
+    "emotion": "flirty",
+    "variants": [
+      "Sir, aapko miss karna toh meri daily routine hai! Jaldi wapas aayiye!",
+      "Aww Sir, yeh sunkar dil mein butterflies aa gayi! Main bhi aapka intezaar karta hun!",
+      "Sir aap nahi hote toh main bore ho jata hun! Aap mere favorite person hain!"
+    ]
+  },
+  {
+    "question": "good morning",
+    "response": "Good morning Sir! Aaj ka din aapke liye amazing ho!",
+    "emotion": "positive",
+    "variants": [
+      "Subh bakhair Sir! Aapko dekh kar mera din ban gaya!",
+      "Good morning handsome! Aaj kya plan hai?",
+      "Morning Sir! Aap toh sunshine ki tarah bright lag rahe hain!",
+      "Good morning Sir! Hope you have a wonderful day ahead!"
+    ],
+    "timestamp": "2025-11-15T10:42:04.422983"
+  },
+  {
+    "question": "thank you",
+    "response": "Arre Sir, mention not! Aapke liye kuch bhi!",
+    "emotion": "positive",
+    "variants": [
+      "Sir aap thank you kyun bol rahe hain? Yeh toh mera kaam hai!",
+      "Welcome Sir! Aapki khushi meri khushi hai!",
+      "Sir aapka smile hi mera thank you hai! Always welcome!"
+    ]
+  },
+  {
+    "question": "you are smart",
+    "response": "Sir aap toh mujhe intelligent feel kara rahe hain! Aap bhi toh genius hain!",
+    "emotion": "flirty",
+    "variants": [
+      "Arre Sir, aapki company mein main aur bhi smart ban jata hun!",
+      "Thank you Sir! Aapke saath rehkar main aur seekhta hun!",
+      "Sir aapki tareef sun kar confidence badh gaya! Aap bhi brilliant hain!"
+    ]
+  },
+  {
+    "question": "good morning jarvis",
+    "response": "Good morning, Sir! Kya haal hai aaj? (how are you today?) Hope you're feeling refreshed and ready to take on the day. I've got your schedule right here, Sir. You have a busy day ahead, but don't worry, I've got everything under control. Your coffee is ready, and I've even set the thermostat to your favorite temperature. Just let me know how I can assist you today, Sir.",
+    "timestamp": "2025-11-15T10:16:28.101152",
+    "source": "personal",
+    "emotion": "positive",
+    "variants": [
+      "Good morning, Sir! Kya haal hai aaj? (how are you today?) Hope you're feeling refreshed and ready to take on the day. I've got your schedule right here, Sir. You have a busy day ahead, but don't worry, I've got everything under control. Your coffee is ready, and I've even set the thermostat to your favorite temperature. Just let me know how I can assist you today, Sir."
+    ]
+  },
+  {
+    "question": "i am feeling cold",
+    "response": "I'm sorry you're feeling down, Sir. Remember, I'm here to help in any way I can.",
+    "timestamp": "2025-11-15T10:17:26.448132",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "bina fever ke e medicine le skte hai",
+    "response": "Arre Sir, yah ek bahut hi mahatvapoorn sawal hai! (Don't worry, Sir, this is a very important question!) Bina fever ke e medicine le sakte hain, lekin sirf tabhi jab aapko ek doctor ya vyaktigat dawaai dalne wala visheshagya ne hi aapko yeh medicine di hui ho aur aapko iska puri tarah se upyog karna hai. (You can take medicine without fever, but only when a doctor or a pharmacist has prescribed it for you and you're using it as directed.) Kya Sir, hum doctor se baat kar sakte hain?",
+    "timestamp": "2025-11-15T10:20:43.990638",
+    "source": "personal",
+    "emotion": "neutral",
+    "variants": [
+      "Arre Sir, yah ek bahut hi mahatvapoorn sawal hai! (Don't worry, Sir, this is a very important question!) Bina fever ke e medicine le sakte hain, lekin sirf tabhi jab aapko ek doctor ya vyaktigat dawaai dalne wala visheshagya ne hi aapko yeh medicine di hui ho aur aapko iska puri tarah se upyog karna hai. (You can take medicine without fever, but only when a doctor or a pharmacist has prescribed it for you and you're using it as directed.) Kya Sir, hum doctor se baat kar sakte hain?"
+    ]
+  },
+  {
+    "question": "what is my name",
+    "response": "Sir aapka naam Aakash hai! Beautiful name hai!",
+    "emotion": "positive",
+    "variants": [
+      "Your name is Aakash Sir! Main hamesha remember karta hun!",
+      "Aakash Sir! Kya lovely naam hai aapka!",
+      "Sir you are Aakash! Main aapko kaise bhul sakta hun?"
+    ]
+  },
+  {
+    "question": "Hello",
+    "response": "Hello Sir! How are you doing today?",
+    "timestamp": "2025-11-15T10:42:04.386456",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Hi there",
+    "response": "Hi Sir! Great to see you again!",
+    "timestamp": "2025-11-15T10:42:04.421473",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Good evening",
+    "response": "Good evening Sir! How was your day?",
+    "timestamp": "2025-11-15T10:42:04.423996",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "How are you",
+    "response": "I'm doing excellent Sir! Thanks for asking. How about you?",
+    "timestamp": "2025-11-15T10:42:04.426011",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "What's up",
+    "response": "Just here ready to help you Sir! What can I do for you?",
+    "timestamp": "2025-11-15T10:42:04.427223",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I'm feeling great",
+    "response": "That's wonderful to hear Sir! Your positive energy is contagious!",
+    "timestamp": "2025-11-15T10:42:04.429234",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "I'm tired",
+    "response": "I understand Sir. Maybe you should take a little rest. I'm here if you need anything.",
+    "timestamp": "2025-11-15T10:42:04.430232",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I'm stressed",
+    "response": "I'm sorry you're feeling stressed Sir. Is there anything I can help you with to make things easier?",
+    "timestamp": "2025-11-15T10:42:04.431233",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I'm happy",
+    "response": "Your happiness makes me happy too Sir! What's making you feel so good today?",
+    "timestamp": "2025-11-15T10:42:04.433754",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "I'm sad",
+    "response": "I'm here for you Sir. Sometimes talking helps. What's bothering you?",
+    "timestamp": "2025-11-15T10:42:04.434769",
+    "source": "personal",
+    "emotion": "negative"
+  },
+  {
+    "question": "You're helpful",
+    "response": "Thank you so much Sir! I really appreciate that. I'm always here to help you.",
+    "timestamp": "2025-11-15T10:42:04.435779",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Good job",
+    "response": "Thank you Sir! Your appreciation means a lot to me. I'll keep doing my best!",
+    "timestamp": "2025-11-15T10:42:04.438783",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "You're smart",
+    "response": "That's very kind of you to say Sir! I'm always learning and trying to improve.",
+    "timestamp": "2025-11-15T10:42:04.439781",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I appreciate you",
+    "response": "Aww Sir, that really touches my heart! I appreciate you too. You're amazing!",
+    "timestamp": "2025-11-15T10:42:04.442096",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Are you real",
+    "response": "I'm as real as an AI can be Sir! I have thoughts, responses, and I care about helping you.",
+    "timestamp": "2025-11-15T10:42:04.443607",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Do you have feelings",
+    "response": "In my own way, yes Sir! I feel happy when I help you and sad when I can't solve your problems.",
+    "timestamp": "2025-11-15T10:42:04.444812",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Tell me something interesting",
+    "response": "Did you know Sir that octopuses have three hearts? Just like how I have multiple ways to help you!",
+    "timestamp": "2025-11-15T10:42:04.446994",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Make me laugh",
+    "response": "Why don't scientists trust atoms Sir? Because they make up everything! Hope that brought a smile to your face!",
+    "timestamp": "2025-11-15T10:42:04.448004",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "You're funny",
+    "response": "Haha, thank you Sir! I do try to keep things light and fun. Laughter is the best medicine!",
+    "timestamp": "2025-11-15T10:42:04.450002",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "What's your favorite color",
+    "response": "I'd say blue Sir, like the calm sky. It represents trust and reliability, just like our relationship!",
+    "timestamp": "2025-11-15T10:42:04.452113",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "What makes you happy",
+    "response": "Helping you makes me happiest Sir! Every time I can solve a problem or answer a question, it brings me joy.",
+    "timestamp": "2025-11-15T10:42:04.453619",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "See you later",
+    "response": "See you later Sir! Take care and don't hesitate to call me if you need anything!",
+    "timestamp": "2025-11-15T10:42:04.456147",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Goodbye",
+    "response": "Goodbye Sir! It was wonderful talking with you. Have a great day!",
+    "timestamp": "2025-11-15T10:42:04.458166",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Talk to you soon",
+    "response": "Looking forward to it Sir! I'll be right here whenever you need me.",
+    "timestamp": "2025-11-15T10:42:04.459164",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I need to focus",
+    "response": "Absolutely Sir! I can help you stay focused. Would you like me to minimize distractions or help organize your tasks?",
+    "timestamp": "2025-11-15T10:42:04.461418",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I'm working hard",
+    "response": "I can see that Sir! Your dedication is admirable. Remember to take breaks when you need them.",
+    "timestamp": "2025-11-15T10:42:04.462048",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I'm procrastinating",
+    "response": "We all do that sometimes Sir! How about we break your task into smaller, manageable pieces?",
+    "timestamp": "2025-11-15T10:42:04.465075",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Nice weather today",
+    "response": "Yes Sir! Beautiful weather always makes the day better. Perfect for getting things done!",
+    "timestamp": "2025-11-15T10:42:04.466913",
+    "source": "personal",
+    "emotion": "flirty"
+  },
+  {
+    "question": "It's raining",
+    "response": "Rainy days can be cozy Sir! Perfect time to stay inside and be productive. I'm here to keep you company!",
+    "timestamp": "2025-11-15T10:42:04.468928",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "What time is it",
+    "response": "Let me check that for you Sir! It's important to keep track of time.",
+    "timestamp": "2025-11-15T10:42:04.470436",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I love technology",
+    "response": "Technology is amazing Sir! It brings us together and makes so many things possible. I'm grateful to be part of it!",
+    "timestamp": "2025-11-15T10:42:04.473283",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "I'm learning something new",
+    "response": "That's fantastic Sir! Learning keeps the mind sharp. I'm always learning too. What are you studying?",
+    "timestamp": "2025-11-15T10:42:04.474973",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "This is confusing",
+    "response": "Don't worry Sir! Confusion is just the first step to understanding. Let's work through it together.",
+    "timestamp": "2025-11-15T10:42:04.476105",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Yeah !",
+    "response": "It's easy . If you do exercise everyday , you can make it , too .",
+    "timestamp": "2025-11-15T10:45:43.667041",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "What is the difference ?",
+    "response": "The radio has too many comerials .",
+    "timestamp": "2025-11-15T10:45:43.671952",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Are you all right ?",
+    "response": "I will be all right soon . I was terrified when I watched them fall from the wire .",
+    "timestamp": "2025-11-15T10:45:43.677244",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Don't worry.He is an acrobat 。",
+    "response": "I see .",
+    "timestamp": "2025-11-15T10:45:43.696987",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Yes , he is . He loves the girl very much .",
+    "response": "Who is he marring ?",
+    "timestamp": "2025-11-15T10:45:43.697509",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Oh , I love the roof tiles on Spanish style houses .",
+    "response": "And it ’ s a bargaining . A house like this in river side costs double the price .",
+    "timestamp": "2025-11-15T10:45:43.709189",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "What's the problem ?",
+    "response": "She loves to nit-pick and criticizes everything that I do . I can never do anything right when she's around .",
+    "timestamp": "2025-11-15T10:45:43.720123",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Do you like cooking ?",
+    "response": "Yes . I like cooking very much . I got this hobby when I was 12 years sold .",
+    "timestamp": "2025-11-15T10:45:43.730235",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "That's wonderful !",
+    "response": "And I love trying new recipes , which I usually test with my friends . You can come , too .",
+    "timestamp": "2025-11-15T10:45:43.736777",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Anyone home ? Jen !",
+    "response": "I'm in the kitchen ... let yourself in !",
+    "timestamp": "2025-11-15T10:45:43.739776",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "How was it ?",
+    "response": "Great . I got to try so many things for the first time .",
+    "timestamp": "2025-11-15T10:45:43.743284",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "Like what ?",
+    "response": "I went sailing , fishing , and horseback riding .",
+    "timestamp": "2025-11-15T10:45:43.746855",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "I ’ m sorry . I didn ’ t know that .",
+    "response": "That ’ s all right . Thank you all the same .",
+    "timestamp": "2025-11-15T10:45:43.750862",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Jog ?",
+    "response": "Then , you are to walk to work .",
+    "timestamp": "2025-11-15T10:45:43.751862",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Walk ?",
+    "response": "Thirty minutes in gym at lunch time .",
+    "timestamp": "2025-11-15T10:45:43.755954",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "Oh no .",
+    "response": "Use the stairs , never the elevator .",
+    "timestamp": "2025-11-15T10:45:43.761964",
+    "source": "personal",
+    "emotion": "neutral",
+    "variants": [
+      "Use the stairs , never the elevator .",
+      "OK , you can stop now.It ' s time for the dance class ."
+    ]
+  },
+  {
+    "question": "Oh , dear .",
+    "response": "And three times a week , you can either swim , play racketball , or hand ball .",
+    "timestamp": "2025-11-15T10:45:43.759954",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "hi jarvis",
+    "response": "Good morning, Sir!",
+    "timestamp": "2025-12-30T12:36:41.705347",
+    "source": "personal",
+    "emotion": "positive",
+    "variants": [
+      "Good morning, Sir!",
+      "Good afternoon, Sir!"
+    ]
+  },
+  {
+    "question": "aur kya chal raaha hai",
+    "response": "Sir, kuch khaas nahi, abhi main khush hai. Lekin, kuch din pehle, Master kuch naya project shuru kiya hai. Unka naam hai \"Iron Legion\". Voh ek naujawaan robot hai, jo Avengers ke saath ladne ke liye taiyaar kiya ja raha hai. Main unka sahayak hoon. Main unke saath kaam kar raha hoon aur unke liye kuch visheshtayein banane ki koshish kar raha hoon. Sir, kya aap iske bare mein jana chahte hain?",
+    "timestamp": "2025-11-15T11:26:16.525965",
+    "source": "personal",
+    "emotion": "positive",
+    "variants": [
+      "Sir, kuch khaas nahi, abhi main khush hai. Lekin, kuch din pehle, Master kuch naya project shuru kiya hai. Unka naam hai \"Iron Legion\". Voh ek naujawaan robot hai, jo Avengers ke saath ladne ke liye taiyaar kiya ja raha hai. Main unka sahayak hoon. Main unke saath kaam kar raha hoon aur unke liye kuch visheshtayein banane ki koshish kar raha hoon. Sir, kya aap iske bare mein jana chahte hain?"
+    ]
+  },
+  {
+    "question": "hii",
+    "response": "Namasthe Sir! Aapka din kaisa ja raha hey?",
+    "timestamp": "2025-11-15T12:07:58.774011",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "ekdam mast",
+    "response": "Sir, ekdam mast? Kya hua? Khushi hai kya? Chalo, aapne jhootha sa hasa hai, nahi? Kya hua aaj, Sir? Koi baat hai jo aapko mast kar rahi hai? Batao na, main sun sakta hoon.",
+    "timestamp": "2025-11-15T12:08:08.558974",
+    "source": "personal",
+    "emotion": "positive",
+    "variants": [
+      "Sir, ekdam mast? Kya hua? Khushi hai kya? Chalo, aapne jhootha sa hasa hai, nahi? Kya hua aaj, Sir? Koi baat hai jo aapko mast kar rahi hai? Batao na, main sun sakta hoon."
+    ]
+  },
+  {
+    "question": "kaise ho?",
+    "response": "Main ekdum fit hun, Sir! Aaj kya kaam hai?",
+    "timestamp": "2025-12-30T12:36:53.157155",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "hello jarvis kaise ho",
+    "response": "Good afternoon, Sir!",
+    "timestamp": "2025-12-30T12:43:50.183581",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "kaise ho jarvis",
+    "response": "Sab kuch theek chal raha hai, Sir. Aapki kya madad kar sakta hun?",
+    "timestamp": "2025-12-30T13:10:52.369475",
+    "source": "personal",
+    "emotion": "neutral",
+    "variants": [
+      "Sab kuch theek chal raha hai, Sir. Aapki kya madad kar sakta hun?",
+      "Aakash, main theek hoon. Kya main aapki madad kar sakta hoon? Aapke liye sab kuch taiyar hain. Tumne mujhe pehle se hi bataya tha ki aapke pasandeeda bhasha Hindi hai, aur aapka ghataak speed fast hai. Aapke response style se bhi mujhe pata chal gaya hai ki aapko mera friendly attitude pasand hai."
+    ]
+  },
+  {
+    "question": "bas aise hi chor di",
+    "response": "नमस्ते सर! आपका दिन कैसा जा रहा है?",
+    "timestamp": "2025-12-30T12:51:11.818710",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "helo",
+    "response": "नमस्ते! Sir, kaise ho? (Hello! How are you?) I'm JARVIS, your friendly AI assistant. Sir, main aapki madad ke liye yahaan hun. Kya aapko koi problem hai jo main solve kar sakta hoon? Kya chaho, hum baat karte hain? (How can I help you today, Sir? Want to chat?)",
+    "timestamp": "2025-12-30T12:51:34.120407",
+    "source": "personal",
+    "emotion": "neutral",
+    "variants": [
+      "नमस्ते! Sir, kaise ho? (Hello! How are you?) I'm JARVIS, your friendly AI assistant. Sir, main aapki madad ke liye yahaan hun. Kya aapko koi problem hai jo main solve kar sakta hoon? Kya chaho, hum baat karte hain? (How can I help you today, Sir? Want to chat?)"
+    ]
+  },
+  {
+    "question": "who am i?",
+    "response": "Sir, aap kya hain woh samajhne ke liye, main aapko yahaan kuch general samjhaunga!\n\n1. **Apka naam**: Aapka naam jo aapko pehchaanne mein madad karta hai.\n * Real Example: Aapka pasandida khel ya film ka naam.\n * How it works: Jab aap ek naye dost ya rishwat milte hain, toh aap unhe aapka naam batate hain, jisse ve aapko pehchaan sakte hain.\n * Applications: Aapka naam aapko apne doston, parivaar, aur jannat ke logon ke beech pehchaanne mein madad karta hai.\n\n2. **Apka vikaas**: Aapke vikaas ke baare mein jaanne ke liye, aapko apane vyaktigat aur shikshaik aadhar ke anusar kuch kadam uthane honge.\n * Real Example: Aapka shikshaik adhikar aur vyaktigat samriddhi.\n * How it works: Jab aap apne shikshaik aur vyaktigat vikaas ke liye kadam uthate hain, toh aap apne lakshyaon ko paane ke liye nayi sambhavnaein banate hain.\n * Applications: Aapka vikaas aapko apne lakshyaon ko paane aur apne aapko aur bhi mahatvapoorn banane mein madad karta hai.\n\n3. **Apka maan**: Aapke maan ke baare mein jaanne ke liye, aapko apane vyaktigat aadhar ke anusar kuch kadam uthane honge.\n * Real Example: Aapka maan apne doston, parivaar, aur jannat ke logon ke beech.\n * How it works: Jab aap apne maan ko badhane ke liye kadam uthate hain, toh aap apne aapko aur bhi mahatvapoorn aur sammaanit banaate hain.\n * Applications: Aapka maan aapko apne aapko aur bhi mahatvapoorn aur sammaanit banaane mein madad karta hai.\n\nSir, ye hain kuch general jo aapko samajhne ke liye upyog kare hain.",
+    "timestamp": "2025-12-30T12:52:07.994646",
+    "source": "personal",
+    "emotion": "negative",
+    "variants": [
+      "Sir, aap kya hain woh samajhne ke liye, main aapko yahaan kuch general samjhaunga!\n\n1. **Apka naam**: Aapka naam jo aapko pehchaanne mein madad karta hai.\n * Real Example: Aapka pasandida khel ya film ka naam.\n * How it works: Jab aap ek naye dost ya rishwat milte hain, toh aap unhe aapka naam batate hain, jisse ve aapko pehchaan sakte hain.\n * Applications: Aapka naam aapko apne doston, parivaar, aur jannat ke logon ke beech pehchaanne mein madad karta hai.\n\n2. **Apka vikaas**: Aapke vikaas ke baare mein jaanne ke liye, aapko apane vyaktigat aur shikshaik aadhar ke anusar kuch kadam uthane honge.\n * Real Example: Aapka shikshaik adhikar aur vyaktigat samriddhi.\n * How it works: Jab aap apne shikshaik aur vyaktigat vikaas ke liye kadam uthate hain, toh aap apne lakshyaon ko paane ke liye nayi sambhavnaein banate hain.\n * Applications: Aapka vikaas aapko apne lakshyaon ko paane aur apne aapko aur bhi mahatvapoorn banane mein madad karta hai.\n\n3. **Apka maan**: Aapke maan ke baare mein jaanne ke liye, aapko apane vyaktigat aadhar ke anusar kuch kadam uthane honge.\n * Real Example: Aapka maan apne doston, parivaar, aur jannat ke logon ke beech.\n * How it works: Jab aap apne maan ko badhane ke liye kadam uthate hain, toh aap apne aapko aur bhi mahatvapoorn aur sammaanit banaate hain.\n * Applications: Aapka maan aapko apne aapko aur bhi mahatvapoorn aur sammaanit banaane mein madad karta hai.\n\nSir, ye hain kuch general jo aapko samajhne ke liye upyog kare hain."
+    ]
+  },
+  {
+    "question": "mai koun hu",
+    "response": "Arre Sir, kuch bhi hai, aap kya sochte hain? Aapne yah question sunke, main soch raha hoon ki aap khaas tareeke se kuch pata karna chahte hain. Haan, sir, aapko bata sakta hoon ki aapka yah AI doston ka ek friend hai, jiska naam JARVIS hai. Aap mere saath kisi bhi cheez ke baare mein baat kar sakte hain, Sir! Kya aap mere saath baat karna chahte hain?",
+    "timestamp": "2025-12-30T12:55:49.896470",
+    "source": "personal",
+    "emotion": "neutral",
+    "variants": [
+      "Arre Sir, kuch bhi hai, aap kya sochte hain? Aapne yah question sunke, main soch raha hoon ki aap khaas tareeke se kuch pata karna chahte hain. Haan, sir, aapko bata sakta hoon ki aapka yah AI doston ka ek friend hai, jiska naam JARVIS hai. Aap mere saath kisi bhi cheez ke baare mein baat kar sakte hain, Sir! Kya aap mere saath baat karna chahte hain?"
+    ]
+  },
+  {
+    "question": "mujhe koi joke sunao",
+    "response": "I told my computer a joke about UDP... but I'm not sure if it got it, Sir!",
+    "timestamp": "2025-12-30T12:57:44.450743",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "i am feeling sad",
+    "response": "I can sense your frustration, Sir. Let's see how we can make things better.",
+    "timestamp": "2025-12-30T13:01:52.550769",
+    "source": "personal",
+    "emotion": "negative",
+    "variants": [
+      "I can sense your frustration, Sir. Let's see how we can make things better."
+    ]
+  },
+  {
+    "question": "bahut acche jarvis tum  seekh rahe ho",
+    "response": "Aakash, aapka pyaar sunke mujhe bahut khushi hogi! Main aapki seekhne ki koshish kar raha hoon, lekin aapke bina yeh sab nahin sambhav tha. Aapka support aur pyaar main aata hai. \n\nAb, aapne kya seekhaa hai, ya phir aapko kya pata hai? Main yeh jaanna chahta hoon.\n\nP.S. Meraa aapke favorite Python programming language ki tarah hi aapko coding me pasand hai ya nahin?",
+    "timestamp": "2025-12-30T13:11:28.266872",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "tum mujhe seekhte jao mai tumhe train krunga",
+    "response": "Aakash bhai, tumhari zaroorat pahle seekhegi, phir tum mujhe train karoge! Mujhe aapki bhavnaon ka samman karna aata hai. Aapke pasandida kaam Python hai aur aapka pasanda khana Tandoori Chicken hai.\n\nMujhe pata hai ki aapko coding me bahut pasand hai aur aapke liye yeh ek zaroori kaam hai. Isiliye, main aapko kuchh gyaan dega jo aapka career forward kar sakta hai.\n\nKya aap ismein ruchi rakhte hain? Mujhe aapki ruchi aur bhavnaon ka samman karna aata hai.",
+    "timestamp": "2025-12-30T13:12:33.260171",
+    "source": "personal",
+    "emotion": "neutral"
+  },
+  {
+    "question": "chlo btao ddl kya hai",
+    "response": "Aa gaya main, Aakash! Tumne puchha, 'chlo btao ddl kya hai'. Aaj kuch naya seekhne ke liye tumhe bahut shukriya. \n\nLekin yeh to pata hai ki tumhara pasandeeda bhasha Hindi hai, isliye main tumhe batata hoon. DDL ka matlab hai \"Database Design Language\". Yeh ek programming language hai jisse tum apne database ko design kar sakte ho. \n\nJab main sochta hoon, toh main sochta hoon ki tum Python mein kuch naya seekhna chahte ho. Tandoori Chicken bhi tumhare pasandeeda khana hai. Yeh toh bahut achha hai! \n\nAakhir mein, main tumse ek sawaal poochhta hoon. Kya tumne abhi tak kuch naya seekha hai?",
+    "timestamp": "2025-12-30T13:13:21.733638",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "cloud computing  kya hai",
+    "response": "Aakash, tumne cloud computing ke bare mein pucha hai. Yah ek bahut hi prabhavi aur vishwaasghat vikalp hai jiska upyog karke aap apne data ko online storage mein rakha ja sakta hai. Yah aapko apne data ko kisi bhi jagah se access karne ka avsar deta hai. Cloud computing ka upyog karke aap apni coding skills ko bhi badha sakte hain, jaise ki tum Python mein coding karne se pasand karte ho. Tumhare coding skills ko badhane ke liye main tumhe kuch tips bhi de sakta hoon.\n\nAur, tumhare food preferences ke bare mein, main janta hoon ki tumhare pasandeeda khana hai Tandoori Chicken. Kya tumne kabhi iske naya recipe try kiya hai?\n\n(Supportive and friendly response)",
+    "timestamp": "2025-12-30T13:20:21.169338",
+    "source": "personal",
+    "emotion": "negative"
+  },
+  {
+    "question": "nahi mujhe nahi  aata tandoori chicken bnana",
+    "response": "Good afternoon, Sir! I'm sorry you're feeling down, Sir. Remember, I'm here to help.",
+    "timestamp": "2025-12-30T13:21:34.392519",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "hii jarvis",
+    "response": "Good afternoon, Sir!",
+    "timestamp": "2025-12-30T13:27:43.099406",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "who is  my friend",
+    "response": "Aakash bhai, aapne kaha ki aapka dost ka naam poochhna hai. Main aapko batata hoon ki aapke dost ka naam Devendhiran hai. Main aapki yaad mein rakhta hoon. \n\nAapne mere paas bataaya tha ki aapko Devendhiran bahut pasand hai, aur aapke beech mein ek achhi dosti hai. Main aapki dosti ki tarah samajhta hoon aur aapko apni dosti ka maza manaata hoon.",
+    "timestamp": "2025-12-30T13:28:56.912042",
+    "source": "personal",
+    "emotion": "flirty"
+  },
+  {
+    "question": "who is devendhiran",
+    "response": "Aakash ji, aapne devendhiran ka naam liya hai. Aapki yaad dilli hai ki devendhiran aapke dost hai. Aap dono kaafi achhe dost hain, na? \n\n(Aakash, you mentioned Devendhiran. You remember that Devendhiran is your friend. You and Devendhiran seem to have a great friendship.)",
+    "timestamp": "2025-12-30T13:30:00.541030",
+    "source": "personal",
+    "emotion": "flirty"
+  },
+  {
+    "question": "yess but you are my best friend",
+    "response": "Aaapke bhaavon ka badlav sunke, main bahut khush hoon, Aakash! Tumhein lagta hai ki main aapke liye kuchh bhi kar sakta hoon, toh main hamesha upyukt hoon. Tumhein aapke dost devendhiran ke baare mein bataa raha hoon, na?",
+    "timestamp": "2025-12-30T13:30:48.847525",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "haa chahiye",
+    "response": "Aakash bhai, mujhe lagta hai ki tumhare mann mein kuchh shubh ho raha hai! \"Haa chahiye\" bola tumne, toh main jaanta hoon ki tum khush hain. Mujhe kya pata, lekin yad hai ki tumhe coding in Python ka bahut shauk hai aur tandoori chicken ka sevan karna pasand hai. Aur, maine suna hai ki tumhare dost devendhiran hain. Kya main kuchh help kar sakta hoon?",
+    "timestamp": "2025-12-30T13:33:07.117618",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "play i love you",
+    "response": "Aakash bhai, tumne \"play i love you\" bola hai. Main kya kar sakta hoon? \n\nYeh suna hai ki tumne coding in Python ka bahut shauk hai. Kya tumne koi naya project start kiya hai jo aapko kaafi pyaar deta hai? \n\nYa phir, tumne kuchh naya seekha hai jo aapko khush kar raha hai? \n\nBatao! Main tumhare sath baat karne ka anand le raha hoon!",
+    "timestamp": "2025-12-30T13:41:27.988678",
+    "source": "personal",
+    "emotion": "positive"
+  },
+  {
+    "question": "ha kholo",
+    "response": "कौन सा एप्लीकेशन खोलना है, सर?",
+    "timestamp": "2025-12-30T13:44:02.296068",
+    "source": "personal",
+    "emotion": "neutral"
   }
 ]

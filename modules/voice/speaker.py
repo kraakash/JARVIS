@@ -150,16 +150,31 @@ class JarvisSpeaker:
             return False
     
     def _is_hindi_text(self, text):
-        """Check if text contains Hindi words"""
+        """Check if text contains Hindi words or Devanagari script"""
+        # 1. Direct Devanagari Check (Highest certainty)
+        if any('\u0900' <= char <= '\u097F' for char in text):
+            return True
+
+        # 2. Keyword Check for Transliterated Hindi
+        neutral_words = ['sir', 'jarvis', 'ok', 'okay']
         hindi_words = [
             'main', 'hun', 'aap', 'kya', 'hai', 'theek', 'bilkul', 'kaise', 
             'kaun', 'kar', 'raha', 'sakta', 'taiyar', 'khol', 'band', 'chalu',
-            'namaste', 'dhanyawad', 'alvida', 'sir', 'haan', 'nahi', 'achha',
+            'namaste', 'dhanyawad', 'alvida', 'haan', 'nahi', 'achha',
             'badhiya', 'mast', 'din', 'raat', 'samay', 'waqt', 'kaam', 'seva'
         ]
         
         text_lower = text.lower()
-        return any(word in text_lower for word in hindi_words)
+        words = text_lower.split()
+        if not words: return False
+
+        hindi_count = sum(1 for word in words if any(hw in word for hw in hindi_words) and word not in neutral_words)
+        
+        # If less than 20% of words are Hindi, prefer English TTS for better "Neural" quality
+        if hindi_count / len(words) < 0.2:
+            return False
+            
+        return hindi_count > 0
     
     def force_english_tts(self, text):
         """Force use of English TTS even for Hindi text"""

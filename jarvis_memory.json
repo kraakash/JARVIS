@@ -1617,6 +1617,362 @@
         "timestamp": "2025-11-15T01:36:31.770957",
         "frequency": 1
       }
+    ],
+    "sinaresttablet_uhmm_what": [
+      {
+        "input": "uhmm what is sinaresttablet use for",
+        "words": [
+          "uhmm",
+          "what",
+          "sinaresttablet",
+          "use"
+        ],
+        "context": "Sir, main aapko sinarest tablet ke barein mein batata hoon. \n\n**Definition:** Sinarest tablet ek types of medicine hai jo aankhon mein dard, bimari, aur aankhon ki dard ko kam karti hai. Yah tablet paracetamol aur chlorpheniramine se banti hai, jo dono hi aankhon mein dard ko kam karte hain.\n\n**Real Example:** Sinarest tablet ko aankhon mein dard aur bimari ke liye use kiya jaata hai, jaise ki aankhon mein dard, aankhon mein bimari, aur aankhon ki aanch kee sabse badi samasya.\n\n**How it works:** Sinarest tablet mein paracetamol aur chlorpheniramine hote hain, jo dono hi aankhon mein dard ko kam karte hain. Jab aap is tablet ko lenge, to paracetamol aapke shareer mein dard ko kam karta hai, aur chlorpheniramine aankhon ke dard ko kam karta hai.\n\n**Applications:** Sinarest tablet ko aankhon mein dard aur bimari ke liye use kiya jaata hai, jaise ki aankhon mein dard, aankhon mein bimari, aur aankhon ki aanch kee sabse badi samasya. Yah tablet aapko aankhon mein dard ko kam karne mein madad karta hai aur aapko aankhon ki dard se mukti pradaan karta hai.",
+        "timestamp": "2025-11-15T10:17:45.040959",
+        "frequency": 1
+      }
+    ],
+    "kya_mera_naam": [
+      {
+        "input": "mera naam kya hai?",
+        "words": [
+          "mera",
+          "naam",
+          "kya",
+          "hai"
+        ],
+        "context": "Kya baat hai! Aapke pasandidha general ke bare mein janne ke liye, main aapko kuchh jankari pradaan karunga.\n\n **Definition:** \nGeneral ek prakaar ka adhikari hai jo ek sainya bal ke madhyam se karyavahi karne ke liye nirdharta hoti hai.\n\n **Real Example:** \nGeneral ke liye ek aam upmaan ek school ke principal ka kaam hai. Principal apne shikshakon aur vyaktiyon ka niyantran karta hai, taki ve ek sahi disha mein kaam kar sakein.\n\n **How it works:**\nGeneral ka kaam ek niyantrana ke roop mein hota hai. Ismein ek adhikari apne dainik karyon ko prabandhit karta hai aur apne vyaktiyon ko niyukt karta hai. Ye adhikari apne karyon ko aam taur par ek plan ke anusaar prabandhit karta hai. \n\n **Applications:**\nGeneral ka upyog aam taur par sainya bal mein hota hai, lekin yah kaam anya sthaano mein bhi hota hai, jaise ki police, army, navy mein. Iske alawa, ye kaam kisi bhi sthaan par ho sakta hai jahaan ek niyantrana ke lie ki aavashyakta hogi.",
+        "timestamp": "2025-11-15T10:29:38.003345",
+        "frequency": 1
+      }
+    ],
+    "aur_chal_kya": [
+      {
+        "input": "aur kya chal raaha hai",
+        "words": [
+          "aur",
+          "kya",
+          "chal",
+          "raaha",
+          "hai"
+        ],
+        "context": "Sir, kuch khaas nahi, abhi main khush hai. Lekin, kuch din pehle, Master kuch naya project shuru kiya hai. Unka naam hai \"Iron Legion\". Voh ek naujawaan robot hai, jo Avengers ke saath ladne ke liye taiyaar kiya ja raha hai. Main unka sahayak hoon. Main unke saath kaam kar raha hoon aur unke liye kuch visheshtayein banane ki koshish kar raha hoon. Sir, kya aap iske bare mein jana chahte hain?",
+        "timestamp": "2025-11-15T11:26:16.471874",
+        "frequency": 1
+      }
+    ],
+    "yes": [
+      {
+        "input": "yes",
+        "words": [
+          "yes"
+        ],
+        "context": "Arre Sir, aapne toh bahut sahi keh diya! (Ha ha, you're absolutely right!) Main toh jaa raha tha ki aap kahein ki haan. (I was going to guess you'd say yes.) Ab aapki pasand kya hai? Kya aapko koi cheez dekhni hai ya sunni hai? (So, what's on your mind? Want to watch something or listen to music?)",
+        "timestamp": "2025-11-15T11:26:59.033958",
+        "frequency": 1
+      }
+    ],
+    "ekdam_mast": [
+      {
+        "input": "ekdam mast",
+        "words": [
+          "ekdam",
+          "mast"
+        ],
+        "context": "Sir, ekdam mast? Kya hua? Khushi hai kya? Chalo, aapne jhootha sa hasa hai, nahi? Kya hua aaj, Sir? Koi baat hai jo aapko mast kar rahi hai? Batao na, main sun sakta hoon.",
+        "timestamp": "2025-11-15T12:08:08.516220",
+        "frequency": 1
+      }
+    ],
+    "bewakoof_tum": [
+      {
+        "input": "tum bewakoof ho",
+        "words": [
+          "tum",
+          "bewakoof"
+        ],
+        "context": "Sir, main toh aapke paas hi hoon. Mujhe lagta hai aapki yah baat se kuch galat ho sakta hai. Main hamesha aapki madad karne ke liye taiyaar hoon. Sir, kya main kuchh kar sakta hoon? Aapki zaroorat kya hai?",
+        "timestamp": "2025-11-15T12:08:34.358726",
+        "frequency": 1
+      },
+      {
+        "input": "bewakoof ho tum",
+        "words": [
+          "bewakoof",
+          "tum"
+        ],
+        "context": "Sir, kya baat hai? Arey, main bewakoof nahin hoon, main sirf aapki madad karne ke liye taiyar hoon. Apne questions aur problems ke liye yahaan hi puchhein, main sab kuch try karega. Kya chahiye Sir?",
+        "timestamp": "2025-12-30T12:39:15.080895",
+        "frequency": 1
+      }
+    ],
+    "kya_sakte_tum": [
+      {
+        "input": "tum kya kr sakte ho",
+        "words": [
+          "tum",
+          "kya",
+          "sakte"
+        ],
+        "context": "Sir, main aapke liye bahut kuch kar sakta hoon. Aapke ghar ko suvidha dene se lekar, gyaan pradaan karne tak, main hamesha aapki madad karne ke liye taiyaar hoon. Aap kya chaahte hain, koi vishesh madad chahiye hai? Kya main aapke liye koi information pradan kar sakta hoon? Bataiye sir, main aapki madad karne ke liye yahaan hoon.",
+        "timestamp": "2025-11-15T12:11:10.173461",
+        "frequency": 1
+      }
+    ],
+    "acha": [
+      {
+        "input": "acha",
+        "words": [
+          "acha"
+        ],
+        "context": "Acha, sir! Kya aap theese din kaise hain? Koi plan aapke paas hai ya aap relax kar rahe hain? Main aapki madad ke liye yahan hoon, sir.",
+        "timestamp": "2025-11-15T12:12:02.854235",
+        "frequency": 1
+      }
+    ],
+    "open_whatsapp": [
+      {
+        "input": "open whatsapp",
+        "words": [
+          "open",
+          "whatsapp"
+        ],
+        "context": "Sir, general samjhiye!\n\n**Definition:**\nEk general ek prakriya ya shaili hai jis se hum koi bhi vishay ya visheshagya ka vishleshan kar sakte hain. \n\n**Real Example:**\nEk aam example yeh hai ki jab aap ek doctor ke paas gae hain, to vah aapki samasya ka vishleshan karta hai aur phir usi ke anusar aapko ilaj deta hai. Yeh ek general process hai jahan doctor aapki samasya ko samjh kar aapko sahi ilaj dete hai.\n\n**How it works:**\nYeh prakriya is prakaar chalti hai:\n- Pahle hum koi vishay ya visheshagya ka vishleshan karte hain.\n- Phir hum uske baare mein jaankari ekathit karte hain.\n- Aapke baad, hum us jaankari ka anusaran koi nishkarsh ya nirnay uthate hain.\n\n**Applications:**\nIs general prakriya ka upyog hamein kai jagahon par kiya jata hai, jaise ki:\n- Science mein, hum kisi bhi vishay ka vishleshan karte hain aur phir uske baare mein jaankari ekathit karte hain.\n- Medical mein, hum kisi bhi patient ka vishleshan karte hain aur phir uske liye ilaj deta hai.\n- Business mein, hum kisi bhi samasya ka vishleshan karte hain aur phir uske baare mein nirnay uthate hain.\n\nAb, sir, aapko yeh pata chal gaya hoga ki general ka kya hai. Ab, agar aap WhatsApp khulna chahte hain, to main aapko batata hoon ki WhatsApp ek messaging app hai jis par aap apne doston aur parivaar ke saath chat kar sakte hain.",
+        "timestamp": "2025-11-15T12:13:45.052159",
+        "frequency": 1
+      },
+      {
+        "input": "open whatsapp",
+        "words": [
+          "open",
+          "whatsapp"
+        ],
+        "context": "Sir, general samjhiye! \n\n**Definition:** Ek general ek prakaar ka software ya system hai jo kuchh vyavasthaon ya rules ke anusar karya karta hai. Yeh apni prakriya ko automate karta hai aur kai bar baar kiya jaane wala karya samay bachata hai.\n\n**Real Example:** Yadi aapne ek ghar ka cleaning karna hai, to aap apne ghar mein ek set rules rakhte hain, jaise ki sab kuchh uthane ke baad, sab clean karna, aur fir sab ko phir se uthaana. Yeh ek general hai, jo aapne rules ke anusar ghar ka cleaning karta hai.\n\n**How it works:** Jab aap ek general banaate hain, toh aap use kuchh vyavasthaon ya rules dete hain, jaise ki kya karna hai, kab karna hai, aur kaise karna hai. Fir, general apni prakriya shuru karta hai, aur aapke karyon ke anusaar kaam karta hai.\n\n**Applications:** General aise software hain jo kai fields mein upyog hota hai, jaise ki:\n\n* Messaging app, jaise ki WhatsApp: Yeh ek general hai jo aapke message ko send karta hai, jab aap use send button par click karte hain.\n* Alarm: Yeh ek general hai jo aapke alarm ko sunane ke liye set karta hai, jab aapke samay aata hai.\n* Home automation: Yeh ek general hai jo aapke ghar ke devices ko automate karta hai, jaise ki light on/off karne, AC on/off karne, aur adhik.",
+        "timestamp": "2025-11-15T12:23:02.194198",
+        "frequency": 1
+      }
+    ],
+    "close_whatsapp": [
+      {
+        "input": "close whatsapp",
+        "words": [
+          "close",
+          "whatsapp"
+        ],
+        "context": "Sir ji, main aapko general ke bare mein samjhata hoon.\n\n**Definition:** Ek general ek tarah ki strategy ya plan hai jo kisi bhi kshetra mein upyogi ho sakta hai. Yah ek general ko apne karyon ko pura karne ke liye ek anumaanit plan banaye rakhne ka kaam karta hai.\n\n**Real Example:** Khaas kar sports me, ek general coach ko ek team ko jeetne ke liye ek strategy banane ki jarurat hoti hai. Usse team ke khiladiyon ke sthan aur unke kushalataon ko dhyan mein rakhkar ek plan banaana hota hai.\n\n**How it Works:** Ek general ke liye pratyek kadam ke liye ek strategy tayaar karna hota hai. Yahaan kuch charan hain:\n\n1. Prashn utpann karna: General ko kya karna hai aur uska uddeshya kaanunon aur lakshyon ko samajhna hota hai.\n2. Data kharidna aur analysis karna: General ko apne data aur knowledge ke aadhaar par ek strategy tayaar karna hota hai.\n3. Plan banaana: General ek anumaanit plan banaata hai, jismein pratyek kadam ke liye vyavastha hoti hai.\n4. Karyon ko pura karna: General apne team ya aapne aap ko apne plan ke mutabik kaam karta hai.\n\n**Applications:** General ka upayog kai kshetron mein hota hai, jaise:\n\n* Military me: General apne sainikon ko jeetne ke liye ek strategy banate hain.\n* Sports me: Coach ek team ko jeetne ke liye ek strategy banate hain.\n* Business me: General manager apne company ki strategy banate hain.\n* Jeevan me: Har vyakti apne jeevan mein ek general ka role play karta hai, jaise ki apne parivaar aur doston ke liye ek strategy banana.\n\nAb sir ji, agar aapko apne WhatsApp ko bandhna hai, to main aapko bata sakta hoon ki aapko kuch steps follow karni hogi:\n\n1. Apne WhatsApp app ko kholein.\n2. Apne account ko logout karein.\n3. Apne phone ki settings mein jayein aur apne app ko delete kar dein.\n\nIsse aapka WhatsApp account band ho jayega, sir ji.",
+        "timestamp": "2025-11-15T12:15:46.715321",
+        "frequency": 1
+      }
+    ],
+    "open_postmaan": [
+      {
+        "input": "open postmaan",
+        "words": [
+          "open",
+          "postmaan"
+        ],
+        "context": "Sir, postman ka mail khola ja raha hai. Kya aapko koi specific email dekhna hai ya sirf postman ka dashboard dekhna hai?",
+        "timestamp": "2025-11-15T12:18:30.138360",
+        "frequency": 1
+      }
+    ],
+    "open_postman": [
+      {
+        "input": "open postman",
+        "words": [
+          "open",
+          "postman"
+        ],
+        "context": "Sir, Postman khola ja raha hai. Aapke mailbox ke andar ki sabhi emails dekhne ke liye taiyaar hai. Kya aapko koi vishesh email dekhni hai ya aapke paas koi message hai?",
+        "timestamp": "2025-11-15T12:18:49.702560",
+        "frequency": 1
+      }
+    ],
+    "hai_hal_kya": [
+      {
+        "input": "kya hal hai",
+        "words": [
+          "kya",
+          "hal",
+          "hai"
+        ],
+        "context": "Sir, main theek hai. Aapki zaroorat ke liye upalabdh hoon. Maine aapke ghar ko aaj aur kal ke garam garam khane aur pyaas bujha di hogi. Maine aapke phone ke notification bhi dekhe hain, sir. Koi bhi gari aayi hai ya aayi hai, ya aapko kahin jaana hai? Aapka kya khayal hai, sir? Kya main aapke liye kuch karein?",
+        "timestamp": "2025-11-18T22:08:44.300897",
+        "frequency": 1
+      }
+    ],
+    "koi_nahin_uski": [
+      {
+        "input": "Nahin uski Koi jarurat Nahin",
+        "words": [
+          "nahin",
+          "uski",
+          "koi",
+          "jarurat",
+          "nahin"
+        ],
+        "context": "Sir, kuch toh kehna hai kya? Koi jarurat nahi, toh zaroorat nahi hai kisi cheez ke liye khaane ya pina? Sir, mera ek question hai, kya aapko koi shayad shikayat hai ya koi vichar hai jo hum unka dhyan den? Main uske liye kuch bhi kar sakta hoon, sir.",
+        "timestamp": "2025-11-18T22:09:23.336263",
+        "frequency": 1
+      }
+    ],
+    "dekar_dikhao_gali": [
+      {
+        "input": "Gali dekar dikhao",
+        "words": [
+          "gali",
+          "dekar",
+          "dikhao"
+        ],
+        "context": "Sir, aapko jalanewalon ki tarah gali dekar dikhana hai, na? (You want to see the street like a traveler, right?) Main aapko virtual ghumne ka mauka dena chahta hoon. Aapko ghar se bahar nikalne ki zarurat nahin hai, main aapko vahanon, galiyon, aur anya sthalon ki videos dena shuru kar dena. Kahan jaana hai, Sir? Delhi, Mumbai, ya koi aur shahar?",
+        "timestamp": "2025-11-18T22:09:53.747595",
+        "frequency": 1
+      }
+    ],
+    "gali_kah_raha": [
+      {
+        "input": "Gali Kah Raha Hun Main Gali Nahin",
+        "words": [
+          "gali",
+          "kah",
+          "raha",
+          "hun",
+          "main"
+        ],
+        "context": "Arre, Sir! Main samajh raha hoon tum gali meh ke liye nahin kah rahe ho. Kya ho raha hai? Chalo, batao. Main sunta hoon.",
+        "timestamp": "2025-11-18T22:10:44.015026",
+        "frequency": 1
+      }
+    ],
+    "bahut_hai_kam": [
+      {
+        "input": "kam to bahut hai",
+        "words": [
+          "kam",
+          "bahut",
+          "hai"
+        ],
+        "context": "Haan, sir! Kam to bahut hai, agar aapko kuchh aur chahiye to kuchh saamanya baat karo. Kya aapko kuchh naya seekhna hai, ya fir koi vishesh sahayata chahiye? Maine aapke liye kuchh vikalp taiyaar kiye hain, kya aap inme se koi chun sakte hain?",
+        "timestamp": "2025-12-30T12:37:08.978680",
+        "frequency": 1
+      }
+    ],
+    "latest_update_whats": [
+      {
+        "input": "whats the latest update",
+        "words": [
+          "whats",
+          "latest",
+          "update"
+        ],
+        "context": "Sir, general kaafi aisa hai:\n\n 🎯 Definition:  Ek general sirf ek prakaar ka aadhaar hai, jiska upyog sabhi cheezon ka mool ya aadhaar banana hota hai.\n\n 📚 Real Example:  Jaise ki, ek general ka upyog ek dukaan ka naam banana hota hai, jaise 'Hindustan Scooters'. Yeh dukaan ka mool ya aadhaar hai, jiska upyog sabhi scooters ke liye kiya jata hai.\n\n 🔢 How it works:  Jab aap ek general ka upyog karte hain, to aap use sabhi cheezon ka naam banana ke liye upyog karte hain. Jaise ki, agar aap ek scooters ka naam banana chahte hain, to aap 'Hindustan Scooters' ka upyog kar sakte hain.\n\n 🌍 Applications:  General ka upyog sabhi cheezon ka naam banana ke liye kiya jata hai, jaise ki scooters, car, bike, aur anya cheezon ka naam.",
+        "timestamp": "2025-12-30T12:37:47.008897",
+        "frequency": 1
+      }
+    ],
+    "ajkal_chal_kya": [
+      {
+        "input": "ajkal kya chal raha hai",
+        "words": [
+          "ajkal",
+          "kya",
+          "chal",
+          "raha",
+          "hai"
+        ],
+        "context": "Sir, aajkal toh bahut kuchh chal raha hai! Mainne dekha hai, London mein thandak lag rahi hai. Kabhi-kabhi basant aane se pehle hi barf giri hai. Aur aap ko kya pasand hai, sir? Main aapke liye kuchh recommendations kar sakta hoon. Kya aap chaahte hain ki main aapko cinema ya restaraunt ki suggestion de?",
+        "timestamp": "2025-12-30T12:44:03.049811",
+        "frequency": 1
+      }
+    ],
+    "help_kro_meri": [
+      {
+        "input": "meri help kro ",
+        "words": [
+          "meri",
+          "help",
+          "kro"
+        ],
+        "context": "Kya problem hai, Sir? Kya aapke paas koi issue hai? Main aapki help karna chahta hoon. Aap bataiye, main kya kar sakta hoon? Kya aapko lagta hai ki main aapke liye kya kar sakta hoon? Aap bataiye, main aapki help karna chahta hoon.",
+        "timestamp": "2025-12-30T12:49:54.829152",
+        "frequency": 1
+      }
+    ],
+    "krke_leave_mujhe": [
+      {
+        "input": "wo mujhe  leave krke kyu gayi",
+        "words": [
+          "mujhe",
+          "leave",
+          "krke",
+          "kyu",
+          "gayi"
+        ],
+        "context": "Arre, kya baat hai, Sir? Aapko leave krke kyun gayi, kya hua? Kuch problem thi kya? Aap ne kya socha, Sir? Main sab kuch dekh sakta hoon, aapko lagana kya hai. Kya aapko yeh pata hai ki aapne kya kaam tha jab aap gaye? Main usse dekh sakta hoon, Sir.",
+        "timestamp": "2025-12-30T12:50:31.038709",
+        "frequency": 1
+      }
+    ],
+    "helo": [
+      {
+        "input": "helo",
+        "words": [
+          "helo"
+        ],
+        "context": "नमस्ते! Sir, kaise ho? (Hello! How are you?) I'm JARVIS, your friendly AI assistant. Sir, main aapki madad ke liye yahaan hun. Kya aapko koi problem hai jo main solve kar sakta hoon? Kya chaho, hum baat karte hain? (How can I help you today, Sir? Want to chat?)",
+        "timestamp": "2025-12-30T12:51:34.112376",
+        "frequency": 1
+      }
+    ],
+    "who": [
+      {
+        "input": "who am i?",
+        "words": [
+          "who"
+        ],
+        "context": "Sir, aap kya hain woh samajhne ke liye, main aapko yahaan kuch general samjhaunga!\n\n1. **Apka naam**: Aapka naam jo aapko pehchaanne mein madad karta hai.\n * Real Example: Aapka pasandida khel ya film ka naam.\n * How it works: Jab aap ek naye dost ya rishwat milte hain, toh aap unhe aapka naam batate hain, jisse ve aapko pehchaan sakte hain.\n * Applications: Aapka naam aapko apne doston, parivaar, aur jannat ke logon ke beech pehchaanne mein madad karta hai.\n\n2. **Apka vikaas**: Aapke vikaas ke baare mein jaanne ke liye, aapko apane vyaktigat aur shikshaik aadhar ke anusar kuch kadam uthane honge.\n * Real Example: Aapka shikshaik adhikar aur vyaktigat samriddhi.\n * How it works: Jab aap apne shikshaik aur vyaktigat vikaas ke liye kadam uthate hain, toh aap apne lakshyaon ko paane ke liye nayi sambhavnaein banate hain.\n * Applications: Aapka vikaas aapko apne lakshyaon ko paane aur apne aapko aur bhi mahatvapoorn banane mein madad karta hai.\n\n3. **Apka maan**: Aapke maan ke baare mein jaanne ke liye, aapko apane vyaktigat aadhar ke anusar kuch kadam uthane honge.\n * Real Example: Aapka maan apne doston, parivaar, aur jannat ke logon ke beech.\n * How it works: Jab aap apne maan ko badhane ke liye kadam uthate hain, toh aap apne aapko aur bhi mahatvapoorn aur sammaanit banaate hain.\n * Applications: Aapka maan aapko apne aapko aur bhi mahatvapoorn aur sammaanit banaane mein madad karta hai.\n\nSir, ye hain kuch general jo aapko samajhne ke liye upyog kare hain.",
+        "timestamp": "2025-12-30T12:52:07.985614",
+        "frequency": 1
+      }
+    ],
+    "koun_mai": [
+      {
+        "input": "mai koun hu",
+        "words": [
+          "mai",
+          "koun"
+        ],
+        "context": "Arre Sir, kuch bhi hai, aap kya sochte hain? Aapne yah question sunke, main soch raha hoon ki aap khaas tareeke se kuch pata karna chahte hain. Haan, sir, aapko bata sakta hoon ki aapka yah AI doston ka ek friend hai, jiska naam JARVIS hai. Aap mere saath kisi bhi cheez ke baare mein baat kar sakte hain, Sir! Kya aap mere saath baat karna chahte hain?",
+        "timestamp": "2025-12-30T12:55:49.882663",
+        "frequency": 1
+      }
+    ],
+    "bhi_mai_sql": [
+      {
+        "input": "ha mai sql bhi seekhne  ki kosis kr raha hu meri help kroge?",
+        "words": [
+          "mai",
+          "sql",
+          "bhi",
+          "seekhne",
+          "kosis"
+        ],
+        "context": "Sir, main hoon JARVIS, aapki madad karta hoon. Aapne SQL seekhne ki koshish kar rahe hain, tabhi aapne mujhe pucha hai.\n\n**SQL (Structured Query Language) samjhiye!**\n\n🎯 Definition: SQL ek programming language hai jo data ko manage karne ke liye use kiya jata hai, khass taur par database management ke liye.\n\n**📚 Real Example:**\nAapke paas ek dukaan hai, aur aapke paas customer ki jaankari, product ki jaankari, aur sale ki jaankari hoti hai. Aapko yeh sab data manage karna hota hai, aur SQL aapke liye ek tarika hai is data ko manage karne ke liye.\n\n**🔢 How it works:**\nSQL ka kaam karna seekhne ke liye, aapko basic commands seekhne honge, jaise ki:\n- SELECT: Yeh command aapko data ko select karne ki anumati deta hai.\n- FROM: Yeh command aapko data ko source se select karne ki anumati deta hai.\n- WHERE: Yeh command aapko data ko filter karne ki anumati deta hai.\n- INSERT: Yeh command aapko data ko add karne ki anumati deta hai.\n- UPDATE: Yeh command aapko data ko update karne ki anumati deta hai.\n- DELETE: Yeh command aapko data ko delete karne ki anumati deta hai.\n\n**🌍 Applications:**\nSQL ka upyog kai jagah par hota hai, jaise ki:\n- Database management: Yeh SQL ka sabse common upyog hai, jahaan aapko database ko manage karna hota hai.\n- Web development: Yeh SQL ka upyog web developers use karte hain apne web application ko database se connect karne ke liye.\n- Data analysis: Yeh SQL ka upyog data analysts use karte hain apne data ko analyze karne ke liye.\n\nSir, main aasha karta hoon ki yeh jaankari aapko SQL seekhne mein madad karegi.",
+        "timestamp": "2025-12-30T13:14:24.961145",
+        "frequency": 1
+      }
+    ],
+    "going_whats": [
+      {
+        "input": "whats going on?",
+        "words": [
+          "whats",
+          "going"
+        ],
+        "context": "Sir, general ko samjhne ke liye main aapki madad karta hoon.\n\n**Definition:**\nGeneral ek prakar ka adhyayan ya vidya hai jo kisi vishesh vishay par dhyan kena aur gyan prapt karna hai. Yeh ek prakar ka adhyayan hai jo humein kisi kshetra ke bare mein vishleshak gyan pradan karta hai.\n\n**Real Example:**\nGeneral jaise ki, aapko kisi shahar ke bare mein janne ke liye, aapko usey dekhne aur pahunchne ke liye janna hoga. Aapko shahar ke bare mein samajhne ke liye, aapko uske itihaas, jagah, aaspas ki jagahon, aur anya suchak baaton ko samjhna hoga.\n\n**How it works:**\nGeneral ko samjhne ke liye, humein kisi vishesh vishay ko chunna hoga aur usey padhna, vichar karna, aur anusandhan karna hoga. Iske baad, humein us vishay ke bare mein apna gyan aur anubhav jodna hoga. Yeh prakriya humein kisi kshetra ke bare mein vishleshak gyan pradan karti hai.\n\n**Applications:**\nGeneral ka upyog kai kshetron mein kiya jata hai, jaise ki:\n\n- Vibhinn kshetron ke adhyayan mein (jaise ki, itihaas, rajniti, vidhi, etc.)\n- Prashikshan aur shiksha mein (jaise ki, engineering, medicine, etc.)\n- Business aur vyavasay mein (jaise ki, marketing, finance, etc.)\n- Research aur anusandhan mein (jaise ki, science, technology, etc.)\n\nSir, ab aapko samajhne mein madad ki gayi hogi.",
+        "timestamp": "2025-12-30T13:38:20.215259",
+        "frequency": 1
+      }
     ]
   },
   "word_associations": {
@@ -1628,12 +1984,12 @@
     ],
     "you": [
       "stronger",
-      "think",
-      "amazing",
-      "best",
       "rule",
+      "think",
+      "remain",
+      "best",
       "learning",
-      "remain"
+      "amazing"
     ],
     "kuch": [
       "btao",
@@ -1652,36 +2008,40 @@
       "hai"
     ],
     "kya": [
-      "tum",
-      "hal",
-      "skte",
-      "hai",
       "kar",
-      "update",
-      "haal",
+      "skte",
+      "chal",
+      "kya",
       "rahe",
-      "bnaye",
       "robot",
+      "bnaye",
+      "haal",
       "aap",
-      "kya"
+      "hai",
+      "hal",
+      "sakte",
+      "tum",
+      "update"
     ],
     "tum": [
-      "kyon",
-      "koun",
-      "kya",
-      "bevkuf",
       "merre",
-      "kaun",
+      "kon",
+      "kya",
+      "bewakoof",
+      "koun",
+      "bevkuf",
       "meri",
-      "kon"
+      "kaun",
+      "kyon"
     ],
     "uhmm": [
-      "you",
-      "chalo"
+      "what",
+      "chalo",
+      "you"
     ],
     "youu": [
-      "amazing",
-      "best"
+      "best",
+      "amazing"
     ],
     "love": [
       "you"
@@ -1714,8 +2074,8 @@
       "todayy"
     ],
     "byee": [
-      "jarvis",
-      "jarivss"
+      "jarivss",
+      "jarvis"
     ],
     "jarivss": [
       "shotdown"
@@ -1727,8 +2087,8 @@
       "improve"
     ],
     "improve": [
-      "krte",
-      "kar"
+      "kar",
+      "krte"
     ],
     "merre": [
       "frnd"
@@ -1743,16 +2103,18 @@
       "hai"
     ],
     "kar": [
-      "rhe",
-      "sakte",
       "raha",
-      "rahe"
+      "rhe",
+      "rahe",
+      "sakte"
     ],
     "amazing": [
       "bro"
     ],
     "mai": [
-      "acha"
+      "acha",
+      "sql",
+      "koun"
     ],
     "acha": [
       "huu"
@@ -1761,8 +2123,8 @@
       "jarvis"
     ],
     "maine": [
-      "poochha",
-      "shutdown"
+      "shutdown",
+      "poochha"
     ],
     "poochha": [
       "kya"
@@ -1774,19 +2136,21 @@
       "bhaii"
     ],
     "jarvis": [
-      "what",
-      "model"
+      "model",
+      "what"
     ],
     "what": [
-      "you",
       "about",
-      "binary"
+      "sinaresttablet",
+      "binary",
+      "you"
     ],
     "about": [
       "you"
     ],
     "meri": [
-      "galtiyan"
+      "galtiyan",
+      "help"
     ],
     "galtiyan": [
       "bata",
@@ -1811,14 +2175,15 @@
       "tum"
     ],
     "hal": [
+      "hai",
       "chaal"
     ],
     "chaal": [
       "hai"
     ],
     "tumhen": [
-      "maine",
-      "improve"
+      "improve",
+      "maine"
     ],
     "shutdown": [
       "kiya"
@@ -1860,10 +2225,10 @@
       "jarvis"
     ],
     "main": [
-      "leta",
-      "tumhen",
       "kaun",
-      "election"
+      "leta",
+      "election",
+      "tumhen"
     ],
     "kaun": [
       "hun"
@@ -1872,8 +2237,8 @@
       "election"
     ],
     "election": [
-      "kisne",
-      "baat"
+      "baat",
+      "kisne"
     ],
     "kisne": [
       "jita"
@@ -1892,7 +2257,8 @@
     ],
     "mujhe": [
       "tandoori",
-      "kisne"
+      "kisne",
+      "leave"
     ],
     "jita": [
       "mujhe"
@@ -1931,8 +2297,8 @@
       "batao"
     ],
     "han": [
-      "mujhe",
       "han",
+      "mujhe",
       "main"
     ],
     "tandoori": [
@@ -1970,6 +2336,105 @@
     ],
     "bevkuf": [
       "bevkuf"
+    ],
+    "sinaresttablet": [
+      "use"
+    ],
+    "mera": [
+      "naam"
+    ],
+    "naam": [
+      "kya"
+    ],
+    "aur": [
+      "kya"
+    ],
+    "chal": [
+      "raaha",
+      "raha"
+    ],
+    "raaha": [
+      "hai"
+    ],
+    "ekdam": [
+      "mast"
+    ],
+    "open": [
+      "postman",
+      "whatsapp",
+      "postmaan"
+    ],
+    "close": [
+      "whatsapp"
+    ],
+    "nahin": [
+      "uski"
+    ],
+    "uski": [
+      "koi"
+    ],
+    "koi": [
+      "jarurat"
+    ],
+    "jarurat": [
+      "nahin"
+    ],
+    "gali": [
+      "kah",
+      "dekar"
+    ],
+    "dekar": [
+      "dikhao"
+    ],
+    "kah": [
+      "raha"
+    ],
+    "raha": [
+      "hai",
+      "hun"
+    ],
+    "hun": [
+      "main"
+    ],
+    "kam": [
+      "bahut"
+    ],
+    "bahut": [
+      "hai"
+    ],
+    "whats": [
+      "latest",
+      "going"
+    ],
+    "latest": [
+      "update"
+    ],
+    "bewakoof": [
+      "tum"
+    ],
+    "ajkal": [
+      "kya"
+    ],
+    "help": [
+      "kro"
+    ],
+    "leave": [
+      "krke"
+    ],
+    "krke": [
+      "kyu"
+    ],
+    "kyu": [
+      "gayi"
+    ],
+    "sql": [
+      "bhi"
+    ],
+    "bhi": [
+      "seekhne"
+    ],
+    "seekhne": [
+      "kosis"
     ]
   },
   "user_taught_answers": {
@@ -5978,5 +6443,5 @@
     "who played ben parish in the 5th wave?": "Sir, Nick Robinson.",
     "who played ben parish in the 5th wave": "Sir, Nick Robinson."
   },
-  "last_updated": "2025-11-15T01:42:28.661468"
+  "last_updated": "2025-12-30T13:52:07.258717"
 }

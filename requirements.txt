@@ -1,9 +1,26 @@
+# Core Dependencies
+requests==2.31.0
+python-dotenv==1.0.0
+numpy>=1.24.0
+psutil==5.9.5
+
+# Voice & Speech
 pyttsx3==2.90
 SpeechRecognition==3.10.0
+PyAudio==0.2.14
+gTTS==2.4.0
+edge-tts==6.1.9
+pygame==2.6.1
+
+# Natural Language Processing (NLP)
 textblob==0.17.1
-psutil==5.9.5
-selenium==4.15.2
-requests==2.31.0
-pyaudio==0.2.11
-numpy>=1.24.0
+scikit-learn==1.3.2
+
+# Machine Learning & AI Models
 tensorflow>=2.16.0
+torch>=2.0.0
+transformers>=4.35.0
+
+# Web Automation
+selenium==4.15.2
+webdriver-manager==4.0.1

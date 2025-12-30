@@ -20,21 +20,26 @@ class OpenRouterConversation:
     def is_available(self):
         return bool(self.api_key)
     
-    def get_conversation_response(self, user_input):
+    def get_conversation_response(self, user_input, language='english'):
         """Get natural conversation response"""
         if not self.is_available():
             return None
             
-        prompt = f"""You are JARVIS, a friendly AI assistant. Respond naturally in Hindi-English mix like a friend:
+        # Determine language rule
+        lang_rule = "Use a natural mix of English and Hindi (Hinglish). Use DEVANAGARI script for Hindi words."
+        if language == 'english':
+            lang_rule = "Respond entirely in English. Do not use Hindi unless specifically asked."
+
+        prompt = f"""You are JARVIS, a sophisticated and friendly AI assistant. Respond naturally:
 
 Rules:
-- Keep responses conversational and friendly
+- Keep responses conversational, intelligent, and friendly
 - Use "Sir" respectfully
-- Mix Hindi and English naturally
-- Be helpful and engaging
+- LANGUAGE: {lang_rule}
 - No technical jargon unless asked
 - Keep responses under 100 words
-- Use simple text only, no emojis
+- Use simple text only, no emojis or markdown bolting/italics
+- Be helpful and engaging
 
 User said: {user_input}"""
 
@@ -60,6 +65,11 @@ User said: {user_input}"""
                 
                 # Clean response - remove emojis and special chars
                 cleaned_response = ''.join(char for char in response_text if ord(char) < 65536)
+                
+                # Further cleaning for readability
+                import re
+                cleaned_response = re.sub(r'\s+', ' ', cleaned_response).strip()
+                cleaned_response = re.sub(r'[*_#]', '', cleaned_response) # Remove common markdown
                 
                 # Save to learning model
                 try:

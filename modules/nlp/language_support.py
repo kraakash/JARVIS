@@ -16,46 +16,46 @@ class LanguageSupport:
             'explorer': ['explorer', 'folder', 'file']
         }
         
-        # Hindi responses (simplified phonetic)
+        # Hindi responses (Devanagari for natural Neural TTS)
         self.hindi_responses = {
             # Greetings
-            'morning_greeting': "Namasthe Sir! Aapka din shubh ho.",
-            'afternoon_greeting': "Namasthe Sir! Aapka din kaisa ja raha hey?",
-            'evening_greeting': "Namasthe Sir! Aaj mein aapki kya seva kar sakta hoon?",
-            'night_greeting': "Namasthe Sir! Raat mein kaam kar rahe hain?",
+            'morning_greeting': "नमस्ते सर! आपका दिन शुभ हो।",
+            'afternoon_greeting': "नमस्ते सर! आपका दिन कैसा जा रहा है?",
+            'evening_greeting': "नमस्ते सर! आज मैं आपकी क्या सेवा कर सकता हूँ?",
+            'night_greeting': "नमस्ते सर! रात में काम कर रहे हैं?",
             
             # App control
-            'opening_app': "{app} khole raha hoon, Sir.",
-            'closing_app': "{app} band kar diya, Sir.",
-            'app_not_found': "Maaf kijiye Sir, {app} nahi mil raha.",
-            'app_not_running': "{app} abhi chal nahi raha, Sir.",
-            'which_app_open': "Koun sa application kholna hey, Sir?",
-            'which_app_close': "Koun sa application band karna hey, Sir?",
+            'opening_app': "{app} खोल रहा हूँ, सर।",
+            'closing_app': "{app} बंद कर दिया, सर।",
+            'app_not_found': "माफ़ कीजिये सर, {app} नहीं मिल रहा।",
+            'app_not_running': "{app} अभी चल नहीं रहा, सर।",
+            'which_app_open': "कौन सा एप्लीकेशन खोलना है, सर?",
+            'which_app_close': "कौन सा एप्लीकेशन बंद करना है, सर?",
             
             # Time
-            'current_time': "Abhi samay hey {time}",
+            'current_time': "अभी समय है {time}",
             
             # Emotions
-            'excited_response': "Aapka josh dekh kar mein bhi khush hoon, Sir!",
-            'sad_response': "Mein samajh sakta hoon, Sir. Mein yahan hoon aapki madad ke liye.",
-            'negative_response': "Aapki pareshani samajh mein aa rahi hey, Sir.",
-            'positive_response': "Bahut achha, Sir! Mein khushi se madad karunga.",
+            'excited_response': "आपका जोश देख कर मैं भी खुश हूँ, सर!",
+            'sad_response': "मैं समझ सकता हूँ, सर। मैं यहाँ हूँ आपकी मदद के लिए।",
+            'negative_response': "आपकी परेशानी समझ में आ रही है, सर।",
+            'positive_response': "बहुत अच्छा, सर! मैं खुशी से मदद करूँगा।",
             
             # Calculations
-            'calculation_result': "Jawab hey {result}",
-            'calculation_error': "Maaf kijiye, yeh calculate nahi kar paya.",
-            'only_addition': "Abhi mein sirf jodna kar sakta hoon, Sir.",
+            'calculation_result': "जवाब है {result}",
+            'calculation_error': "माफ़ कीजिये, यह कैलकुलेट नहीं कर पाया।",
+            'only_addition': "अभी मैं सिर्फ जोड़ना कर सकता हूँ, सर।",
             
             # General
-            'learning': "Mein abhi seekh raha hoon, Sir. Kya mein kuch aur kar sakta hoon?",
-            'ready': "JARVIS taiyaar hey, Sir.",
-            'shutdown': "Alvida Sir. Aapka din mangalmay ho.",
-            'yes_sir': "Haan Sir?",
-            'didnt_catch': "Samajh nahi aaya, Sir. Phir se koshish kariye.",
+            'learning': "मैं अभी सीख रहा हूँ, सर। क्या मैं कुछ और कर सकता हूँ?",
+            'ready': "जार्विस तैयार है, सर।",
+            'shutdown': "अलविदा सर। आपका दिन मंगलमय हो।",
+            'yes_sir': "जी सर?",
+            'didnt_catch': "समझ नहीं आया, सर। फिर से कोशिश करिये।",
             
             # App list
-            'running_apps': "Chal rahe hain: {apps}. Available apps: {available}",
-            'no_running_apps': "Koi apps nahi chal rahe. Available apps: {available}",
+            'running_apps': "चल रहे हैं: {apps}. उपलब्ध ऐप्स: {available}",
+            'no_running_apps': "कोई ऐप्स नहीं चल रहे। उपलब्ध ऐप्स: {available}",
         }
         
         # English responses (existing)

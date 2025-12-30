@@ -6,6 +6,10 @@ Advanced AI Assistant System
 
 import sys
 import os
+import signal
+import atexit
+import threading
+import time
 
 # Add the project root to Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -15,11 +19,75 @@ from modules.voice import jarvis_listener
 from modules.nlp import language_support
 from modules.core.session_manager import session_manager
 
+# Global shutdown flag
+shutdown_flag = threading.Event()
+jarvis_instance = None
+listener_instance = None
+
+def signal_handler(signum, frame):
+    """Handle system signals - allow Ctrl+C for text mode"""
+    if signum == signal.SIGINT:
+        # Ctrl+C should switch to text mode, not shutdown
+        print(f"\n[SIGNAL] Ctrl+C detected - switching to text mode")
+        raise KeyboardInterrupt()
+    else:
+        # Other signals trigger shutdown
+        print(f"\n[SIGNAL] Received signal {signum}")
+        shutdown_flag.set()
+        emergency_shutdown()
+        sys.exit(0)
+
+def emergency_shutdown():
+    """Emergency shutdown - force stop all systems"""
+    print("[EMERGENCY] Force shutdown initiated...")
+    
+    global jarvis_instance, listener_instance
+    
+    # Stop all systems immediately
+    if jarvis_instance:
+        try:
+            jarvis_instance.active = False
+            jarvis_instance.speaker.shutdown()
+        except:
+            pass
+    
+    if listener_instance:
+        try:
+            listener_instance.shutdown()
+        except:
+            pass
+    
+    # Force stop Hindi TTS
+    try:
+        from modules.voice.hindi_tts import hindi_tts
+        hindi_tts.stop_speaking()
+        hindi_tts.cleanup()
+    except:
+        pass
+    
+    # Force stop pygame
+    try:
+        import pygame
+        pygame.mixer.quit()
+    except:
+        pass
+    
+    print("[EMERGENCY] Shutdown complete")
+
+# Register signal handlers
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
+atexit.register(emergency_shutdown)
+
 def main():
+    global jarvis_instance, listener_instance
+    
     print("Initializing JARVIS...")
     
     # Initialize the core brain
     jarvis = JarvisBrain()
+    jarvis_instance = jarvis
+    listener_instance = jarvis_listener
     
     # Show session info
     if session_manager.is_monitoring_active():
@@ -39,8 +107,11 @@ def main():
         
         conversation_mode = False
         
-        while True:
+        while not shutdown_flag.is_set():
             try:
+                if shutdown_flag.is_set():
+                    break
+                    
                 if not conversation_mode:
                     # Listen for wake word
                     if jarvis_listener.listen_for_wake_word():

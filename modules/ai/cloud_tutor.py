@@ -33,10 +33,10 @@ class CloudTutor:
         
         print("[CLOUD] No cloud provider available, using fallback")
     
-    def get_tutor_response(self, topic, question=""):
+    def get_tutor_response(self, topic, question="", language='english'):
         """Get tutor response from cloud"""
         if self.active_provider:
-            return self.active_provider.get_response(topic, question)
+            return self.active_provider.get_response(topic, question, language)
         else:
             return self.get_fallback_response(topic)
     
@@ -53,7 +53,7 @@ class HuggingFaceAPI:
     def is_available(self):
         return bool(self.api_key)
     
-    def get_response(self, topic, question):
+    def get_response(self, topic, question, language='english'):
         prompt = f"Explain {topic} like a programming tutor with examples: {question}"
         
         try:
@@ -82,17 +82,21 @@ class GroqAPI:
     def is_available(self):
         return bool(self.api_key)
     
-    def get_response(self, topic, question):
-        prompt = f"""You are JARVIS, explain {topic} in simple Hindi-English mix without any code. Just explanation:
+    def get_response(self, topic, question, language='english'):
+        # Dynamic language rule
+        lang_rule = "Use simple Hindi-English mix (Hinglish) with Devanagari script for Hindi."
+        if language == 'english':
+            lang_rule = "Respond entirely in English as a sophisticated AI (JARVIS)."
 
-Sir, {topic} samjhiye!
+        prompt = f"""You are JARVIS, an expert tutor. Explain {topic} clearly.
+Language Instruction: {lang_rule}
 
+Explanation structure:
 🎯 Definition: [Simple explanation]
 📚 Real Example: [Real-world analogy]  
 🔢 How it works: [Step-by-step process]
 🌍 Applications: [Where it's used]
 
-NO CODE - Only explanation needed.
 User asked: {question}"""
 
         try:
@@ -105,7 +109,7 @@ User asked: {question}"""
                 json={
                     "model": self.model,
                     "messages": [{"role": "user", "content": prompt}],
-                    "temperature": 0.7,
+                    "temperature": 0.5,
                     "max_tokens": 800
                 },
                 timeout=20

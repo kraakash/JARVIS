@@ -1,23 +1,3 @@
-
-# Quick API Error Fix
-def handle_api_error(error_msg, user_input=""):
-    """Handle API errors gracefully"""
-    try:
-        from modules.ai.simple_ai import simple_ai
-        return simple_ai.handle_api_error(error_msg)
-    except:
-        return "API mein problem hai, Sir. Phir try kariye."
-
-# Wrap existing API calls
-def safe_api_call(func, *args, **kwargs):
-    """Safely call API functions"""
-    try:
-        return func(*args, **kwargs)
-    except Exception as e:
-        print(f"[DEBUG] API Error handled: {e}")
-        return handle_api_error(str(e))
-
-
 """
 JARVIS Core Brain - Main Decision Making Module
 """
@@ -56,10 +36,6 @@ from modules.voice.continuous_listener import ContinuousListener
 print(f"[DEBUG] OpenRouter Llama 3.3 available: {openrouter_conversation.is_available()}")
 print(f"[DEBUG] Groq available: {general_conversation.is_available() if hasattr(general_conversation, 'is_available') else 'Unknown'}")
 print(f"[DEBUG] JARVIS model available: {JARVIS_MODEL_AVAILABLE}")
-
-from modules.nlp.pulse_engine import pulse_engine
-from modules.ai.memory_gpt import memory_gpt
-from modules.ai.personal_trainer import personal_trainer
 
 class JarvisBrain:
     def __init__(self):
@@ -139,31 +115,10 @@ class JarvisBrain:
         # Store command for context
         self._last_command = command_text
         
-        # Detect input language for response consistency
-        self._input_lang = 'hindi' if language_support.detect_hindi_input(command_text) else 'english'
-        
         # Analyze natural language and emotions
         emotion_data = emotion_engine.process_natural_language(command_text)
         intent = emotion_data['intent']
-
-        # 1. HIGH PRIORITY: Identity Check
-        identity_phrases = [
-            'who am i', 'main kaun hun', 'main kaun hoon', 'mera naam kya hai', 
-            'what is my name', 'do you know me', 'mujhe jaante ho'
-        ]
-        if any(phrase in command_text.lower() for phrase in identity_phrases):
-             # Force use of Memory GPT for deep identity answers
-             history = personal_data_manager.user_data.get('conversations', [])
-             response = memory_gpt.answer_with_memory(command_text, history=history, language=self._input_lang)
-             self.speak(response)
-             return response
-
-        # 2. TRAINING CHECK: See if user is teaching us
-        training_response = personal_trainer.process_training_input(command_text)
-        if training_response:
-            self.speak(training_response)
-            return training_response
-
+        
         print(f"[NLP] Detected emotion: {emotion_data['emotion']}, Intent: {intent}")
         
         # Adaptive learning - learn from this interaction
@@ -520,18 +475,10 @@ class JarvisBrain:
     
     def _handle_question(self, command_text, emotion_data):
         """Handle general questions with emotional context"""
-        # Priority 1: Context-Aware Memory GPT (for personal facts)
-        if any(word in command_text.lower() for word in ['who is', 'kon hai', 'jaante ho', 'mere', 'meri', 'my']):
-            print(f"[BRAIN] Checking personal memory for: {command_text}")
-            history = personal_data_manager.user_data.get('conversations', [])
-            memory_response = memory_gpt.answer_with_memory(command_text, history=history, language=self._input_lang)
-            if memory_response and "memory system mein kuch issue" not in memory_response:
-                return memory_response
-
-        # Priority 2: Try Groq cloud tutor for general knowledge
+        # Try Groq cloud tutor first for ALL questions
         try:
             from modules.ai.cloud_tutor import cloud_tutor
-            tutor_response = cloud_tutor.get_tutor_response("general", command_text, language=self._input_lang)
+            tutor_response = cloud_tutor.get_tutor_response("general", command_text)
             if tutor_response and len(tutor_response) > 50:
                 print(f"[DEBUG] Using Groq cloud tutor response")
                 return tutor_response
@@ -686,23 +633,8 @@ class JarvisBrain:
         return base_response
     
     def _handle_general_conversation(self, command_text, emotion_data):
-        """Handle non-command conversation queries with memory and emotion"""
-        
-        # Check for pulse reaction (Emotion First)
-        pulse = pulse_engine.get_pulse_reaction(emotion_data)
-        if pulse:
-            print(f"[PULSE] Emotional reaction: {pulse}")
-            self.speaker.speak(pulse)
-        
-        # Priority 1: Context-Aware Memory GPT
-        print(f"[BRAIN] Using Memory GPT for personal response...")
-        history = personal_data_manager.user_data.get('conversations', [])
-        response = memory_gpt.answer_with_memory(command_text, history=history, language=self._input_lang)
-        
-        if response:
-            return response
-
-        # Fallback to standard conversation logic if GPT fails
+        """Handle general conversation and questions"""
+        # Check conversation engine FIRST for identity and basic questions
         response = conversation_engine.get_conversation_response(command_text)
         
         if response:
@@ -710,11 +642,7 @@ class JarvisBrain:
             return response
         
         # Check for name questions specifically - route to JARVIS model first
-        identity_phrases = [
-            'mera naam kya hai', 'what is my name', 'naam kya hai', 
-            'who am i', 'main kaun hun', 'main kaun hoon'
-        ]
-        if any(phrase in command_text.lower() for phrase in identity_phrases):
+        if any(phrase in command_text.lower() for phrase in ['mera naam kya hai', 'what is my name', 'naam kya hai']):
             if JARVIS_MODEL_AVAILABLE:
                 print(f"[DEBUG] Name question detected - trying JARVIS model first")
                 try:
@@ -745,7 +673,7 @@ class JarvisBrain:
         if openrouter_conversation.is_available():
             print(f"[DEBUG] [1/2] OpenRouter Llama 3.3...")
             try:
-                openrouter_response = openrouter_conversation.get_conversation_response(command_text, language=self._input_lang)
+                openrouter_response = openrouter_conversation.get_conversation_response(command_text)
                 if openrouter_response and len(openrouter_response.strip()) > 5:
                     print("[DEBUG] ✅ OpenRouter SUCCESS - returning response")
                     return openrouter_response
@@ -759,7 +687,7 @@ class JarvisBrain:
         if general_conversation.is_available():
             print(f"[DEBUG] [2/4] Groq fallback...")
             try:
-                groq_response = general_conversation.get_conversation_response(command_text, language=self._input_lang)
+                groq_response = general_conversation.get_conversation_response(command_text)
                 if groq_response and len(groq_response.strip()) > 5:
                     print("[DEBUG] ✅ Groq SUCCESS - returning response")
                     return groq_response
@@ -862,29 +790,27 @@ class JarvisBrain:
     
     def _handle_youtube_search(self, command_text, emotion_data):
         """Handle YouTube search commands"""
-        text_lower = command_text.lower()
+        words = command_text.lower().split()
         query = ""
         
-        # Comprehensive list of search triggers
-        triggers = ['search for', 'search', 'find', 'dikhao', 'dikhaye', 'search kare', 'dhoondo', 'look for']
-        
-        # Remove "youtube" or "yt" if present to clean the query
-        clean_text = text_lower.replace('youtube', '').replace('yt', '').strip()
-        
-        for trigger in triggers:
-            if trigger in clean_text:
-                query = clean_text.split(trigger)[-1].strip()
+        # Find search terms after trigger words
+        trigger_words = ['youtube', 'yt', 'video']
+        for i, word in enumerate(words):
+            if word in trigger_words:
+                if i + 1 < len(words) and words[i + 1] in ['search', 'mein']:
+                    # Skip 'for' if it follows 'search'
+                    start_idx = i + 2
+                    if start_idx < len(words) and words[start_idx] == 'for':
+                        start_idx += 1
+                    if start_idx < len(words):
+                        query = ' '.join(words[start_idx:])
+                elif i + 1 < len(words):
+                    query = ' '.join(words[i + 1:])
                 break
         
         if not query:
-            # Fallback: take everything after the first word if it was a search intent
-            words = clean_text.split()
-            if len(words) > 1:
-                query = ' '.join(words[1:])
-            else:
-                return "What should I search for on YouTube, Sir?"
+            return "What video would you like me to search for, Sir?"
         
-        print(f"[YOUTUBE] Searching for: {query}")
         success, message = web_controller.search_youtube(query)
         
         if success:
@@ -895,49 +821,23 @@ class JarvisBrain:
         if emotion_data:
             return emotion_engine.enhance_response(message, emotion_data)
         return message
-
+    
     def _handle_play_video(self, command_text, emotion_data):
-        """Handle playing YouTube videos with search capability"""
-        import time # Import time for sleep
-        text_lower = command_text.lower()
-        words = text_lower.split()
-        
+        """Handle playing YouTube videos by position"""
+        words = command_text.lower().split()
         position = 1
+        
         position_words = {
             'first': 1, 'second': 2, 'third': 3, 'fourth': 4, 'fifth': 5,
             '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
             'pehla': 1, 'dusra': 2, 'tisra': 3
         }
         
-        # Check if a position is explicitly mentioned
-        found_position = False
         for word in words:
             if word in position_words:
                 position = position_words[word]
-                found_position = True
                 break
         
-        # If no position mentioned, extract the song/video name
-        if not found_position:
-            # Remove trigger words to extract the song/video name
-            query = text_lower.replace('play', '').replace('video', '').replace('youtube', '').replace('song', '').replace('and', '').replace('open', '').strip()
-            
-            if query and len(query) > 2:
-                print(f"[YOUTUBE] Searching and playing: {query}")
-                self.speaker.speak(f"Searching for {query} and playing the first result, Sir.")
-                
-                # Search first
-                web_controller.search_youtube(query)
-                time.sleep(1) # Brief wait for results
-                
-                # Then play first result
-                success, message = web_controller.play_youtube_video(1)
-                
-                if emotion_data:
-                    return emotion_engine.enhance_response(message, emotion_data)
-                return message
-        
-        # If position was found or no specific query, just play by index
         success, message = web_controller.play_youtube_video(position)
         
         if emotion_data:

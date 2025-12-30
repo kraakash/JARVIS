@@ -51,39 +51,61 @@ class JarvisModel:
         self.model = None
         self.training_data = []
         
-        self.setup_model()
+        # Load training data first
         self.load_training_data()
+        # Then setup model based on available data
+        self.setup_model()
     
     def setup_model(self):
         """Initialize or load model"""
-        try:
-            # Try to load existing model
-            self.tokenizer = GPT2Tokenizer.from_pretrained(self.model_path)
-            self.model = GPT2LMHeadModel.from_pretrained(self.model_path)
-            print("[JARVIS] Loaded existing model")
-        except Exception as e:
-            print(f"[JARVIS] No existing model found: {e}")
+        # Check if model directory exists and has required files
+        model_exists = (os.path.exists(self.model_path) and 
+                       os.path.exists(os.path.join(self.model_path, 'config.json')))
+        
+        if model_exists:
             try:
-                # Create new model
-                print("[JARVIS] Creating new model...")
-                self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-                self.tokenizer.pad_token = self.tokenizer.eos_token
-                
-                config = GPT2Config(
-                    vocab_size=self.tokenizer.vocab_size,
-                    n_positions=512,
-                    n_ctx=512,
-                    n_embd=768,
-                    n_layer=12,
-                    n_head=12
-                )
-                
-                self.model = GPT2LMHeadModel(config)
-                print("[JARVIS] Created new model successfully")
-            except Exception as setup_error:
-                print(f"[JARVIS] Model setup failed: {setup_error}")
-                self.model = None
-                self.tokenizer = None
+                # Try to load existing model
+                self.tokenizer = GPT2Tokenizer.from_pretrained(self.model_path)
+                self.model = GPT2LMHeadModel.from_pretrained(self.model_path)
+                print("[JARVIS] Loaded existing model")
+                return
+            except Exception as e:
+                print(f"[JARVIS] Failed to load existing model: {e}")
+        
+        # Only create new model if we have training data
+        if len(self.training_data) < 5:
+            print("[JARVIS] Skipping model creation - insufficient training data")
+            self.model = None
+            self.tokenizer = None
+            return
+        
+        try:
+            # Create new model only when needed
+            print("[JARVIS] Creating new model...")
+            self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+            
+            config = GPT2Config(
+                vocab_size=self.tokenizer.vocab_size,
+                n_positions=512,
+                n_ctx=512,
+                n_embd=768,
+                n_layer=12,
+                n_head=12
+            )
+            
+            self.model = GPT2LMHeadModel(config)
+            
+            # Save immediately to prevent recreation
+            os.makedirs(self.model_path, exist_ok=True)
+            self.model.save_pretrained(self.model_path)
+            self.tokenizer.save_pretrained(self.model_path)
+            
+            print("[JARVIS] Created and saved new model successfully")
+        except Exception as setup_error:
+            print(f"[JARVIS] Model setup failed: {setup_error}")
+            self.model = None
+            self.tokenizer = None
     
     def load_training_data(self):
         """Load existing training data"""
@@ -92,33 +114,119 @@ class JarvisModel:
                 with open(self.data_file, 'r', encoding='utf-8') as f:
                     self.training_data = json.load(f)
                 print(f"[JARVIS] Loaded {len(self.training_data)} training samples")
+            else:
+                self.training_data = []
+            
+            # Load pre-trained personal conversation data
+            pretrained_file = "personal_conversation_training.json"
+            if os.path.exists(pretrained_file):
+                with open(pretrained_file, 'r', encoding='utf-8') as f:
+                    pretrained_data = json.load(f)
+                
+                # Add pretrained data if not already present
+                for item in pretrained_data:
+                    exists = any(existing['question'].lower() == item['question'].lower() 
+                               for existing in self.training_data)
+                    if not exists:
+                        self.training_data.append(item)
+                
+                print(f"[JARVIS] Added {len(pretrained_data)} pre-trained personal conversations")
+                self.save_training_data()
+                
         except Exception as e:
             print(f"[JARVIS] Error loading data: {e}")
             self.training_data = []
     
+    def is_personal_conversation(self, question, response):
+        """Check if this is a personal/emotional conversation worth training on"""
+        personal_keywords = [
+            'kaise ho', 'how are you', 'mood', 'feel', 'emotion', 'love', 'pyaar',
+            'dost', 'friend', 'achha', 'bura', 'khush', 'sad', 'happy', 'angry',
+            'flirt', 'cute', 'beautiful', 'handsome', 'sweet', 'romantic',
+            'thank you', 'dhanyawad', 'sorry', 'maaf', 'compliment', 'tareef',
+            'joke', 'mazak', 'funny', 'hasna', 'smile', 'muskurana',
+            'miss', 'yaad', 'care', 'fikar', 'worry', 'tension'
+        ]
+        
+        # Skip technical/news/app control conversations
+        skip_keywords = [
+            'open', 'close', 'search', 'youtube', 'chrome', 'calculator',
+            'election', 'news', 'result', 'algorithm', 'code', 'programming',
+            'sort', 'merge', 'selection', 'binary', 'function', 'variable'
+        ]
+        
+        question_lower = question.lower()
+        response_lower = response.lower()
+        
+        # Skip if contains technical keywords
+        if any(keyword in question_lower for keyword in skip_keywords):
+            return False
+        
+        # Include if contains personal keywords
+        if any(keyword in question_lower or keyword in response_lower for keyword in personal_keywords):
+            return True
+        
+        # Include short conversational exchanges
+        if len(question.split()) <= 5 and len(response.split()) <= 20:
+            return True
+        
+        return False
+    
+    def detect_emotion(self, question, response):
+        """Detect emotion in conversation"""
+        positive_words = ['happy', 'khush', 'achha', 'good', 'great', 'awesome', 'love', 'pyaar']
+        negative_words = ['sad', 'bura', 'bad', 'angry', 'gussa', 'upset', 'tension']
+        flirty_words = ['cute', 'beautiful', 'handsome', 'sweet', 'romantic', 'miss', 'yaad']
+        
+        text = (question + ' ' + response).lower()
+        
+        if any(word in text for word in flirty_words):
+            return 'flirty'
+        elif any(word in text for word in positive_words):
+            return 'positive'
+        elif any(word in text for word in negative_words):
+            return 'negative'
+        else:
+            return 'neutral'
+    
     def add_conversation(self, question, response):
-        """Add new conversation to training data"""
+        """Add new conversation to training data (only personal conversations)"""
+        # Only train on personal/emotional conversations
+        if not self.is_personal_conversation(question, response):
+            return
+        
         conversation = {
             'question': question.strip(),
             'response': response.strip(),
             'timestamp': datetime.now().isoformat(),
-            'source': 'groq'
+            'source': 'personal',
+            'emotion': self.detect_emotion(question, response)
         }
         
-        # Avoid duplicates
+        # Store multiple responses for same question
+        existing_found = False
         for existing in self.training_data:
             if existing['question'].lower() == question.lower():
-                existing['response'] = response  # Update response
-                existing['timestamp'] = conversation['timestamp']
-                self.save_training_data()
-                return
+                # Create variants list if not exists
+                if 'variants' not in existing:
+                    existing['variants'] = [existing['response']]
+                
+                # Add new response as variant if different
+                if response not in existing['variants']:
+                    existing['variants'].append(response)
+                    existing['timestamp'] = conversation['timestamp']
+                    print(f"[JARVIS] Added response variant: {question[:30]}...")
+                existing_found = True
+                break
         
-        self.training_data.append(conversation)
+        if not existing_found:
+            self.training_data.append(conversation)
+            print(f"[JARVIS] Added personal conversation: {question[:30]}...")
+        
         self.save_training_data()
-        print(f"[JARVIS] Added conversation: {question[:30]}...")
         
-        # Auto-train if we have enough new data
-        if len(self.training_data) % 10 == 0:
+        # Auto-train if we have enough personal data
+        if len(self.training_data) % 5 == 0:
             self.train_model()
     
     def save_training_data(self):
@@ -219,10 +327,18 @@ class JarvisModel:
     
     def get_model_stats(self):
         """Get model statistics"""
+        last_training = "Never"
+        if self.training_data:
+            # Find the most recent entry with timestamp
+            for conv in reversed(self.training_data):
+                if 'timestamp' in conv:
+                    last_training = conv['timestamp']
+                    break
+        
         return {
             'total_conversations': len(self.training_data),
             'model_size': f"{sum(p.numel() for p in self.model.parameters()) / 1e6:.1f}M parameters" if self.model else "Not loaded",
-            'last_training': self.training_data[-1]['timestamp'] if self.training_data else "Never",
+            'last_training': last_training,
             'data_sources': list(set([conv.get('source', 'unknown') for conv in self.training_data]))
         }
 

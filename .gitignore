@@ -1,26 +1,48 @@
-# Environment variables
+# Environment
 .env
+venv/
+.venv/
 
 # Python cache
 __pycache__/
 *.pyc
 *.pyo
 
-# AI Learning files (optional - comment out if you want to track them)
-jarvis_memory.json
-user_taught_answers.json
-conversation_context.json
-jarvis_conversation_training.json
-user_conversations.json
-contextual_training.json
+# Temporary Media
+temp_*.mp3
+temp_*.txt
+*.mp3
 
-# Logs
+# Diagnostic/Test Scripts
+test_*.py
+check_*.py
+demo_*.py
+fix_*.py
+quick_*.py
+install_*.py
+setup_*.py
+train_*.py
+retrain_*.py
+cleanup_*.py
+monitor_*.py
+kill_*.py
+kill_*.bat
+shutdown.*
+
+# Model & Binary Files
+*.pkl
+*.h5
+*.npz
+*.art
+
+# Local Data & Session
+session_data.json
+jarvis_session.json
 *.log
+knowledge_base.json
 
 # IDE files
 .vscode/
 .idea/
-
-# OS files
 .DS_Store
 Thumbs.db
