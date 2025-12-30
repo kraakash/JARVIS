@@ -2,6 +2,7 @@
 .env
 venv/
 .venv/
+.env
 
 # Python cache
 __pycache__/
@@ -30,6 +31,7 @@ kill_*.bat
 shutdown.*
 
 # Model & Binary Files
+jarvis_model/
 *.pkl
 *.h5
 *.npz

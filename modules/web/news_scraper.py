@@ -6,10 +6,15 @@ Gets current information without opening browser
 import requests
 from bs4 import BeautifulSoup
 import json
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 class NewsInfoScraper:
     def __init__(self):
-        self.api_key = "rioxjE0JG42piQclawm1GjH5ISRgHykqs3ig2DCQ"
+        self.api_key = os.getenv('NEWS_API_KEY', '')
         self.base_url = "https://newsapi.org/v2/everything"
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'

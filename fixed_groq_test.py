@@ -4,9 +4,14 @@ Fixed Groq API Test with Latest Model
 
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
-# Set API key directly
-GROQ_API_KEY = "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"
+# Load environment variables
+load_dotenv()
+
+# Get API key from environment
+GROQ_API_KEY = os.getenv('GROQ_API_KEY', '')
 
 def test_groq_api():
     """Test Groq API with latest model"""

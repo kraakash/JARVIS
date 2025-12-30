@@ -13,7 +13,7 @@ load_dotenv()
 
 class OpenRouterConversation:
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = os.getenv('OPENROUTER_API_KEY', '')
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
         self.model = "meta-llama/llama-3.3-8b-instruct:free"
     
