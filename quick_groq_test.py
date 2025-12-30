@@ -7,7 +7,7 @@ import json
 import os
 
 # Set API key directly
-GROQ_API_KEY = "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"
+
 
 def test_groq_api():
     """Test Groq API with your key"""
